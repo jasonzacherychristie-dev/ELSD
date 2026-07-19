@@ -18,8 +18,10 @@ class MixState {
     @Volatile var pulseEnabled: Boolean = false
     /** ART family → shader paint path */
     @Volatile var paintId: String = "none"
-    /** ELSD family (legacy single id for hue/split/etc.) */
+    /** PSYCHEDELIC trip (kaleido/melt) */
     @Volatile var lsdId: String = "none"
+    /** DESK utility (hue/split/negative/posterize/mirror) */
+    @Volatile var deskId: String = "none"
     /** Stackable: trails + fractal chromakey */
     @Volatile var trailOn: Boolean = false
     /** 0 off, 1 mandelbrot, 2 julia */
@@ -171,6 +173,7 @@ class MixState {
     private fun softClear() {
         wet = 0f
         lsdId = "none"
+        deskId = "none"
         paintId = "none"
         cinemaId = "none"
         paletteId = "none"

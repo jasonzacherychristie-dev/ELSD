@@ -119,8 +119,10 @@ Install `app/build/outputs/apk/debug/app-debug.apk`, grant camera + mic, landsca
 | Doc | What |
 |-----|------|
 | [MISSION.md](MISSION.md) | Mission, vision, principles |
+| [docs/design/FEATURES_1_0.md](docs/design/FEATURES_1_0.md) | **1.0 feature set** (Desk · Art · Film · Psychedelic) |
+| [docs/design/SHADER_IMPORT.md](docs/design/SHADER_IMPORT.md) | How we import / massage shaders |
 | [docs/design/ROADMAP.md](docs/design/ROADMAP.md) | **1.0 → 4.0** |
-| [docs/design/VISUAL_SYSTEM.md](docs/design/VISUAL_SYSTEM.md) | ELSD · Art · Cinema · Palette · Mood |
+| [docs/design/VISUAL_SYSTEM.md](docs/design/VISUAL_SYSTEM.md) | Visual banks detail |
 | [docs/design/STILLNESS_MORPH.md](docs/design/STILLNESS_MORPH.md) | Stare longer → morph budget |
 | [docs/design/TIME_TRAVEL.md](docs/design/TIME_TRAVEL.md) | **4.0** — era transform of the local world |
 | [docs/design/SOUL.md](docs/design/SOUL.md) | Look, Amy, TOASTED |

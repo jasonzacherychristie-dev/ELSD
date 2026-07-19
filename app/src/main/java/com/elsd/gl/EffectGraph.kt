@@ -89,6 +89,7 @@ class EffectGraph(private val context: Context) {
         p.setUniform1i("uPulse", if (mix.pulseEnabled) 1 else 0)
         p.setUniform1i("uPaint", paintIndex(mix.paintId))
         p.setUniform1i("uLsd", lsdIndex(mix.lsdId))
+        p.setUniform1i("uDesk", deskIndex(mix.deskId))
         p.setUniform1i("uCinema", cinemaIndex(mix.cinemaId))
         p.setUniform1i("uPalette", paletteIndex(mix.paletteId))
         p.setUniform1i("uMood", moodIndex(mix.moodId))
@@ -129,13 +130,17 @@ class EffectGraph(private val context: Context) {
     }
 
     private fun lsdIndex(id: String): Int = when (id) {
-        "trail" -> 1
-        "hue" -> 2
-        "split" -> 3
         "kaleido" -> 4
         "melt" -> 5
-        "mandelbrot" -> 6
-        "julia" -> 7
+        else -> 0
+    }
+
+    private fun deskIndex(id: String): Int = when (id) {
+        "hue" -> 1
+        "split" -> 2
+        "negative" -> 3
+        "posterize" -> 4
+        "mirror" -> 5
         else -> 0
     }
 

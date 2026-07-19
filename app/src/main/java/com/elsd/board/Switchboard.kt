@@ -39,7 +39,7 @@ class Switchboard {
         val existing = layers[id]
         if (existing != null) {
             existing.onEnabledChanged(true)
-            if (id.family == EffectFamily.CINEMA) {
+            if (id.family == EffectFamily.FILM) {
                 CinemaCadence.applySoft(this, id, framerateHardLocked)
             }
             return existing
@@ -47,7 +47,7 @@ class Switchboard {
         val layer = EffectLayer(id = id, enabled = true, clockSec = 0f)
         layers[id] = layer
         // Film styles own their cadence — variable FPS is part of the look
-        if (id.family == EffectFamily.CINEMA) {
+        if (id.family == EffectFamily.FILM) {
             CinemaCadence.applySoft(this, id, framerateHardLocked)
         }
         return layer
@@ -147,6 +147,7 @@ class Switchboard {
 
         mix.paintId = "none"
         mix.lsdId = "none"
+        mix.deskId = "none"
         mix.cinemaId = "none"
         mix.paletteId = "none"
         mix.moodId = "mood_neutral"
@@ -166,38 +167,42 @@ class Switchboard {
             val active = layer.enabled || layer.envelope() > 0.01f || layer.phaseEnabled
             if (!active) continue
             when (layer.id.family) {
-                EffectFamily.ELSD -> {
+                EffectFamily.DESK -> {
+                    if (layer.enabled || layer.envelope() > 0.01f) {
+                        when (layer.id) {
+                            EffectId.TRAIL -> {
+                                mix.trailOn = true
+                                last = "DESK"
+                            }
+                            else -> {
+                                // hue, split, negative, posterize, mirror
+                                mix.deskId = layer.id.catalogName
+                                last = "DESK"
+                            }
+                        }
+                    }
+                }
+                EffectFamily.PSYCHEDELIC -> {
                     if (layer.enabled || layer.envelope() > 0.01f) {
                         when (layer.id) {
                             EffectId.STILLNESS_MORPH -> {
                                 mix.stillnessMorph = true
-                                last = "ELSD"
-                            }
-                            EffectId.TRAIL -> {
-                                mix.trailOn = true
-                                last = "ELSD"
+                                last = "PSYCH"
                             }
                             EffectId.MANDELBROT -> {
                                 mix.fractalMode = 1
                                 mix.fractalZoomRate = layer.rate.coerceIn(0.15f, 6f)
-                                mix.lsdId = "mandelbrot"
-                                last = "ELSD"
+                                last = "PSYCH"
                             }
                             EffectId.JULIA -> {
                                 mix.fractalMode = 2
                                 mix.fractalZoomRate = layer.rate.coerceIn(0.15f, 6f)
-                                mix.lsdId = "julia"
-                                last = "ELSD"
+                                last = "PSYCH"
                             }
                             else -> {
-                                // hue/split/kaleido/melt — last non-fractal trip still maps
-                                if (mix.fractalMode == 0 && !mix.trailOn) {
-                                    mix.lsdId = layer.id.catalogName
-                                } else if (layer.id != EffectId.TRAIL) {
-                                    // keep secondary trip id for hue etc. via lsdId only if no fractal
-                                    if (mix.fractalMode == 0) mix.lsdId = layer.id.catalogName
-                                }
-                                last = "ELSD"
+                                // kaleido, melt
+                                mix.lsdId = layer.id.catalogName
+                                last = "PSYCH"
                             }
                         }
                     }
@@ -211,10 +216,10 @@ class Switchboard {
                         last = "ART"
                     }
                 }
-                EffectFamily.CINEMA -> {
+                EffectFamily.FILM -> {
                     if (layer.enabled || layer.envelope() > 0.01f) {
                         mix.cinemaId = layer.id.catalogName
-                        last = "CINEMA"
+                        last = "FILM"
                     }
                 }
                 EffectFamily.PALETTE -> {

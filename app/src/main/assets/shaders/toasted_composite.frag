@@ -14,8 +14,10 @@ uniform float uChromaHue;
 uniform int uPulse;
 // ART: 0 none, 1 gogh, 2 monet, 3 noir, 4 neon, 5 sketch, 6 melt, 7 comic, 8 cartoon, 9 hyperreal
 uniform int uPaint;
-// ELSD: 0 none, 1 trail, 2 hue, 3 split, 4 kaleido, 5 melt (6/7 legacy; prefer uFractal)
+// PSYCHEDELIC: 0 none, 4 kaleido, 5 melt
 uniform int uLsd;
+// DESK: 0 none, 1 hue, 2 split, 3 negative (import pilot), 4 posterize, 5 mirror
+uniform int uDesk;
 uniform int uTrail;           // 1 = trails on (stackable)
 uniform int uFractal;         // 0 off, 1 mandelbrot, 2 julia
 uniform float uFractalZoomRate; // adjustable dive speed
@@ -502,22 +504,51 @@ vec3 applyTrail(vec3 c, vec2 uv) {
     return mix(c, trail, 0.55 * w);
 }
 
-vec3 applyLsd(vec3 c, vec2 uv) {
-    // Stack: optional secondary trip (hue/split/kaleido/melt) then fractal key + trails
+// DESK bank — Toaster-class utilities (NEGATIVE is shader-import pilot)
+vec3 applyDesk(vec3 c, vec2 uv) {
     float w = uWet;
-    vec3 o = c;
-    if (uLsd == 2) {
-        vec3 hsv = rgb2hsv(o);
+    if (uDesk == 0) return c;
+    if (uDesk == 1) {
+        // hue rotate
+        vec3 hsv = rgb2hsv(c);
         hsv.x = fract(hsv.x + uTime * 0.05 * w);
-        o = hsv2rgb(hsv);
-    } else if (uLsd == 3) {
+        return mix(c, hsv2rgb(hsv), w);
+    }
+    if (uDesk == 2) {
+        // RGB split
         float s = 0.006 * w;
-        o = vec3(
+        return vec3(
             texture(uWorld, uv + vec2(s, 0.0)).r,
-            o.g,
+            c.g,
             texture(uWorld, uv - vec2(s, 0.0)).b
         );
-    } else if (uLsd == 4) {
+    }
+    if (uDesk == 3) {
+        // NEGATIVE — import process pilot (see docs/shaders/import/negative/)
+        return mix(c, 1.0 - c, w);
+    }
+    if (uDesk == 4) {
+        // posterize
+        float levels = mix(16.0, 4.0, w);
+        return floor(c * levels + 0.5) / levels;
+    }
+    if (uDesk == 5) {
+        // mirror H
+        vec2 muv = vec2(abs(uv.x - 0.5) + 0.5 * step(uv.x, 0.5) * 0.0 + (1.0 - uv.x) * step(0.5, uv.x) * 0.0, uv.y);
+        // clean horizontal mirror about center
+        muv = vec2(uv.x < 0.5 ? uv.x : 1.0 - uv.x, uv.y);
+        // show mirrored half blended
+        vec3 mc = texture(uWorld, vec2(1.0 - uv.x, uv.y)).rgb;
+        return mix(c, mc, w * step(0.5, uv.x));
+    }
+    return c;
+}
+
+vec3 applyLsd(vec3 c, vec2 uv) {
+    // PSYCHEDELIC: kaleido / melt, then fractal key + trails
+    float w = uWet;
+    vec3 o = c;
+    if (uLsd == 4) {
         vec2 d = uv - 0.5;
         float r = length(d);
         float ang = atan(d.y, d.x);
@@ -530,22 +561,12 @@ vec3 applyLsd(vec3 c, vec2 uv) {
         vec2 d = uv - 0.5;
         float m = 0.03 * w * sin(10.0 * d.x + uTime) * cos(8.0 * d.y - uTime);
         o = texture(uWorld, uv + d * m).rgb;
-    } else if (uLsd == 1 && uTrail == 0) {
-        // legacy trail via uLsd only
-        o = applyTrail(o, uv);
     }
 
-    // Fractal chromakeyed into FOV (stackable with trail)
-    int frac = uFractal;
-    if (frac == 0 && (uLsd == 6 || uLsd == 7)) {
-        frac = (uLsd == 6) ? 1 : 2;
-    }
-    if (frac == 1) {
-        vec3 fcol = mandelbrotColor(uv, o);
-        o = compositeFractal(o, fcol);
-    } else if (frac == 2) {
-        vec3 fcol = juliaColor(uv, o);
-        o = compositeFractal(o, fcol);
+    if (uFractal == 1) {
+        o = compositeFractal(o, mandelbrotColor(uv, o));
+    } else if (uFractal == 2) {
+        o = compositeFractal(o, juliaColor(uv, o));
     }
 
     if (uTrail == 1) {
@@ -567,7 +588,8 @@ void main() {
     vec3 cine = applyCinema(art, uv);
     cine = mix(art, cine, uWet * 0.85);
 
-    vec3 tripped = applyLsd(cine, uv);
+    vec3 desked = applyDesk(cine, uv);
+    vec3 tripped = applyLsd(desked, uv);
     vec3 pgm = mix(world, tripped, clamp(uWet, 0.0, 1.0));
 
     oColor = vec4(pgm, 1.0);
