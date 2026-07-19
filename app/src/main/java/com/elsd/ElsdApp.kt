@@ -1,6 +1,8 @@
 package com.elsd
 
 import android.app.Application
+import com.elsd.board.BoardSession
+import com.elsd.board.PresetStore
 
 /**
  * ELSD — Electronic LSD
@@ -12,6 +14,7 @@ class ElsdApp : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        BoardSession.init(PresetStore(this))
     }
 
     companion object {

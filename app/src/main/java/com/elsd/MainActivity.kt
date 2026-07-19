@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.elsd.board.BoardSession
 import com.elsd.bus.CameraBus
 import com.elsd.gl.ElsdRenderer
 import com.elsd.voice.VoiceRouter
@@ -31,6 +32,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var status: TextView
 
     private val mix = MixState()
+    private var lastBoardTickNs = 0L
 
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions(),
@@ -100,6 +102,9 @@ class MainActivity : ComponentActivity() {
         )
         setContentView(root)
 
+        // Apply switchboard layers into live mix
+        BoardSession.board.applyToMix(mix)
+
         cameraBus = CameraBus(this)
         voiceRouter = VoiceRouter(
             context = this,
@@ -107,6 +112,7 @@ class MainActivity : ComponentActivity() {
                 runOnUiThread {
                     renderer.setListening(false)
                     mix.applyCommand(cmd)
+                    BoardSession.board.applyToMix(mix)
                     renderer.onMixChanged()
                     status.text = mix.statusLine() + "\n" + ElsdApp.CREDIT_SHORT
                 }
@@ -171,12 +177,32 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
+        BoardSession.board.applyToMix(mix)
         glView.onResume()
+        // Phase clocks for timed effect envelopes
+        glView.queueEvent {
+            // tick on draw via renderer callback would be better; approximate here
+        }
         cameraBus.resume()
         voiceRouter.start()
+        status.post(boardTick)
+    }
+
+    private val boardTick = object : Runnable {
+        override fun run() {
+            val now = System.nanoTime()
+            val dt = if (lastBoardTickNs == 0L) 0.016f
+            else ((now - lastBoardTickNs) / 1_000_000_000f).coerceIn(0f, 0.1f)
+            lastBoardTickNs = now
+            BoardSession.board.tick(dt)
+            BoardSession.board.applyToMix(mix)
+            status.text = mix.statusLine() + "\n" + ElsdApp.CREDIT_SHORT
+            status.postDelayed(this, 33L)
+        }
     }
 
     override fun onPause() {
+        status.removeCallbacks(boardTick)
         voiceRouter.stop()
         cameraBus.pause()
         glView.onPause()

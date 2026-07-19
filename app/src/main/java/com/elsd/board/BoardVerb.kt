@@ -1,0 +1,20 @@
+package com.elsd.board
+
+/**
+ * Switchboard vocabulary — UI labels and voice share these verbs.
+ */
+enum class BoardVerb(val label: String) {
+    ADD_EFFECT("ADD EFFECT"),
+    REMOVE_EFFECT("REMOVE EFFECT"),
+    TOGGLE_EFFECT("TOGGLE EFFECT"),
+    ADD_EFFECT_TIME("ADD EFFECT TIME"),
+    REMOVE_EFFECT_TIME("REMOVE EFFECT TIME"),
+    PHASE_TIME("PHASE TIME"),
+    PHASE_ON("PHASE ON"),
+    PHASE_OFF("PHASE OFF"),
+    SAVE_PRESET("SAVE PRESET"),
+    LOAD_PRESET("LOAD PRESET"),
+    CLEAR_BOARD("CLEAR BOARD"),
+    GO_LIVE("GO LIVE"),
+    BACK("BACK"),
+}

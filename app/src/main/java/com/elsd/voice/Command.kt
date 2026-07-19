@@ -21,5 +21,16 @@ sealed class Command {
     data class Spatial(val modeId: String) : Command()
     data class EarWet(val value: Float) : Command()
     data object EarsDry : Command()
+    /** Switchboard vocabulary mirrored to voice. */
+    data class BoardAdd(val effectCatalog: String) : Command()
+    data class BoardRemove(val effectCatalog: String) : Command()
+    data class BoardToggle(val effectCatalog: String) : Command()
+    data class BoardFadeIn(val effectCatalog: String, val sec: Float) : Command()
+    data class BoardFadeOut(val effectCatalog: String, val sec: Float) : Command()
+    data class BoardPhaseTime(val effectCatalog: String, val sec: Float) : Command()
+    data class BoardPhase(val effectCatalog: String, val on: Boolean) : Command()
+    data class BoardSavePreset(val name: String) : Command()
+    data class BoardLoadPreset(val name: String) : Command()
+    data object BoardClear : Command()
     data class Unknown(val raw: String) : Command()
 }

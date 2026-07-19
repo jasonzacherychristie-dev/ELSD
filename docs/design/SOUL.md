@@ -74,16 +74,16 @@ Amy must **never**:
 - Shame the user
 - Imply corporate endorsement of any vintage brand
 
-### Voice is the only control plane
+### Control plane: SWITCHBOARD + voice (same vocabulary)
 
 | Domain | How it works |
 |--------|----------------|
-| **Primary input** | Speech only — banks, wet/dry, key, paint, pulse, presets, mute |
-| **No touch UI** | No hamburger menus, no seek bars as the real UX |
-| **OS exceptions** | System back / notification shade / permission dialogs remain (platform) |
-| **Hardware** | Optional viewer button → “next preset” only if we need a dumb fallback; still secondary to voice |
-| **First run** | Amy *speaks* the grammar; short listen-and-repeat; no 12-page wizard |
-| **Lean-in** | `onBeginningOfSpeech` → lean; end/error/result → ease back |
+| **One UI page** | **SWITCHBOARD** — list layers, drill down, SAVE/LOAD PRESET, GO LIVE ([`SWITCHBOARD.md`](SWITCHBOARD.md)) |
+| **Vocabulary** | **ADD EFFECT**, **REMOVE EFFECT**, **ADD EFFECT TIME**, **PHASE TIME**, **SAVE PRESET**, … |
+| **In headset** | Voice uses the **same verbs** (no second language) |
+| **On glass** | Touch the switchboard before GO LIVE; not a settings maze |
+| **No extra apps** | No nested “settings”; BACK returns to the board |
+| **Lean-in** | `onBeginningOfSpeech` → Amy leans; end/error/result → ease back |
 
 **Mute Amy** ≠ mute audio world.  
 Commands:

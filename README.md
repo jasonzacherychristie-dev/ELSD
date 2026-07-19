@@ -59,6 +59,14 @@ Full map: **[docs/design/ROADMAP.md](docs/design/ROADMAP.md)** · 1.0 execution:
 | M4 | Vosk, polish, safety timers |
 | M5 | Stereo + **v1.0.0** |
 
+## Switchboard (UI)
+
+One page. Drill down. Same words as voice:
+
+**ADD EFFECT** · **REMOVE EFFECT** · **TOGGLE EFFECT** · **ADD EFFECT TIME** · **REMOVE EFFECT TIME** · **PHASE TIME** · **PHASE ON/OFF** · **SAVE PRESET** · **LOAD PRESET** · **CLEAR BOARD** · **GO LIVE**
+
+Spec: [docs/design/SWITCHBOARD.md](docs/design/SWITCHBOARD.md)
+
 ## Target hardware
 
 | | |

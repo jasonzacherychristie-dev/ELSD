@@ -1,6 +1,8 @@
 package com.elsd.mix
 
 import com.elsd.audio.SpatialMode
+import com.elsd.board.BoardSession
+import com.elsd.board.EffectId
 import com.elsd.bounce.BounceMode
 import com.elsd.voice.Command
 
@@ -67,6 +69,54 @@ class MixState {
             is Command.EarsDry -> {
                 spatialMode = SpatialMode.OFF
                 earWet = 0f
+            }
+            is Command.BoardAdd -> {
+                EffectId.fromCatalog(cmd.effectCatalog)?.let { BoardSession.board.addEffect(it) }
+                BoardSession.board.applyToMix(this)
+            }
+            is Command.BoardRemove -> {
+                EffectId.fromCatalog(cmd.effectCatalog)?.let { BoardSession.board.removeEffect(it) }
+                BoardSession.board.applyToMix(this)
+            }
+            is Command.BoardToggle -> {
+                EffectId.fromCatalog(cmd.effectCatalog)?.let { BoardSession.board.toggleEffect(it) }
+                BoardSession.board.applyToMix(this)
+            }
+            is Command.BoardFadeIn -> {
+                EffectId.fromCatalog(cmd.effectCatalog)?.let {
+                    BoardSession.board.setFadeIn(it, cmd.sec)
+                }
+            }
+            is Command.BoardFadeOut -> {
+                EffectId.fromCatalog(cmd.effectCatalog)?.let {
+                    BoardSession.board.setFadeOut(it, cmd.sec)
+                }
+            }
+            is Command.BoardPhaseTime -> {
+                EffectId.fromCatalog(cmd.effectCatalog)?.let {
+                    BoardSession.board.setPhaseTime(it, cmd.sec)
+                }
+            }
+            is Command.BoardPhase -> {
+                EffectId.fromCatalog(cmd.effectCatalog)?.let {
+                    BoardSession.board.setPhaseEnabled(it, cmd.on)
+                }
+                BoardSession.board.applyToMix(this)
+            }
+            is Command.BoardSavePreset -> {
+                if (BoardSession::presets.isInitialized) {
+                    BoardSession.presets.save(cmd.name, BoardSession.board)
+                }
+            }
+            is Command.BoardLoadPreset -> {
+                if (BoardSession::presets.isInitialized) {
+                    BoardSession.presets.load(cmd.name, BoardSession.board)
+                    BoardSession.board.applyToMix(this)
+                }
+            }
+            is Command.BoardClear -> {
+                BoardSession.board.clearBoard()
+                BoardSession.board.applyToMix(this)
             }
             is Command.Unknown -> { /* ignore */ }
         }

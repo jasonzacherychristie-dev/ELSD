@@ -14,6 +14,9 @@ object CommandGrammar {
             .trim()
         if (t.isEmpty()) return Command.Unknown(raw)
 
+        // Switchboard vocabulary (UI twins)
+        parseBoard(t)?.let { return it }
+
         // Safety first
         if (t.matches(Regex(".*(clear|sober|dry out|come back).*"))) {
             return Command.SafetyClear
@@ -150,5 +153,45 @@ object CommandGrammar {
         }
 
         return Command.Unknown(raw)
+    }
+
+    private fun parseBoard(t: String): Command? {
+        if (t.contains("clear board")) return Command.BoardClear
+        if (t.contains("save preset")) {
+            val name = t.substringAfter("save preset").trim().ifEmpty { "voice" }
+            return Command.BoardSavePreset(name.replace(" ", "_"))
+        }
+        if (t.contains("load preset")) {
+            val name = t.substringAfter("load preset").trim().ifEmpty { return null }
+            return Command.BoardLoadPreset(name.replace(" ", "_"))
+        }
+        // add effect time trails 2
+        Regex("(?:add effect time|fade in)\\s+(\\w+)\\s+(\\d+(?:\\.\\d+)?)").find(t)?.let { m ->
+            return Command.BoardFadeIn(m.groupValues[1], m.groupValues[2].toFloat())
+        }
+        Regex("(?:remove effect time|fade out)\\s+(\\w+)\\s+(\\d+(?:\\.\\d+)?)").find(t)?.let { m ->
+            return Command.BoardFadeOut(m.groupValues[1], m.groupValues[2].toFloat())
+        }
+        Regex("phase time\\s+(\\w+)\\s+(\\d+(?:\\.\\d+)?)").find(t)?.let { m ->
+            return Command.BoardPhaseTime(m.groupValues[1], m.groupValues[2].toFloat())
+        }
+        Regex("phase on\\s+(\\w+)").find(t)?.let { m ->
+            return Command.BoardPhase(m.groupValues[1], true)
+        }
+        Regex("phase off\\s+(\\w+)").find(t)?.let { m ->
+            return Command.BoardPhase(m.groupValues[1], false)
+        }
+        Regex("(?:add effect|add)\\s+(\\w+)").find(t)?.let { m ->
+            val id = m.groupValues[1]
+            if (id == "effect") return null
+            return Command.BoardAdd(id)
+        }
+        Regex("(?:remove effect|remove)\\s+(\\w+)").find(t)?.let { m ->
+            return Command.BoardRemove(m.groupValues[1])
+        }
+        Regex("toggle(?: effect)?\\s+(\\w+)").find(t)?.let { m ->
+            return Command.BoardToggle(m.groupValues[1])
+        }
+        return null
     }
 }

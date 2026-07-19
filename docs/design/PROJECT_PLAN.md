@@ -87,6 +87,17 @@ Logical packages inside `app`: `bus`, `gl`, `fx-*`, `audio`, `bounce` (Amy), `vo
 
 **Exit:** Gogh Walk + City Pulse outdoors.
 
+### M2.25 — Switchboard UI (1.0 must)
+
+- [x] Single SWITCHBOARD page + drill-down  
+- [x] ADD / REMOVE / TOGGLE EFFECT  
+- [x] ADD EFFECT TIME / REMOVE EFFECT TIME / PHASE TIME / PHASE ON·OFF  
+- [x] SAVE PRESET / LOAD PRESET (JSON)  
+- [x] Shared vocabulary with voice  
+- [ ] Envelope drives shader wet per layer (full multi-layer blend)  
+
+**Refs:** [`SWITCHBOARD.md`](SWITCHBOARD.md)
+
 ### M4 — Amy, voice, polish
 
 - [ ] Vosk or robust offline path  
@@ -95,7 +106,7 @@ Logical packages inside `app`: `bus`, `gl`, `fx-*`, `audio`, `bounce` (Amy), `vo
 - [ ] Session timer + soft landing  
 - [ ] About: Grok + Jason credits  
 
-**Exit:** Stranger demo, voice only, &lt; 60s.
+**Exit:** Stranger demo; switchboard + voice; &lt; 60s.
 
 ### M5 — Tag **v1.0.0**
 
