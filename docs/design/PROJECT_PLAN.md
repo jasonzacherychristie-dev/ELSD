@@ -1,12 +1,21 @@
-# ELSD — Open Source Android Project Plan
+# ELSD — Project plan (active: **1.0**)
 
-## Goals
+> **Release map:** [`ROADMAP.md`](ROADMAP.md) — **1.0** ship · **2.0** deepen · **3.0** dream (DeepDream wishlist).  
+> This file is the **1.0 execution plan only**. Do not park 3.0 work in these checkboxes.
 
-1. Ship a **usable 1.0 APK** that demos KEY + PULSE + PAINT + LSD on Cardboard-compatible devices.  
-2. Keep the repo **easy to fork**: **MIT** app code, clear modules, no proprietary required runtimes for core path.  
-3. Stay faithful to the **TOASTED** metaphor: live mix, wet/dry, world-first — not a content silo.  
-4. **Voice only** + **Bounce** cursor (FLAT / SPATIAL / MUTED); see [`SOUL.md`](SOUL.md).  
-5. Imply classic desk/demo spirit; never ship forbidden brand names ([`TRADEMARK_SAFE_LANGUAGE.md`](TRADEMARK_SAFE_LANGUAGE.md)).
+## 1.0 goals
+
+1. Ship a **usable 1.0 APK** that demos KEY + PULSE + PAINT + LSD on target hardware.  
+2. Keep the repo **easy to fork**: **MIT** app code; Apache deps in NOTICE.  
+3. **TOASTED** live desk: wet/dry, world-first, composable banks.  
+4. **Voice only** + **Amy** (lean-in, FLAT / SPATIAL / MUTED) — [`SOUL.md`](SOUL.md).  
+5. Eyes **and** ears can hallucinate; `clear` dries both.  
+6. Imply heritage; no forbidden brand names — [`TRADEMARK_SAFE_LANGUAGE.md`](TRADEMARK_SAFE_LANGUAGE.md).  
+7. **No neural DeepDream in 1.0** — that is **3.0** ([`ROADMAP.md`](ROADMAP.md)).
+
+## Hardware baseline
+
+- **Target:** OnePlus 12–class phone + large-tray Cardboard-compatible viewer — [`TARGET_HARDWARE.md`](TARGET_HARDWARE.md)
 
 ## Recommended repo layout
 
@@ -15,157 +24,131 @@ ELSD/
   README.md
   LICENSE                 # MIT
   NOTICE
-  CONTRIBUTING.md
-  CODE_OF_CONDUCT.md
-  settings.gradle.kts
-  build.gradle.kts
-  gradle/libs.versions.toml
-  app/                    # Application shell (Compose + permissions + navigation)
-  core-gl/                # GL runtime, FBO graph, effect interfaces
-  fx-key/                 # Luma/chroma key shaders + params
-  fx-pulse/               # World visualizers + audio uniforms
-  fx-paint/               # Painter/style presets
-  fx-lsd/                 # Classic trip FX
-  media-bus/              # Media3 → GL texture
-  camera-bus/             # CameraX → GL texture
-  voice/                  # Vosk + command grammar + SpeechRecognizer fallback
-  bounce/                 # Checker cursor + personality lines
-  cardboard/              # JNI/NDK bridge to Cardboard SDK
-  presets/                # JSON/YAML TOASTED "pages"
-  docs/                   # Design + framework bookmarks (this tree)
-  tools/                  # scripts (shader pack, license check)
+  MISSION.md
+  docs/design/ROADMAP.md  # 1.0 / 2.0 / 3.0
+  app/                    # Application (may split modules later)
+  docs/
 ```
 
-Gradle can start as a **single `app` module** and split when files hurt; the table above is the *logical* architecture either way.
+Logical packages inside `app`: `bus`, `gl`, `fx-*`, `audio`, `bounce` (Amy), `voice`, `mix`, later `cardboard`.
 
-## Module responsibilities
+## Module responsibilities (1.0)
 
-| Module | Depends on | Owns |
-|--------|------------|------|
-| `camera-bus` | CameraX | OES world texture, lifecycle |
-| `media-bus` | Media3 | File/SAF/HLS → texture, audio session id |
-| `core-gl` | GLES 3 | Graph runner, wet/dry, timing |
-| `fx-*` | core-gl | Shaders + parameter schemas |
-| `voice` | Vosk AAR / platform speech | **Only** command path → parameter bus |
-| `bounce` | core-gl | Checker cursor FLAT / SPATIAL / MUTED + optional quips |
-| `cardboard` | Cardboard NDK | Head pose, distortion, stereo submit |
-| `app` | all | Legends, presets, safety timers, permissions — **no touch mixer UI** |
+| Module | Owns |
+|--------|------|
+| `camera-bus` | WORLD OES texture |
+| `media-bus` | PLATE (file/HLS) |
+| `core-gl` / `EffectGraph` | TOASTED pass graph |
+| `fx` shaders | KEY · PULSE · PAINT · LSD (GLSL only in 1.0) |
+| `audio` | BandEnergy, spatial ears engine |
+| `voice` | Grammar + SpeechRecognizer / Vosk |
+| `bounce` | Amy cursor + lean-in |
+| `cardboard` | Stereo distortion (1.0 if ready; flat OK for alpha) |
+| `app` | Permissions, legends, safety — **no touch mixer** |
 
-## Technical milestones
+## 1.0 technical milestones
 
-### M0 — Repo & docs (current)
+### M0 — Repo & docs ✅
 
-- [x] Framework bookmarks + local doc mirrors  
-- [x] Stack map + checkout guide  
-- [x] Vision + plan + soul (Bounce / TOASTED)  
-- [x] LICENSE, README, .gitignore  
-- [x] Upstream clones under `D:\ELSD\upstream`
+- [x] Framework bookmarks, stack, soul, mission, public GitHub  
+- [x] Target hardware, spatial audio design, roadmap 1/2/3  
 
-### Hardware baseline
+### M1 — Hello eyes ✅ (partial)
 
-- **Target:** OnePlus 12–class phone + large-tray Cardboard-compatible viewer — [`TARGET_HARDWARE.md`](TARGET_HARDWARE.md)
-
-### M1 — Hello eyes
-
-- [x] Android app skeleton (Kotlin, min SDK documented)  
-- [x] Fullscreen GL surface, 60/30 fps clear + textured quad  
-- [x] CameraX → OES texture on quad (flat phone preview)  
-- [x] Amy lean-in on speech (flat)  
-- [ ] Cardboard hello: stereo + distortion of same texture (on target viewer)  
-
-**Exit:** You see the room on the reference phone; stereo on target headset when M5/partial stereo lands.
+- [x] App skeleton, GLES, CameraX WORLD  
+- [x] Amy lean-in on speech  
+- [ ] Cardboard stereo on target viewer  
 
 ### M2 — TOASTED minimum
 
-- [ ] Media3 local video → second texture  
-- [ ] Luma key composite (A world, B media)  
-- [ ] Global wet/dry  
-- [ ] One LSD effect: trail/feedback  
-- [ ] Bounce FLAT placeholder (can be silent)
+- [ ] Media3 local video → PLATE texture  
+- [ ] Luma key composite  
+- [ ] Global wet/dry + true trail feedback FBO  
+- [ ] Window TV preset demo  
 
-**Exit:** Window TV works in a controlled room.
+**Exit:** Window TV in a controlled room.
 
-### M2.5 — Sound-activated hallucinations (eyes + ears)
+### M2.5 — Hallucinations eyes + ears
 
-- [x] `BandEnergy` + `MediaVisualizerSource` + `MicEnergySource` (skeleton)  
-- [x] `SpatialHallucinationEngine` + modes + voice grammar (control math)  
-- [ ] Wire bands into renderer uniforms every frame  
-- [ ] Wire spatial engine → AudioTrack / Media3 wet chain (actual ears)  
-- [ ] Modes eyes: City Pulse, Nerve, Sparkle, Heartbeat  
-- [ ] Modes ears: orbit, behind, cathedral, bass crawl, hallucinate ears  
-- [ ] Voice: `hallucinate`, `hallucinate ears`, `ears dry`, `city pulse`, `pulse off`  
-- [ ] `clear` dries eyes **and** ears  
+- [x] BandEnergy + Visualizer/mic sources (skeleton)  
+- [x] SpatialHallucinationEngine + grammar (control)  
+- [ ] Bands → shader uniforms every frame  
+- [ ] Spatial engine → real wet audio output  
+- [ ] `clear` dries eyes and ears  
 
-**Exit:** Bass possesses the world *and* something can move behind your head.  
-**Refs:** [`../frameworks/VISUALIZERS.md`](../frameworks/VISUALIZERS.md) · [`../frameworks/SPATIAL_AUDIO.md`](../frameworks/SPATIAL_AUDIO.md)
+**Exit:** Bass has the building; something can move behind your head.
 
-### M3 — RAD banks
+### M3 — RAD banks (still 1.0)
 
-- [ ] Chroma key + color picker (freeze frame)  
-- [ ] HLS stream as Bus B  
-- [ ] 4+ paint presets, 3+ LSD FX  
-- [ ] Spectrum texture optional; Butterchurn-inspired warp (MIT original GLSL)  
+- [ ] Chroma key + color pick  
+- [ ] HLS plate  
+- [ ] Full paint + LSD preset set  
+- [ ] Butterchurn-inspired warp (MIT original GLSL — **not** DeepDream)  
 
 **Exit:** Gogh Walk + City Pulse outdoors.
 
-### M4 — Bounce, voice & polish
+### M4 — Amy, voice, polish
 
-- [ ] Vosk grammar commands + sober/clear (preempt personality)  
-- [ ] Bounce cursor: FLAT + SPATIAL + MUTED  
-- [ ] Fourth-wall line budget + `no jokes`  
-- [ ] TOASTED chrome: bank lights, wet legend, auto-hide  
-- [ ] 8 factory presets  
+- [ ] Vosk or robust offline path  
+- [ ] Amy SPATIAL + MUTED polish; quip budget  
+- [ ] TOASTED chrome legends  
 - [ ] Session timer + soft landing  
-- [ ] NOTICE / license screen  
-- [ ] CONTRIBUTING + issue templates  
+- [ ] About: Grok + Jason credits  
 
-**Exit:** Stranger demo, **voice only**, Bounce optional quiet, &lt; 60 seconds to magic.
+**Exit:** Stranger demo, voice only, &lt; 60s.
 
-### M5 — 1.0 release
+### M5 — Tag **v1.0.0**
 
-- [ ] Version tag `v1.0.0`  
-- [ ] GitHub Actions: assembleDebug / lint  
-- [ ] F-Droid-friendly notes (no proprietary must-haves on core path)  
-- [ ] Short demo video + README GIFs  
+- [ ] Stereo Cardboard path on target headset  
+- [ ] CI assembleDebug  
+- [ ] Demo clip + README  
+- [ ] Tag `v1.0.0`  
+
+---
+
+## After 1.0 (do not expand checkboxes here)
+
+| Release | See |
+|---------|-----|
+| **2.0** Deeper mixer | [`ROADMAP.md`](ROADMAP.md#20--deeper-mixer-after-10) |
+| **3.0** Dream machine + **DeepDream mode** | [`ROADMAP.md`](ROADMAP.md#30--dream-machine-wishlist) |
 
 ## Open source process
 
 | Practice | Choice |
 |----------|--------|
-| Host | GitHub (user/org TBD) |
-| Default branch | `main` |
-| Versioning | SemVer; presets may version independently |
-| CI | GitHub Actions (Android Gradle) |
-| Issues | bug / enhancement / shader / docs labels |
-| PR rule | one logical change; include before/after note for FX |
-| Code of conduct | Contributor Covenant |
-| Security | No camera/mic frames uploaded by default; document any future cloud path |
+| Host | https://github.com/jasonzacherychristie-dev/ELSD |
+| Branch | `main` |
+| Versioning | SemVer — `v1.0.0` / `v2.0.0` / `v3.0.0` |
+| Labels | `1.0` `2.0` `3.0` `wishlist` `neural` |
+| CoC | CODE_OF_CONDUCT.md |
+| Security | SECURITY.md — no default cloud of camera/mic |
 
-## Risk register
+## Risk register (1.0)
 
 | Risk | Mitigation |
 |------|------------|
-| Cardboard NDK integration pain | M1 time-box; flat mode ships even if stereo slips |
-| Camera + ExoPlayer + GL thread races | Single GL owner thread; explicit EGL context rules |
-| Thermal / FPS | Half-res feedback; effect budget (max N passes) |
-| Vosk APK size | Download model on first run; optional system speech |
-| Trademark | “Cardboard-compatible” wording in store/README |
-| Scope creep (Amiga 9000) | Horizon doc only; not 1.0 milestones |
+| Scope creep (DeepDream, dome, iOS) | Roadmap buckets; reject into `3.0`/`wishlist` |
+| Thermal / FPS | Effect budget; half-res feedback |
+| Cardboard NDK pain | Flat alpha ships; stereo hard-gate only at M5 |
+| GPL analysis libs | MIT BandEnergy + platform Visualizer |
+| Trademark | Cardboard-compatible wording only |
 
-## Decision log (initial)
+## Decision log
 
 | Decision | Choice | Rationale |
 |----------|--------|-----------|
-| Platform | Android first | Cardboard SDK + open ecosystem |
-| Engine | OpenGL ES 3 (not Unity) | Open, Toaster-like control |
-| Video | Media3 | HLS + local, Apache-2.0 |
-| Voice | Vosk primary | Offline OSS |
-| License | MIT (app) | Simple for shaders/forks; Apache deps via NOTICE |
-| Neural style | Post-1.0 | Shader painters first |
+| Platform | Android first | Target hardware + open stack |
+| Engine | GLES 3 | TOASTED control |
+| 1.0 paint | Shader presets | Real-time, small APK |
+| DeepDream | **3.0 wishlist** | Neural cost / focus |
+| Spatial ears | 1.0 control + wet path | Dual wet soul |
+| License | MIT | Fork-friendly shaders |
 
-## Next actions (human + agent)
+## Next actions (1.0 focus)
 
-1. Commit docs scaffold to `main`.  
-2. **Checkout** Cardboard + Vosk demo under `D:\ELSD\upstream` when coding starts (see `../frameworks/CHECKOUTS.md`).  
-3. Scaffold Gradle `app` with empty packages matching filter families.  
-4. Implement M1 camera quad before any FX glam.
+1. Android SDK + build debug on OnePlus 12 class device.  
+2. Finish M2 Window TV (plate + luma key + trail FBO).  
+3. Wire BandEnergy → uniforms + spatial → AudioTrack.  
+4. Large-tray headset QA per TARGET_HARDWARE.  
+5. Keep DeepDream issues labeled `3.0` `wishlist` only.

@@ -43,6 +43,7 @@ Long horizon: richer stereo, safer trips, collaborative seeing. Near term: a **C
 - Building a social network or ad-surveillance platform  
 - Requiring proprietary engines for the core path  
 - iOS parity before Android 1.0 is real  
+- Shipping **DeepDream / heavy neural vision** before the 1.0 mixer works (tracked as **3.0** — see `docs/design/ROADMAP.md`)  
 
 ## Success looks like
 

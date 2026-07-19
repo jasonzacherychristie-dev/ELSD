@@ -38,16 +38,26 @@ Third-party libraries (Cardboard SDK, CameraX, Media3, Vosk, AndroidX, …) rema
 
 ## Status
 
-**M1 codebase landed:** WORLD bus (CameraX → GL), TOASTED composite shader (paint / pulse / LSD / key hooks), Bounce cursor, voice command grammar + SpeechRecognizer loop, mix state + presets.
+**Active release: 1.0** — perception mixer (shaders, keys, Amy, pulse, spatial ears).  
+**Not in 1.0:** DeepDream / heavy neural vision → **3.0 wishlist**.
 
-| Milestone | Meaning |
+| Release | Theme | Status |
+|---------|--------|--------|
+| **1.0** | TOASTED desk — GLSL + audio analysis + Amy + Cardboard | **In progress** (M1 landed) |
+| **2.0** | Deeper mixer — richer FBO, spatial, presets | After 1.0 |
+| **3.0** | Dream machine — **DeepDream mode**, neural layers | Wishlist |
+
+Full map: **[docs/design/ROADMAP.md](docs/design/ROADMAP.md)** · 1.0 execution: **[docs/design/PROJECT_PLAN.md](docs/design/PROJECT_PLAN.md)**
+
+| 1.0 milestone | Meaning |
 |-----------|---------|
-| M0 | Docs, stack, soul ✅ |
-| M1 | Camera → GL → Bounce + voice grammar ✅ (build needs Android SDK) |
-| M2 | Plate bus keying + trail FBO + wet polish |
-| M3 | HLS, full banks, city pulse audio |
-| M4 | Vosk offline, Bounce quips, TOASTED chrome |
-| M5 | Stereo Cardboard NDK, v1.0.0 |
+| M0 | Docs, stack, soul, public repo ✅ |
+| M1 | Camera → GL → Amy lean-in + voice grammar ✅ |
+| M2 | Plate keying + trail FBO |
+| M2.5 | Eyes + ears hallucination wired to output |
+| M3 | Full banks + HLS |
+| M4 | Vosk, polish, safety timers |
+| M5 | Stereo + **v1.0.0** |
 
 ## Target hardware
 
@@ -99,7 +109,8 @@ Install `app/build/outputs/apk/debug/app-debug.apk`, grant camera + mic, landsca
 | Doc | What |
 |-----|------|
 | [MISSION.md](MISSION.md) | Mission, vision, principles |
-| [docs/design/SOUL.md](docs/design/SOUL.md) | Look, Bounce, TOASTED |
+| [docs/design/ROADMAP.md](docs/design/ROADMAP.md) | **1.0 / 2.0 / 3.0** (DeepDream in 3.0) |
+| [docs/design/SOUL.md](docs/design/SOUL.md) | Look, Amy, TOASTED |
 | [docs/design/VISION_1_0.md](docs/design/VISION_1_0.md) | Product vision |
 | [docs/design/VOICE_AND_CURSOR.md](docs/design/VOICE_AND_CURSOR.md) | Voice-only + cursor |
 | [docs/design/PROJECT_PLAN.md](docs/design/PROJECT_PLAN.md) | Milestones |

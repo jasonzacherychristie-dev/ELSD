@@ -47,7 +47,9 @@ Treat **live world + keyed media + painter styles + pulse** as busses you mix **
 
 ## Non-goals for 1.0
 
-Horizon dome hardware, ARCore city meshes, real-time neural style every frame, iOS parity, social network, accounts, touch-first settings UI.
+Horizon dome hardware, ARCore city meshes, **DeepDream / continuous neural dream** (see **3.0** in [`ROADMAP.md`](ROADMAP.md)), real-time heavy style transfer every frame, iOS parity, social network, accounts, touch-first settings UI.
+
+Shader **PAINT** (Gogh, Noir, …) **is** 1.0. **DeepDream mode** is not.
 
 ## Ethics (product rules)
 
@@ -60,9 +62,11 @@ Horizon dome hardware, ARCore city meshes, real-time neural style every frame, i
 
 ## Related docs
 
-- [`SOUL.md`](SOUL.md) — look / feel / Bounce / TOASTED  
+- [`ROADMAP.md`](ROADMAP.md) — **1.0 / 2.0 / 3.0** releases  
+- [`SOUL.md`](SOUL.md) — look / feel / Amy / TOASTED  
 - [`VOICE_AND_CURSOR.md`](VOICE_AND_CURSOR.md) — interaction spec  
 - [`TRADEMARK_SAFE_LANGUAGE.md`](TRADEMARK_SAFE_LANGUAGE.md) — naming guardrails  
+- [`TARGET_HARDWARE.md`](TARGET_HARDWARE.md) — OP12 + large-tray viewer  
 - [`../frameworks/STACK.md`](../frameworks/STACK.md) — libraries  
-- [`PROJECT_PLAN.md`](PROJECT_PLAN.md) — milestones & modules  
+- [`PROJECT_PLAN.md`](PROJECT_PLAN.md) — **1.0** milestones only  
 - [`SOURCE_PAPERS.md`](SOURCE_PAPERS.md) — research anchors  
