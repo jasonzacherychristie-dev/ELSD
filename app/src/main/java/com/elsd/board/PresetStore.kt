@@ -90,6 +90,18 @@ class PresetStore(context: Context) {
             addEffect(EffectId.EXPRESSIONIST)
             addEffect(EffectId.MOOD_NIGHT)
         }
+        seed("saturday_cel") {
+            globalWet = 0.8f
+            addEffect(EffectId.CARTOON)
+            addEffect(EffectId.MOOD_WARM)
+            addEffect(EffectId.DIGITAL_CLEAN)
+        }
+        seed("uncanny_sharp") {
+            globalWet = 0.7f
+            addEffect(EffectId.HYPERREAL)
+            addEffect(EffectId.MOOD_NEUTRAL)
+            addEffect(EffectId.DIGITAL_HARSH)
+        }
     }
 
     private fun sanitize(name: String): String =

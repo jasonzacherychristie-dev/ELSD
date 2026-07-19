@@ -140,7 +140,6 @@ class Switchboard {
                     if (layer.enabled || layer.envelope() > 0.01f) {
                         mix.paintId = when (layer.id) {
                             EffectId.MELT_PAINT -> "melt"
-                            EffectId.COMIC -> "sketch" // map until comic shader lands
                             else -> layer.id.catalogName
                         }
                         last = "ART"

@@ -31,6 +31,8 @@ enum class EffectId(
     MONET("monet", EffectFamily.ART, "MONET"),
     SKETCH("sketch", EffectFamily.ART, "SKETCH"),
     COMIC("comic", EffectFamily.ART, "COMIC"),
+    CARTOON("cartoon", EffectFamily.ART, "CARTOON"),
+    HYPERREAL("hyperreal", EffectFamily.ART, "HYPERREAL"),
     MELT_PAINT("melt_paint", EffectFamily.ART, "MELT PAINT"),
 
     // —— CINEMA styles (noir-inspired grades + eras + directors) ——

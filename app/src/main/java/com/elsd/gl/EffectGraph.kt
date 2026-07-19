@@ -118,6 +118,9 @@ class EffectGraph(private val context: Context) {
         "neon" -> 4
         "sketch" -> 5
         "melt" -> 6
+        "comic" -> 7
+        "cartoon" -> 8
+        "hyperreal" -> 9
         else -> 0
     }
 

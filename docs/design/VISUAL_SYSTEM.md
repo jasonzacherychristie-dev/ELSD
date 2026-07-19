@@ -37,7 +37,9 @@ Painterly / graphic looks (GLSL, not neural).
 | `gogh` | Swirl, saturation |
 | `monet` | Soft dabs |
 | `sketch` | Ink / paper |
-| `comic` | Hard ink + poster (optional) |
+| `comic` | Hard ink + poster / Ben-Day |
+| `cartoon` | Cel bands, bold outlines, flat fills |
+| `hyperreal` | Micro-contrast, clarity, HDR-ish pop |
 | `melt_paint` | Soft painterly melt |
 
 ### 3. CINEMA (cinematic styles)

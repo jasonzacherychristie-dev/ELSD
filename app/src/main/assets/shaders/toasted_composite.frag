@@ -12,7 +12,8 @@ uniform float uBass;
 uniform int uKeyMode;
 uniform float uChromaHue;
 uniform int uPulse;
-uniform int uPaint;     // ART: 0 none, 1 gogh, 2 monet, 3 noir, 4 neon, 5 sketch, 6 melt
+// ART: 0 none, 1 gogh, 2 monet, 3 noir, 4 neon, 5 sketch, 6 melt, 7 comic, 8 cartoon, 9 hyperreal
+uniform int uPaint;
 uniform int uLsd;       // ELSD: 0 none, 1 trail, 2 hue, 3 split, 4 kaleido, 5 melt
 // cinema: 0 none, 1 noir, 2 neon, 3 bleach, 4 teal_orange, 5 anamorphic, 6 soft_glow,
 // 7 technicolor, 8 suspiria, 9 silent_era, 10 expressionist, 11 giallo, 12 golden_age
@@ -179,6 +180,63 @@ vec3 applyPaint(vec3 c, vec2 uv) {
         vec2 d = uv - 0.5;
         float w = 0.02 * uWet * sin(uTime + d.y * 20.0);
         return texture(uWorld, uv + vec2(w, -w * 0.5)).rgb;
+    }
+    if (uPaint == 7) {
+        // comic / Lichtenstein-ish: hard ink + flat cells
+        float e = length(vec2(
+            luma(texture(uWorld, uv + vec2(0.002, 0.0)).rgb) - luma(texture(uWorld, uv - vec2(0.002, 0.0)).rgb),
+            luma(texture(uWorld, uv + vec2(0.0, 0.002)).rgb) - luma(texture(uWorld, uv - vec2(0.0, 0.002)).rgb)
+        ));
+        float ink = smoothstep(0.03, 0.1, e);
+        vec3 flat = floor(c * 4.0) / 4.0;
+        float dots = step(0.55, hash(floor(uv * vec2(90.0, 90.0))));
+        flat = mix(flat, flat * 0.85, dots * 0.35);
+        return mix(c, mix(flat, vec3(0.05), ink), uWet);
+    }
+    if (uPaint == 8) {
+        // cartoon — cel shade, bold outlines, flat fills
+        float y = luma(c);
+        // quantize value into cel bands
+        float bands = 4.0;
+        float cel = floor(y * bands) / bands + 0.5 / bands;
+        vec3 hsv = rgb2hsv(c);
+        hsv.y = clamp(hsv.y * 1.25, 0.0, 1.0);
+        hsv.z = cel;
+        vec3 fill = hsv2rgb(hsv);
+        // thick outline from depth-of-edge
+        float e = length(vec2(
+            luma(texture(uWorld, uv + vec2(0.0035, 0.0)).rgb) - y,
+            luma(texture(uWorld, uv + vec2(0.0, 0.0035)).rgb) - y
+        ));
+        float line = smoothstep(0.04, 0.12, e);
+        // slight “toon” specular disk
+        float spec = smoothstep(0.75, 0.95, y) * 0.15;
+        fill += spec;
+        vec3 toon = mix(fill, vec3(0.08, 0.07, 0.1), line);
+        return mix(c, toon, uWet);
+    }
+    if (uPaint == 9) {
+        // hyperreal — micro-contrast, clarity, pore-sharp, mild HDR pop
+        float y = luma(c);
+        // unsharp / local contrast
+        vec3 blur = c;
+        blur += texture(uWorld, uv + vec2(0.002, 0.0)).rgb;
+        blur += texture(uWorld, uv - vec2(0.002, 0.0)).rgb;
+        blur += texture(uWorld, uv + vec2(0.0, 0.002)).rgb;
+        blur += texture(uWorld, uv - vec2(0.0, 0.002)).rgb;
+        blur *= 0.2;
+        vec3 hi = c + (c - blur) * (1.4 * uWet);
+        // clarity curve
+        hi = (hi - 0.5) * (1.0 + 0.25 * uWet) + 0.5;
+        // selective sat: midtones richer, not clownish
+        vec3 hsv = rgb2hsv(clamp(hi, 0.0, 1.0));
+        float mid = smoothstep(0.15, 0.4, y) * (1.0 - smoothstep(0.65, 0.95, y));
+        hsv.y = clamp(hsv.y * (1.0 + 0.2 * mid * uWet), 0.0, 1.0);
+        hsv.z = pow(hsv.z, 0.95);
+        vec3 hr = hsv2rgb(hsv);
+        // fine grain of “sensor” detail
+        hr += (hash(uv * vec2(1200.0, 800.0) + uTime) - 0.5) * 0.02 * uWet;
+        return mix(c, clamp(hr, 0.0, 1.0), uWet);
     }
     return c;
 }
