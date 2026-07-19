@@ -14,6 +14,44 @@ object CommandGrammar {
             .trim()
         if (t.isEmpty()) return Command.Unknown(raw)
 
+        // Amy actions / antics mass toggle
+        if (
+            t.contains("amy actions off") || t.contains("amy antics off") ||
+            t.contains("stop amy antics") || t.contains("amy still") ||
+            t.contains("disable amy actions")
+        ) {
+            return Command.AmyActionsEnabled(false)
+        }
+        if (
+            t.contains("amy actions on") || t.contains("amy antics on") ||
+            t.contains("enable amy actions") || t.contains("amy move")
+        ) {
+            return Command.AmyActionsEnabled(true)
+        }
+        if (
+            t.contains("amy antics") || t.contains("amy dance") ||
+            t.contains("amy goof") || t.contains("do something amy") ||
+            t.contains("amy something")
+        ) {
+            return Command.AmyAntics
+        }
+        when {
+            t.contains("amy bounce") || t.contains("bounce amy") || t == "bounce" ->
+                return Command.AmyPlay("bounce")
+            t.contains("amy roll") || t.contains("roll amy") || t.contains("amy roll over") ->
+                return Command.AmyPlay("roll")
+            t.contains("amy teleport") || t.contains("teleport amy") || t.contains("amy blink") ->
+                return Command.AmyPlay("teleport")
+            t.contains("amy hop") || t.contains("hop amy") ->
+                return Command.AmyPlay("hop")
+            t.contains("amy spin") || t.contains("spin amy") ->
+                return Command.AmyPlay("spin")
+            t.contains("amy pop") || t.contains("pop amy") ->
+                return Command.AmyPlay("pop")
+            t.contains("amy ack") || t.contains("good amy") ->
+                return Command.AmyPlay("ack")
+        }
+
         // RANDOM mode — whatever verbal trigger
         if (
             t == "random" ||

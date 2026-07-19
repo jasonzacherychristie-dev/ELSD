@@ -74,7 +74,7 @@ Four creative banks + two globals.
 | **PRESETS / USER SAVES** | ✅ factory + user dirs; switchboard hub; prefs voice — [`PRESETS.md`](PRESETS.md) |
 | **RANDOM** | ✅ roll board — voice: random / surprise me / shuffle / chaos… |
 | **SET FRAMERATE / DROPPED FRAMES** | ✅ film cadence + budget |
-| **Amy** lean-in | ✅ procedural quad (not live 3D mesh) — [`AMY_RENDER.md`](AMY_RENDER.md) |
+| **Amy** | ✅ lean + **bounce/roll/teleport/hop/spin/ack/pop**; mass **ACTIONS ON/OFF** — [`AMY_RENDER.md`](AMY_RENDER.md) |
 | **Voice** = switchboard verbs | ✅ |
 | **CLEAR / sober** | ✅ |
 | **GO LIVE** (camera PGM) | ✅ |

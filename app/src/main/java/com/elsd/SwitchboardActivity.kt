@@ -127,6 +127,27 @@ class SwitchboardActivity : ComponentActivity() {
             Toast.makeText(this, summary, Toast.LENGTH_LONG).show()
             showBoard()
         })
+        listHost.addView(text(
+            if (board.amyActionsEnabled) "AMY ACTIONS · ON (roll · bounce · teleport · …)"
+            else "AMY ACTIONS · OFF (still pilot, lean only)",
+        ).apply {
+            setTextColor(if (board.amyActionsEnabled) LIME else DIM)
+            setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
+            setPadding(0, dp(6), 0, dp(4))
+        })
+        actionHost.addView(
+            verbButton(
+                if (board.amyActionsEnabled) BoardVerb.AMY_ACTIONS_OFF else BoardVerb.AMY_ACTIONS_ON,
+            ) {
+                board.amyActionsEnabled = !board.amyActionsEnabled
+                Toast.makeText(
+                    this,
+                    if (board.amyActionsEnabled) "AMY ACTIONS ON" else "AMY ACTIONS OFF",
+                    Toast.LENGTH_SHORT,
+                ).show()
+                showBoard()
+            },
+        )
         actionHost.addView(frameRateRow())
         actionHost.addView(
             verbButton(

@@ -43,6 +43,8 @@ class MixState {
     @Volatile var allowDroppedFrames: Boolean = true
     @Volatile var navBoostFps: Boolean = true
     @Volatile var bounceMode: BounceMode = BounceMode.FLAT
+    /** Mass toggle for Amy roll/bounce/teleport/etc. Lean-on-speech still works. */
+    @Volatile var amyActionsEnabled: Boolean = true
     @Volatile var spatialMode: SpatialMode = SpatialMode.OFF
     @Volatile var earWet: Float = 0f
     @Volatile var jokes: Boolean = true

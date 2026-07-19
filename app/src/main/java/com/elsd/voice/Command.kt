@@ -41,5 +41,8 @@ sealed class Command {
     data object UnlockFramerate : Command()
     data class FractalZoomRate(val rate: Float) : Command()
     data class FractalKeyMode(val mode: Int) : Command()
+    data class AmyPlay(val actionId: String) : Command()
+    data class AmyActionsEnabled(val enabled: Boolean) : Command()
+    data object AmyAntics : Command()
     data class Unknown(val raw: String) : Command()
 }

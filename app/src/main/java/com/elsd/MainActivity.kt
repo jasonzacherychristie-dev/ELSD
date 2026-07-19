@@ -14,8 +14,10 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.elsd.board.BoardSession
+import com.elsd.bounce.AmyAction
 import com.elsd.bus.CameraBus
 import com.elsd.gl.ElsdRenderer
+import com.elsd.voice.Command
 import com.elsd.voice.VoiceRouter
 import com.elsd.mix.MixState
 

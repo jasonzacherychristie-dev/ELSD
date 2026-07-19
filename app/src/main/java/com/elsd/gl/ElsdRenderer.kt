@@ -5,6 +5,7 @@ import android.graphics.SurfaceTexture
 import android.opengl.GLES11Ext
 import android.opengl.GLES30
 import android.opengl.GLSurfaceView
+import com.elsd.bounce.AmyAction
 import com.elsd.bounce.BounceCursor
 import com.elsd.mix.MixState
 import javax.microedition.khronos.egl.EGLConfig
@@ -45,10 +46,19 @@ class ElsdRenderer(
         listening = v
     }
 
+    fun playAmy(action: AmyAction) {
+        bounce.play(action)
+    }
+
+    fun playAmyAntics() {
+        bounce.playRandomCute()
+    }
+
     fun applyFramePolicyFromMix() {
         framePacer.targetFps = mix.targetFps
         framePacer.allowDroppedFrames = mix.allowDroppedFrames
         framePacer.navBoost = mix.navBoostFps
+        bounce.actionsEnabled = mix.amyActionsEnabled
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
@@ -145,10 +155,4 @@ class ElsdRenderer(
         bounce.mode = mix.bounceMode
         bounce.wet = mix.wet
         bounce.listening = listening
-        val aspect = width.toFloat() / height.toFloat()
-        bounce.draw(aspect, dt)
-
-        val costMs = (System.nanoTime() - t0) / 1_000_000f
-        lastFrameExpensive = costMs > 18f
-    }
-}
+       

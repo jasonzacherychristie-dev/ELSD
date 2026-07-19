@@ -50,16 +50,27 @@ Lock names, duration, loop vs one-shot:
 | Action ID | Trigger | Length (hint) | Loop? |
 |-----------|---------|---------------|-------|
 | `idle_float` | default | 1–2 s cycle | yes |
-| `lean_in` | speech start | 0.2–0.4 s | no → hold |
-| `lean_hold` | listening | — | yes subtle |
-| `lean_out` | speech end | 0.3–0.5 s | no → idle |
-| `ack` | command understood | 0.15–0.25 s | no (squash) |
-| `toasted_pride` | high wet / “toasted” | 0.4 s | no |
-| `muted` | mute amy | static or micro | yes |
-| `think` | optional stillness | slow | yes |
-| `clear` | sober | settle | no |
+| `lean_in` / hold / out | speech | 0.2–0.5 s | communication (always allowed) |
+| `bounce` | voice `amy bounce` | ~0.45 s | hop in place |
+| `roll` | `amy roll` | ~0.55 s | roll to new rest |
+| `teleport` | `amy teleport` | ~0.4 s | pop out / in |
+| `hop` | `amy hop` | ~0.28 s | short relocate |
+| `spin` | `amy spin` | ~0.5 s | tumble checks |
+| `ack` | after commands / `amy ack` | ~0.22 s | squash |
+| `pop` | `amy pop` / toasted | ~0.35 s | happy scale |
+| `antics` | `amy antics` / dance | random from above | one-shot |
 
-**Process:** ship procedural + log real timings from OP9 sessions → adjust table → **then** Blender batch.
+### Mass toggle
+
+| Control | Effect |
+|---------|--------|
+| **AMY ACTIONS ON/OFF** | Enables/disables roll, bounce, teleport, hop, spin, pop, idle bob |
+| Lean-on-speech | **Still works** when actions off (she listens, doesn’t clown) |
+| **MUTE AMY** | Hides her entirely (separate from actions) |
+
+Voice: `amy actions off` · `amy actions on` · `amy still` · `amy bounce` · `amy roll` · `amy teleport` · `amy antics`
+
+**Process:** procedural catalog **shipped**; Blender flipbooks after OP9 timing pass.
 
 ### 2. Blender scene (once catalog frozen)
 

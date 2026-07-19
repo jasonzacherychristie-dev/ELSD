@@ -12,6 +12,8 @@ class Switchboard {
     private val layers = linkedMapOf<EffectId, EffectLayer>()
     var globalWet: Float = 0.7f
     var amyMuted: Boolean = false
+    /** Mass toggle for Amy roll/bounce/teleport catalog. */
+    var amyActionsEnabled: Boolean = true
     var presetName: String = "untitled"
     /** 0 = unlock */
     var targetFps: Int = 30
@@ -111,6 +113,7 @@ class Switchboard {
         put("presetName", presetName)
         put("globalWet", globalWet.toDouble())
         put("amyMuted", amyMuted)
+        put("amyActionsEnabled", amyActionsEnabled)
         put("targetFps", targetFps)
         put("allowDroppedFrames", allowDroppedFrames)
         put("fractalKeyMode", fractalKeyMode)
@@ -126,6 +129,7 @@ class Switchboard {
         presetName = o.optString("presetName", "loaded")
         globalWet = o.optDouble("globalWet", 0.7).toFloat()
         amyMuted = o.optBoolean("amyMuted", false)
+        amyActionsEnabled = o.optBoolean("amyActionsEnabled", true)
         targetFps = o.optInt("targetFps", 30)
         allowDroppedFrames = o.optBoolean("allowDroppedFrames", true)
         fractalKeyMode = o.optInt("fractalKeyMode", 3)
@@ -231,11 +235,4 @@ class Switchboard {
                 EffectFamily.MOOD -> {
                     if (layer.enabled || layer.envelope() > 0.01f) {
                         mix.moodId = layer.id.catalogName
-                        last = "MOOD"
-                    }
-                }
-            }
-        }
-        mix.lastBank = last
-    }
-}
+                  
