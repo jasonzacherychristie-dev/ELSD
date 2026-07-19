@@ -2,9 +2,10 @@
 
 **Open-source Android perception mixer** for Cardboard-compatible viewers.
 
-Live camera world + keyed media (local/stream) + painter styles + real-world pulse visualizers + classic trip FX — mixed like a **Video Toaster**, controlled by touch and **voice**.
+Live camera world + keyed media (local/stream) + painter styles + real-world pulse visualizers + classic trip FX — mixed **TOASTED** (live desk soul), **voice only**, with **Bounce**: a spirited checker-orb cursor that can go spatial, break the fourth wall, or mute into the background.
 
 > Buildings can throb. Windows can become TVs. Streets can go Van Gogh.  
+> You talk. Bounce mixes. Say *clear* when you want the earth back.  
 > Built for hobbyists. Inspired by 1998 research toward *Ultimate Reality*.
 
 ## Status
@@ -25,6 +26,8 @@ Live camera world + keyed media (local/stream) + painter styles + real-world pul
 | Doc | What |
 |-----|------|
 | [docs/design/VISION_1_0.md](docs/design/VISION_1_0.md) | Product vision |
+| [docs/design/SOUL.md](docs/design/SOUL.md) | Look, feel, Bounce, TOASTED |
+| [docs/design/VOICE_AND_CURSOR.md](docs/design/VOICE_AND_CURSOR.md) | Voice-only + cursor states |
 | [docs/design/PROJECT_PLAN.md](docs/design/PROJECT_PLAN.md) | Modules & milestones |
 | [docs/design/SOURCE_PAPERS.md](docs/design/SOURCE_PAPERS.md) | Research lineage |
 | [docs/frameworks/STACK.md](docs/frameworks/STACK.md) | How libraries map to busses |

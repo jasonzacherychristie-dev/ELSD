@@ -4,7 +4,9 @@
 
 1. Ship a **usable 1.0 APK** that demos KEY + PULSE + PAINT + LSD on Cardboard-compatible devices.  
 2. Keep the repo **easy to fork**: Apache-2.0, clear modules, no proprietary required runtimes for core path.  
-3. Stay faithful to the **Toaster metaphor**: live mix, not a content silo.
+3. Stay faithful to the **TOASTED** metaphor: live mix, wet/dry, world-first — not a content silo.  
+4. **Voice only** + **Bounce** cursor (FLAT / SPATIAL / MUTED); see [`SOUL.md`](SOUL.md).  
+5. Imply classic desk/demo spirit; never ship forbidden brand names ([`TRADEMARK_SAFE_LANGUAGE.md`](TRADEMARK_SAFE_LANGUAGE.md)).
 
 ## Recommended repo layout
 
@@ -27,8 +29,9 @@ ELSD/
   media-bus/              # Media3 → GL texture
   camera-bus/             # CameraX → GL texture
   voice/                  # Vosk + command grammar + SpeechRecognizer fallback
+  bounce/                 # Checker cursor + personality lines
   cardboard/              # JNI/NDK bridge to Cardboard SDK
-  presets/                # JSON/YAML Toaster "pages"
+  presets/                # JSON/YAML TOASTED "pages"
   docs/                   # Design + framework bookmarks (this tree)
   tools/                  # scripts (shader pack, license check)
 ```
@@ -43,9 +46,10 @@ Gradle can start as a **single `app` module** and split when files hurt; the tab
 | `media-bus` | Media3 | File/SAF/HLS → texture, audio session id |
 | `core-gl` | GLES 3 | Graph runner, wet/dry, timing |
 | `fx-*` | core-gl | Shaders + parameter schemas |
-| `voice` | Vosk AAR / platform speech | Intent → parameter bus |
+| `voice` | Vosk AAR / platform speech | **Only** command path → parameter bus |
+| `bounce` | core-gl | Checker cursor FLAT / SPATIAL / MUTED + optional quips |
 | `cardboard` | Cardboard NDK | Head pose, distortion, stereo submit |
-| `app` | all | UX, presets, safety timers, permissions |
+| `app` | all | Legends, presets, safety timers, permissions — **no touch mixer UI** |
 
 ## Technical milestones
 
@@ -53,9 +57,9 @@ Gradle can start as a **single `app` module** and split when files hurt; the tab
 
 - [x] Framework bookmarks + local doc mirrors  
 - [x] Stack map + checkout guide  
-- [x] Vision + plan  
-- [ ] LICENSE, README, .gitignore  
-- [ ] Optional: clone upstream into `D:\ELSD\upstream`
+- [x] Vision + plan + soul (Bounce / TOASTED)  
+- [x] LICENSE, README, .gitignore  
+- [x] Upstream clones under `D:\ELSD\upstream`
 
 ### M1 — Hello eyes
 
@@ -66,12 +70,13 @@ Gradle can start as a **single `app` module** and split when files hurt; the tab
 
 **Exit:** You see the room in Cardboard.
 
-### M2 — Toaster minimum
+### M2 — TOASTED minimum
 
 - [ ] Media3 local video → second texture  
 - [ ] Luma key composite (A world, B media)  
 - [ ] Global wet/dry  
 - [ ] One LSD effect: trail/feedback  
+- [ ] Bounce FLAT placeholder (can be silent)
 
 **Exit:** Window TV works in a controlled room.
 
@@ -84,15 +89,18 @@ Gradle can start as a **single `app` module** and split when files hurt; the tab
 
 **Exit:** Gogh Walk + City Pulse outdoors.
 
-### M4 — Voice & polish
+### M4 — Bounce, voice & polish
 
-- [ ] Vosk grammar commands + sober/clear  
+- [ ] Vosk grammar commands + sober/clear (preempt personality)  
+- [ ] Bounce cursor: FLAT + SPATIAL + MUTED  
+- [ ] Fourth-wall line budget + `no jokes`  
+- [ ] TOASTED chrome: bank lights, wet legend, auto-hide  
 - [ ] 8 factory presets  
 - [ ] Session timer + soft landing  
 - [ ] NOTICE / license screen  
 - [ ] CONTRIBUTING + issue templates  
 
-**Exit:** Hands-free demo for a stranger in &lt; 60 seconds.
+**Exit:** Stranger demo, **voice only**, Bounce optional quiet, &lt; 60 seconds to magic.
 
 ### M5 — 1.0 release
 
