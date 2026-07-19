@@ -1,14 +1,26 @@
 ELSD (Electronic LSD)
 =====================
+A Praxis Software project (informal house brand)
 
 ## Copyright
 
-Copyright (c) 2026 Jason Z. Christie
+Copyright (c) 2026 Jason Z. Christie / Praxis Software (informal)
 Copyright (c) 2026 xAI — Grok (implementation contributions)
 
 ELSD application code, GLSL effect shaders authored for this project, design
 docs in /docs (except third-party mirrors), and project scaffolding are
 released under the MIT License (see LICENSE).
+
+## UI fonts (SIL Open Font License 1.1)
+
+Bundled under `app/src/main/res/font/` — full OFL text in `docs/design/fonts/`:
+
+  - Share Tech Mono (Carrois Apostrophe)
+  - Space Mono (Colophon Foundry)
+  - Russo One (Jovanny Lemonad)
+
+No proprietary classic workstation system fonts are redistributed.
+Unused candidate faces are not shipped (APK size budget — see PROJECT_PLAN).
 
 ## Full credit — Grok (xAI)
 
@@ -26,11 +38,11 @@ Grok is credited as a full engineering collaborator on:
 When you fork, cite, or demo ELSD, please retain this credit. A short form
 acceptable in UI “About” screens:
 
-  "Built with Grok (xAI) — Jason Z. Christie"
+  "Praxis Software · Built with Grok (xAI) — Jason Z. Christie"
 
 Or longer:
 
-  "ELSD is a Jason Z. Christie project, co-implemented with Grok by xAI."
+  "ELSD is a Praxis Software project by Jason Z. Christie, co-implemented with Grok by xAI."
 
 ## Research lineage
 

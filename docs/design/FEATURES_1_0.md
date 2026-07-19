@@ -113,6 +113,21 @@ WORLD (camera)
 | Spatial ears | 2.0 |
 | DeepDream | 3.0 |
 | Time travel / era reskin | 4.0 |
+| Fat APK (models, asset packs) | Never as silent default — see size budget |
+
+---
+
+## APK size budget (1.0)
+
+Keep the craft small. Full table: [`PROJECT_PLAN.md`](PROJECT_PLAN.md).
+
+| | Limit |
+|--|--------|
+| **Release hard cap** | **≤ 25 MB** |
+| **Release soft target** | **≤ 15 MB** |
+| **Debug** | **≤ 30 MB** |
+
+Shaders stay in one composite pass (~tens of KB). Growth risk is **deps + ML/speech models**, not GLSL.
 
 ---
 
@@ -120,7 +135,8 @@ WORLD (camera)
 
 On **OnePlus 9**: switchboard → load `noir_night` or `mandel_key_trails` → GO LIVE → clear.  
 On **OnePlus 12**: same, feels smoother.  
-Stranger &lt; 60s to a look they can name.
+Stranger &lt; 60s to a look they can name.  
+**Release APK ≤ 25 MB** (prefer ≤ 15 MB).
 
 ---
 
@@ -128,4 +144,6 @@ Stranger &lt; 60s to a look they can name.
 
 - Shader intake: [`SHADER_IMPORT.md`](SHADER_IMPORT.md)  
 - Visual detail: [`VISUAL_SYSTEM.md`](VISUAL_SYSTEM.md)  
+- Desk color map (luma treatments): [`DESK_COLOR_MAP.md`](DESK_COLOR_MAP.md)  
+- Keying + sensors (motion trails): [`KEYING_AND_SENSORS.md`](KEYING_AND_SENSORS.md)  
 - Roadmap: [`ROADMAP.md`](ROADMAP.md)  

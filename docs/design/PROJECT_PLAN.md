@@ -11,7 +11,28 @@
 4. **Amy** + voice vocabulary twin of switchboard — [`SOUL.md`](SOUL.md) · [`SWITCHBOARD.md`](SWITCHBOARD.md).  
 5. **No** live video in / stream out / key / ears in 1.0 — those are **2.0**.  
 6. **No** DeepDream in 1.0 — **3.0**; **no** time travel — **4.0** ([`ROADMAP.md`](ROADMAP.md)).  
-7. MIT + NOTICE; target hardware OP12 + large-tray viewer.
+7. MIT + NOTICE; target hardware OP12 + large-tray viewer.  
+8. Stay inside the **1.0 APK size budget** (below).
+
+## 1.0 APK size budget (real-world brake)
+
+Pie-in-the-sky design is fine in docs; **shipped bits must stay small**.
+
+| Tier | Limit | Notes |
+|------|--------|--------|
+| **Release APK (soft)** | **≤ 15 MB** | Prefer this for sideload / “craft” feel |
+| **Release APK (hard)** | **≤ 25 MB** | Do not cross without an explicit product decision |
+| **Debug APK** | **≤ 30 MB** | Local builds; symbols OK |
+| **With optional offline voice model in APK** | **≤ 50 MB** | Prefer small Vosk (or download-on-first-run) |
+| **Stop and re-architect** | **> 50 MB** core | Split modules / on-demand packs before adding ML weights |
+
+**Rules**
+
+- **1.0 core** = composite GLSL + switchboard + procedural Amy + lean deps — not model zoos.  
+- **No** third-party ML weights in base APK unless they still fit the **25 MB** hard cap.  
+- **No** bulk Shadertoy dumps as assets; import one effect at a time ([`SHADER_IMPORT.md`](SHADER_IMPORT.md)).  
+- Drop unused fonts/assets (e.g. unused variable fonts).  
+- Measure before calling a milestone done: size of `app-release.apk` / `app-debug.apk`.
 
 ## Hardware baseline
 
