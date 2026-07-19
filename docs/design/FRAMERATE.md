@@ -1,13 +1,13 @@
 # Framerate toggle & dropped frames
 
-**Breathing room for the engine. A look for the eyes.**
+**Cadence is part of the grade. Breathing room for the engine.**
 
 ELSD is not only “max FPS forever.”  
 A **framerate dial** plus **Enable Dropped Frames** lets us:
 
-1. **Push limits** — stillness morph, heavy CINEMA, future dream/era passes get headroom  
-2. **Change feel** — 12 fps silent reel, 24 cinema, 30 broadcast, 60 live glass  
-3. **Stay honest on thermal** — OP12 in a sealed headset cooks; dropping is a feature  
+1. **Film language** — variable FPS is how eras and directors *feel* (silent hand-crank ≠ 60 Hz glass)  
+2. **Push limits** — stillness morph, heavy CINEMA, dream/era passes get headroom  
+3. **Stay honest on thermal** — OP9/OP12 in a sealed headset; dropping is a feature  
 
 ---
 
