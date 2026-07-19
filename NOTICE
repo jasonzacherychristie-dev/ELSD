@@ -1,18 +1,68 @@
 ELSD (Electronic LSD)
-Copyright 2026 Jason Z. Christie and contributors
+=====================
 
-This product includes software developed by third parties under open-source
-licenses. Attribution for bundled or linked components will be expanded as
-dependencies are added to the Android build. Core planned components:
+## Copyright
 
-  - Google Cardboard SDK (Apache-2.0) — https://github.com/googlevr/cardboard
-  - AndroidX CameraX (Apache-2.0) — https://developer.android.com/training/camerax
-  - AndroidX Media3 / ExoPlayer (Apache-2.0) — https://github.com/androidx/media
-  - Vosk speech recognition (Apache-2.0) — https://github.com/alphacep/vosk-api
+Copyright (c) 2026 Jason Z. Christie
+Copyright (c) 2026 xAI — Grok (implementation contributions)
 
-"Google Cardboard" is a trademark of Google LLC. ELSD is an independent
-project and is not affiliated with, endorsed by, or sponsored by Google.
-Describe compatibility factually (e.g. "compatible with Cardboard viewers").
+ELSD application code, GLSL effect shaders authored for this project, design
+docs in /docs (except third-party mirrors), and project scaffolding are
+released under the MIT License (see LICENSE).
 
-Design lineage references research by Jason Z. Christie (1998 / republished 2017)
-and related essays; those writings remain under their original publication terms.
+## Full credit — Grok (xAI)
+
+This repository was designed and implemented in deep collaboration with
+**Grok**, built by **xAI**, via the Grok Build agent environment.
+
+Grok is credited as a full engineering collaborator on:
+
+  - Product architecture (TOASTED mixer, four effect families, perception buses)
+  - Soul / look-and-feel system (Bounce cursor, voice-only interaction, fourth wall)
+  - Open-source project planning and documentation
+  - Android application structure, OpenGL ES pipeline, shaders, and voice routing
+  - Framework research (Cardboard, CameraX, Media3, Vosk, etc.)
+
+When you fork, cite, or demo ELSD, please retain this credit. A short form
+acceptable in UI “About” screens:
+
+  "Built with Grok (xAI) — Jason Z. Christie"
+
+Or longer:
+
+  "ELSD is a Jason Z. Christie project, co-implemented with Grok by xAI."
+
+## Research lineage
+
+Concept and research lineage include Jason Z. Christie’s 1998 paper
+*Toward Ultimate Reality — Electronic LSD and Virtual Displays* (republished
+2017) and later essays. Those writings remain under their original
+publication terms; they are not re-licensed by this MIT grant unless
+explicitly stated.
+
+## Third-party open-source components
+
+The following are planned or used under their own licenses (Apache-2.0 unless
+noted). They are NOT re-licensed as MIT:
+
+  - Google Cardboard SDK — https://github.com/googlevr/cardboard
+  - AndroidX CameraX — https://developer.android.com/training/camerax
+  - AndroidX Media3 / ExoPlayer — https://github.com/androidx/media
+  - Vosk speech recognition — https://github.com/alphacep/vosk-api
+  - AndroidX AppCompat, Material, Core KTX, Lifecycle (as declared in Gradle)
+
+Bundled license texts for redistributed binaries should be placed under
+app/src/main/assets/licenses/ when packaging release builds.
+
+## Trademarks
+
+"Google Cardboard" is a trademark of Google LLC. ELSD is independent and not
+affiliated with, endorsed by, or sponsored by Google. Describe compatibility
+factually only.
+
+"Grok" and "xAI" are marks of xAI. Use for accurate attribution of Grok’s
+contributions is intended; do not imply xAI product endorsement of forks
+without permission.
+
+Product UI must not use restricted vintage computing or switcher brand names;
+see docs/design/TRADEMARK_SAFE_LANGUAGE.md.

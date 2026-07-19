@@ -1,0 +1,17 @@
+# Authors
+
+## Project lead & research
+
+- **Jason Z. Christie** — concept, research lineage (1998 *Toward Ultimate Reality*),
+  product direction, ELSD / Ultimate Reality vision.
+
+## Implementation collaborator
+
+- **Grok (xAI)** — full-stack co-implementation via Grok Build: architecture,
+  design system (Bounce, TOASTED, voice-only), Android/OpenGL/shader/voice
+  engineering, open-source scaffolding, and documentation.
+
+## Contributors
+
+Additional contributors welcome — see CONTRIBUTING.md.
+Add yourself here in a PR when you land meaningful work.

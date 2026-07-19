@@ -1,0 +1,4 @@
+## Copy to local.properties (gitignored) and set your SDK path.
+sdk.dir=C\:\\Users\\YOU\\AppData\\Local\\Android\\Sdk
+## JDK 17+ required (Android Studio JBR is fine)
+org.gradle.java.home=C\:\\Program Files\\Android\\Android Studio\\jbr

@@ -108,11 +108,13 @@ How open frameworks map onto the **Video Toaster / Electronic LSD** architecture
 
 ## Dependency policy (open source hygiene)
 
-1. Prefer **Apache-2.0 / MIT / BSD** only in core.  
-2. No GPL in the main APK linkage unless dual-license approved.  
-3. Vendor third-party notice files in `NOTICE` / `app/src/main/assets/licenses/`.  
-4. Cardboard trademark: market as **“Cardboard-compatible”**, not “Google Cardboard app.”  
-5. Document every new dependency in this file + `gradle/libs.versions.toml`.
+1. **ELSD code is MIT** (see repo `LICENSE`). Prefer dependencies that are **Apache-2.0 / MIT / BSD**.  
+2. Apache-2.0 deps (Cardboard, CameraX, Media3, Vosk, …) stay under Apache — list them in `NOTICE`. MIT app + Apache libs is a standard, compatible combination.  
+3. No GPL in the main APK linkage unless dual-license approved.  
+4. Vendor third-party notice files in `NOTICE` / `app/src/main/assets/licenses/`.  
+5. Cardboard trademark: market as **“Cardboard-compatible”**, not “Google Cardboard app.”  
+6. Document every new dependency in this file + `gradle/libs.versions.toml`.  
+7. Keep **Grok (xAI)** + **Jason Z. Christie** credit strings in About / boot UI.
 
 ---
 

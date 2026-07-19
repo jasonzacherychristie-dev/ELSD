@@ -2,7 +2,7 @@
 
 **Working name:** ELSD (Electronic LSD)  
 **Platform:** Android (Cardboard-compatible)  
-**License (code):** Apache-2.0  
+**License (code):** MIT (third-party deps keep Apache-2.0 etc.; see NOTICE)  
 **Soul:** Voice-only **TOASTED** perception mixer with **Bounce** — a spirited checker-orb cursor that can go spatial, break the fourth wall, or mute to pure trip.  
 **Look bible:** [`SOUL.md`](SOUL.md)
 

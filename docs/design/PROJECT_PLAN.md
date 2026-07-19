@@ -3,7 +3,7 @@
 ## Goals
 
 1. Ship a **usable 1.0 APK** that demos KEY + PULSE + PAINT + LSD on Cardboard-compatible devices.  
-2. Keep the repo **easy to fork**: Apache-2.0, clear modules, no proprietary required runtimes for core path.  
+2. Keep the repo **easy to fork**: **MIT** app code, clear modules, no proprietary required runtimes for core path.  
 3. Stay faithful to the **TOASTED** metaphor: live mix, wet/dry, world-first — not a content silo.  
 4. **Voice only** + **Bounce** cursor (FLAT / SPATIAL / MUTED); see [`SOUL.md`](SOUL.md).  
 5. Imply classic desk/demo spirit; never ship forbidden brand names ([`TRADEMARK_SAFE_LANGUAGE.md`](TRADEMARK_SAFE_LANGUAGE.md)).
@@ -13,7 +13,7 @@
 ```
 ELSD/
   README.md
-  LICENSE                 # Apache-2.0
+  LICENSE                 # MIT
   NOTICE
   CONTRIBUTING.md
   CODE_OF_CONDUCT.md
@@ -141,7 +141,7 @@ Gradle can start as a **single `app` module** and split when files hurt; the tab
 | Engine | OpenGL ES 3 (not Unity) | Open, Toaster-like control |
 | Video | Media3 | HLS + local, Apache-2.0 |
 | Voice | Vosk primary | Offline OSS |
-| License | Apache-2.0 | Aligns with deps |
+| License | MIT (app) | Simple for shaders/forks; Apache deps via NOTICE |
 | Neural style | Post-1.0 | Shader painters first |
 
 ## Next actions (human + agent)

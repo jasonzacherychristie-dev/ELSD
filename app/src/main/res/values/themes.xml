@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.ELSD" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#DC1F24</item>
+        <item name="colorPrimaryVariant">#8B1014</item>
+        <item name="colorOnPrimary">#F5EDE0</item>
+        <item name="colorSecondary">#8CF258</item>
+        <item name="android:statusBarColor">#0D0D0F</item>
+        <item name="android:navigationBarColor">#0D0D0F</item>
+        <item name="android:windowBackground">#0D0D0F</item>
+    </style>
+    <style name="Theme.ELSD.Fullscreen" parent="Theme.ELSD">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+</resources>

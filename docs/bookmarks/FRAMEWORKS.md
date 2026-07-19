@@ -55,7 +55,7 @@ Local mirrors of key pages live in [`../frameworks/raw/`](../frameworks/raw/). S
 | IDE | Android Studio (latest stable) |
 | Build | Gradle + Version Catalog (`libs.versions.toml`) |
 | UI shell | Jetpack Compose (menus) + GL surface (eyes) |
-| License for ELSD code | **Apache-2.0** (matches Cardboard, CameraX, Media3, Vosk) |
+| License for ELSD code | **MIT** (deps mostly Apache-2.0 — compatible; see NOTICE) |
 
 ---
 

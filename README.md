@@ -5,62 +5,92 @@
 Live camera world + keyed media (local/stream) + painter styles + real-world pulse visualizers + classic trip FX — mixed **TOASTED** (live desk soul), **voice only**, with **Bounce**: a spirited checker-orb cursor that can go spatial, break the fourth wall, or mute into the background.
 
 > Buildings can throb. Windows can become TVs. Streets can go Van Gogh.  
-> You talk. Bounce mixes. Say *clear* when you want the earth back.  
-> Built for hobbyists. Inspired by 1998 research toward *Ultimate Reality*.
+> You talk. Bounce mixes. Say *clear* when you want the earth back.
+
+## Credits
+
+| | |
+|--|--|
+| **Project lead & research** | [Jason Z. Christie](https://jasonzchristie.blogspot.com/) |
+| **Co-implementation** | **Grok (xAI)** via Grok Build |
+
+> ELSD is a Jason Z. Christie project, **co-implemented with Grok by xAI**.
+
+Please keep that credit in forks, About screens, and demos. See [AUTHORS](AUTHORS) and [NOTICE](NOTICE).
+
+## License
+
+**MIT** for ELSD application code, project GLSL, and original docs — see [LICENSE](LICENSE).
+
+Third-party libraries (Cardboard SDK, CameraX, Media3, Vosk, AndroidX, …) remain under **their own licenses** (mostly Apache-2.0). MIT is fully compatible; their notices stay in [NOTICE](NOTICE).
 
 ## Status
 
-**Documentation / planning phase.** Framework bookmarks and local doc mirrors are in-tree. Application code milestones start at **M1** (see plan).
+**M1 codebase landed:** WORLD bus (CameraX → GL), TOASTED composite shader (paint / pulse / LSD / key hooks), Bounce cursor, voice command grammar + SpeechRecognizer loop, mix state + presets.
 
 | Milestone | Meaning |
 |-----------|---------|
-| M0 | Docs, license, stack ✅ (in progress) |
-| M1 | Camera → GL → Cardboard eyes |
-| M2 | Luma key + media bus + trail |
-| M3 | Chroma, paint, pulse, HLS |
-| M4 | Voice + presets + safety |
-| M5 | v1.0.0 open release |
+| M0 | Docs, stack, soul ✅ |
+| M1 | Camera → GL → Bounce + voice grammar ✅ (build needs Android SDK) |
+| M2 | Plate bus keying + trail FBO + wet polish |
+| M3 | HLS, full banks, city pulse audio |
+| M4 | Vosk offline, Bounce quips, TOASTED chrome |
+| M5 | Stereo Cardboard NDK, v1.0.0 |
+
+## Build
+
+Requirements:
+
+- **Android Studio** (or SDK 35 + build-tools)
+- **JDK 17+** (Studio’s JBR is fine)
+- Device/emulator with camera + mic (gyro later for stereo)
+
+```bash
+# from repo root
+copy local.properties.example local.properties
+# edit sdk.dir
+
+# with wrapper (generate once in Android Studio: open project, or:)
+# gradle wrapper --gradle-version 8.9
+
+./gradlew :app:assembleDebug
+./gradlew :app:test
+```
+
+Install `app/build/outputs/apk/debug/app-debug.apk`, grant camera + mic, landscape, talk.
+
+### Voice cheatsheet (M1)
+
+| Say | Effect |
+|-----|--------|
+| `clear` / `sober` | Dry / sober eyes |
+| `toasted` | High wet pride |
+| `gogh` / `noir` / `neon` / … | PAINT bank |
+| `trails` / `kaleido` / `split` | LSD bank |
+| `city pulse` | PULSE on |
+| `window tv` / `gogh walk` / `sky cinema` | Presets |
+| `mute bounce` / `bounce on` / `bounce 3d` | Cursor |
 
 ## Docs map
 
 | Doc | What |
 |-----|------|
+| [docs/design/SOUL.md](docs/design/SOUL.md) | Look, Bounce, TOASTED |
 | [docs/design/VISION_1_0.md](docs/design/VISION_1_0.md) | Product vision |
-| [docs/design/SOUL.md](docs/design/SOUL.md) | Look, feel, Bounce, TOASTED |
-| [docs/design/VOICE_AND_CURSOR.md](docs/design/VOICE_AND_CURSOR.md) | Voice-only + cursor states |
-| [docs/design/PROJECT_PLAN.md](docs/design/PROJECT_PLAN.md) | Modules & milestones |
-| [docs/design/SOURCE_PAPERS.md](docs/design/SOURCE_PAPERS.md) | Research lineage |
-| [docs/frameworks/STACK.md](docs/frameworks/STACK.md) | How libraries map to busses |
-| [docs/frameworks/CHECKOUTS.md](docs/frameworks/CHECKOUTS.md) | Upstream clones |
-| [docs/bookmarks/FRAMEWORKS.md](docs/bookmarks/FRAMEWORKS.md) | Link bookmarks |
-| [docs/frameworks/raw/](docs/frameworks/raw/) | Fetched third-party doc mirrors |
-
-## Planned open stack
-
-- **Cardboard SDK** (stereo, tracking) — Apache-2.0  
-- **CameraX** — world bus  
-- **Media3 / ExoPlayer** — media bus (files + HLS)  
-- **OpenGL ES 3** — key / pulse / paint / LSD graph  
-- **Vosk** — offline voice T-bar  
-
-Details: [docs/frameworks/STACK.md](docs/frameworks/STACK.md).
-
-## License
-
-Code: [Apache License 2.0](LICENSE).  
-See [NOTICE](NOTICE) for third-party attribution.
-
-**Trademark:** “Google Cardboard” is a trademark of Google LLC. This project is independent and only aims for viewer compatibility.
+| [docs/design/VOICE_AND_CURSOR.md](docs/design/VOICE_AND_CURSOR.md) | Voice-only + cursor |
+| [docs/design/PROJECT_PLAN.md](docs/design/PROJECT_PLAN.md) | Milestones |
+| [docs/frameworks/STACK.md](docs/frameworks/STACK.md) | Libraries |
+| [docs/bookmarks/FRAMEWORKS.md](docs/bookmarks/FRAMEWORKS.md) | Bookmarks |
 
 ## Lineage
 
-- [Toward Ultimate Reality — Electronic LSD and Virtual Displays](https://jasonzchristie.blogspot.com/2017/06/toward-ultimate-reality-electronic-lsd.html) (research paper)  
+- [Toward Ultimate Reality — Electronic LSD and Virtual Displays](https://jasonzchristie.blogspot.com/2017/06/toward-ultimate-reality-electronic-lsd.html)
 - [2025 revisit on Medium](https://medium.com/@JasonZChristie/toward-ultimate-reality-revisiting-jason-z-christies-1998-predictions-in-2025-4791c6a8d31d)
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md). Shader and preset PRs will be first-class once M2 lands.
 
 ## Safety
 
-Immersive and flashing effects can cause discomfort. Always provide a hard **clear/sober** path, session limits, and avoid seizure-unfriendly defaults.
+Immersive and flashing effects can cause discomfort. Always provide a hard **clear/sober** path. Session limits and soft landings expand in M4.
+
+## Trademark note
+
+Describe Cardboard **compatibility** factually. ELSD is not a Google product. Do not use restricted vintage platform/switcher brand names in UI — imply spirit only ([docs/design/TRADEMARK_SAFE_LANGUAGE.md](docs/design/TRADEMARK_SAFE_LANGUAGE.md)).
