@@ -54,6 +54,20 @@ class MixState {
             is Command.BounceModeSet -> bounceMode = cmd.mode
             is Command.Jokes -> jokes = cmd.enabled
             is Command.Preset -> applyPreset(cmd.name)
+            is Command.Spatial -> {
+                spatialMode = SpatialMode.fromId(cmd.modeId)
+                if (spatialMode != SpatialMode.OFF) {
+                    earWet = earWet.coerceAtLeast(0.55f)
+                    lastBank = "EARS"
+                } else {
+                    earWet = 0f
+                }
+            }
+            is Command.EarWet -> earWet = cmd.value.coerceIn(0f, 1f)
+            is Command.EarsDry -> {
+                spatialMode = SpatialMode.OFF
+                earWet = 0f
+            }
             is Command.Unknown -> { /* ignore */ }
         }
     }
@@ -61,10 +75,12 @@ class MixState {
     private fun softClear() {
         wet = 0f
         lsdId = "none"
-        // Keep paint/pulse gentle; clear means sober eyes
+        // Keep paint/pulse gentle; clear means sober eyes + ears
         pulseEnabled = false
         paintId = "none"
         keyMode = KeyMode.OFF
+        spatialMode = SpatialMode.OFF
+        earWet = 0f
         presetName = "clear"
     }
 
@@ -101,7 +117,17 @@ class MixState {
                 wet = 0.8f
                 lsdId = "melt"
                 bounceMode = BounceMode.MUTED
+                spatialMode = SpatialMode.ORBIT
+                earWet = 0.65f
                 lastBank = "LSD"
+            }
+            "full_hallucination" -> {
+                wet = 0.75f
+                pulseEnabled = true
+                lsdId = "trail"
+                spatialMode = SpatialMode.HALLUCINATE_EARS
+                earWet = 0.8f
+                lastBank = "EARS"
             }
             else -> { /* keep state */ }
         }
@@ -109,12 +135,12 @@ class MixState {
 
     fun statusLine(): String {
         val bounce = when (bounceMode) {
-            BounceMode.FLAT -> "Bounce FLAT"
-            BounceMode.SPATIAL -> "Bounce 3D"
-            BounceMode.MUTED -> "Bounce quiet"
+            BounceMode.FLAT -> "Amy FLAT"
+            BounceMode.SPATIAL -> "Amy 3D"
+            BounceMode.MUTED -> "Amy quiet"
         }
-        return "PGM  wet=${"%.2f".format(wet)}  $bounce  bank=$lastBank  " +
-            "key=$keyMode  paint=$paintId  lsd=$lsdId  preset=$presetName"
+        return "PGM eyes=${"%.2f".format(wet)} ears=${spatialMode.id}/${"%.2f".format(earWet)}  " +
+            "$bounce  bank=$lastBank  key=$keyMode  paint=$paintId  lsd=$lsdId  preset=$presetName"
     }
 }
 

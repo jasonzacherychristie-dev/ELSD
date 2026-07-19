@@ -136,4 +136,12 @@ How open frameworks map onto the **Video Toaster / Electronic LSD** architecture
 
 ---
 
-## What we deliberately skip i
+## What we deliberately skip in 1.0
+
+| Skip | Reason |
+|------|--------|
+| Filament as required engine | Extra weight; GL ES enough for full-screen quads |
+| ARCore mesh city | Proprietary runtime; pulse fakes are enough |
+| Unity / Unreal | Not fully open; harder community fork |
+| Real-time neural style transfer | Ship shader painters first; NST as optional later module |
+| iOS | Android-first open source; iOS can fork later with Cardboard iOS bits |
