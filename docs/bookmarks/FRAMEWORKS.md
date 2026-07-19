@@ -19,6 +19,7 @@ Local mirrors of key pages live in [`../frameworks/raw/`](../frameworks/raw/). S
 | Offline voice (T-bar) | **Vosk** | Apache-2.0 | [Android page](https://alphacephei.com/vosk/android) · [vosk-api](https://github.com/alphacep/vosk-api) · [vosk-android-demo](https://github.com/alphacep/vosk-android-demo) · [Models](https://alphacephei.com/vosk/models) |
 | Online/system voice (fallback) | **SpeechRecognizer** | Platform | [API](https://developer.android.com/reference/android/speech/SpeechRecognizer) |
 | Audio reactive pulse | **Visualizer** + optional **Oboe** | Platform / Apache-2.0 | [Visualizer](https://developer.android.com/reference/android/media/audiofx/Visualizer) · [Oboe](https://github.com/google/oboe) |
+| Sound hallucinations (design) | **See VISUALIZERS.md** | MIT-friendly path | [Butterchurn](https://github.com/jberg/butterchurn) (MIT insp.) · [projectM](https://github.com/projectM-visualizer/projectm) (LGPL — ideas only) · in-repo `BandEnergy` |
 
 ---
 

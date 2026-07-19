@@ -71,11 +71,14 @@ object CommandGrammar {
             return Command.KeyOff
         }
 
-        // Pulse
-        if (t.contains("city pulse") || t.contains("pulse on") || t == "pulse") {
+        // Pulse / hallucinations
+        if (t.contains("hallucinate") || t.contains("sound trip") || t.contains("audio trip")) {
             return Command.PulseOn
         }
-        if (t.contains("pulse off")) {
+        if (t.contains("city pulse") || t.contains("pulse on") || t == "pulse" || t.contains("heartbeat")) {
+            return Command.PulseOn
+        }
+        if (t.contains("pulse off") || t.contains("no pulse")) {
             return Command.PulseOff
         }
 

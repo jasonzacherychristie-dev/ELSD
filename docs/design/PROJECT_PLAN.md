@@ -80,12 +80,22 @@ Gradle can start as a **single `app` module** and split when files hurt; the tab
 
 **Exit:** Window TV works in a controlled room.
 
+### M2.5 — Sound-activated hallucinations
+
+- [ ] `BandEnergy` + `MediaVisualizerSource` + `MicEnergySource` (skeleton landed)  
+- [ ] Wire bands into renderer uniforms every frame  
+- [ ] Modes: City Pulse, Nerve, Sparkle, Heartbeat  
+- [ ] Voice: `hallucinate`, `city pulse`, `pulse off`  
+
+**Exit:** Bass visibly possesses the world (camera still underneath).  
+**Refs:** [`../frameworks/VISUALIZERS.md`](../frameworks/VISUALIZERS.md)
+
 ### M3 — RAD banks
 
 - [ ] Chroma key + color picker (freeze frame)  
 - [ ] HLS stream as Bus B  
 - [ ] 4+ paint presets, 3+ LSD FX  
-- [ ] Pulse: edge + bright + Visualizer bass  
+- [ ] Spectrum texture optional; Butterchurn-inspired warp (MIT original GLSL)  
 
 **Exit:** Gogh Walk + City Pulse outdoors.
 

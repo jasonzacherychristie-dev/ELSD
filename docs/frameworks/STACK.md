@@ -14,7 +14,8 @@ How open frameworks map onto the **Video Toaster / Electronic LSD** architecture
   Cardboard SDK ─────────► stereo meshes + lens distortion + head pose
          │
   Vosk / SpeechRecognizer ► voice T-bar (wet/dry, banks, clear)
-  Visualizer / Oboe ─────► bass/mid/high → building pulse
+  Visualizer / Mic FFT ──► BandEnergy → bass/mid/high/beat → PULSE + LSD drive
+  (Butterchurn-inspired looks re-authored MIT; see VISUALIZERS.md)
 ```
 
 ---
