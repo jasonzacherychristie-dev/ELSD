@@ -1,11 +1,23 @@
 # ELSD — Electronic LSD
 
-**Open-source Android perception mixer** for Cardboard-compatible viewers.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/status-public%20alpha-blue.svg)](https://github.com/jasonzacherychristie-dev/ELSD)
+[![Platform](https://img.shields.io/badge/platform-Android-green.svg)](https://github.com/jasonzacherychristie-dev/ELSD)
+
+**Open-source Android perception mixer** for Cardboard-compatible viewers.  
+**Repository:** https://github.com/jasonzacherychristie-dev/ELSD · **Visibility: public** · **License: MIT**
 
 Live camera world + keyed media (local/stream) + painter styles + real-world pulse visualizers + classic trip FX — mixed **TOASTED** (live desk soul), **voice only**, with **Bounce**: a spirited checker-orb cursor that can go spatial, break the fourth wall, or mute into the background.
 
 > Buildings can throb. Windows can become TVs. Streets can go Van Gogh.  
 > You talk. Bounce mixes. Say *clear* when you want the earth back.
+
+## Mission
+
+> Put a live perception mixer in everyone’s hands — open source, voice-first, and honest about wonder and risk.
+
+Full statement: **[MISSION.md](MISSION.md)**  
+Conduct: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) · Contributing: [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Credits
 
@@ -75,12 +87,15 @@ Install `app/build/outputs/apk/debug/app-debug.apk`, grant camera + mic, landsca
 
 | Doc | What |
 |-----|------|
+| [MISSION.md](MISSION.md) | Mission, vision, principles |
 | [docs/design/SOUL.md](docs/design/SOUL.md) | Look, Bounce, TOASTED |
 | [docs/design/VISION_1_0.md](docs/design/VISION_1_0.md) | Product vision |
 | [docs/design/VOICE_AND_CURSOR.md](docs/design/VOICE_AND_CURSOR.md) | Voice-only + cursor |
 | [docs/design/PROJECT_PLAN.md](docs/design/PROJECT_PLAN.md) | Milestones |
 | [docs/frameworks/STACK.md](docs/frameworks/STACK.md) | Libraries |
+| [docs/frameworks/VISUALIZERS.md](docs/frameworks/VISUALIZERS.md) | Sound-activated hallucinations |
 | [docs/bookmarks/FRAMEWORKS.md](docs/bookmarks/FRAMEWORKS.md) | Bookmarks |
+| [SECURITY.md](SECURITY.md) | Vulnerability reporting |
 
 ## Lineage
 
