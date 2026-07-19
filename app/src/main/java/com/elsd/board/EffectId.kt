@@ -33,13 +33,19 @@ enum class EffectId(
     COMIC("comic", EffectFamily.ART, "COMIC"),
     MELT_PAINT("melt_paint", EffectFamily.ART, "MELT PAINT"),
 
-    // —— CINEMA styles ——
+    // —— CINEMA styles (noir-inspired grades + eras + directors) ——
     NOIR("noir", EffectFamily.CINEMA, "NOIR"),
     NEON("neon", EffectFamily.CINEMA, "NEON"),
     BLEACH("bleach", EffectFamily.CINEMA, "BLEACH"),
     TEAL_ORANGE("teal_orange", EffectFamily.CINEMA, "TEAL ORANGE"),
     ANAMORPHIC("anamorphic", EffectFamily.CINEMA, "ANAMORPHIC"),
     SOFT_GLOW("soft_glow", EffectFamily.CINEMA, "SOFT GLOW"),
+    TECHNICOLOR("technicolor", EffectFamily.CINEMA, "TECHNICOLOR"),
+    SUSPIRIA("suspiria", EffectFamily.CINEMA, "SUSPIRIA"),
+    SILENT_ERA("silent_era", EffectFamily.CINEMA, "SILENT ERA"),
+    EXPRESSIONIST("expressionist", EffectFamily.CINEMA, "EXPRESSIONIST"),
+    GIALLO("giallo", EffectFamily.CINEMA, "GIALLO"),
+    GOLDEN_AGE("golden_age", EffectFamily.CINEMA, "GOLDEN AGE"),
 
     // —— PALETTE (analog / digital medium) ——
     ANALOG_FILM("analog_film", EffectFamily.PALETTE, "ANALOG FILM"),

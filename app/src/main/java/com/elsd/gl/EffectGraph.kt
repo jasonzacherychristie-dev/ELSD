@@ -137,6 +137,12 @@ class EffectGraph(private val context: Context) {
         "teal_orange" -> 4
         "anamorphic" -> 5
         "soft_glow" -> 6
+        "technicolor" -> 7
+        "suspiria" -> 8
+        "silent_era" -> 9
+        "expressionist" -> 10
+        "giallo" -> 11
+        "golden_age" -> 12
         else -> 0
     }
 

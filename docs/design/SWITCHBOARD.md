@@ -89,7 +89,7 @@ See [`VISUAL_SYSTEM.md`](VISUAL_SYSTEM.md).
 |--------|----------|
 | **ELSD** | trail, hue, split, kaleido, melt |
 | **ART** | gogh, monet, sketch, comic, melt_paint |
-| **CINEMA** | noir, neon, bleach, teal_orange, anamorphic, soft_glow |
+| **CINEMA** | noir, neon, bleach, teal_orange, anamorphic, soft_glow, **technicolor**, **suspiria**, **silent_era**, expressionist, giallo, golden_age |
 | **PALETTE** | analog_film, analog_vhs, digital_clean, digital_harsh, polaroid (single-select) |
 | **MOOD** | calm, warm, cold, night, fever, toasted, neutral (single-select overall toggle) |
 

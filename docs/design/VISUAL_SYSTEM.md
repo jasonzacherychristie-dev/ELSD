@@ -42,16 +42,24 @@ Painterly / graphic looks (GLSL, not neural).
 
 ### 3. CINEMA (cinematic styles)
 
-Shot language, grade, lens character.
+Shot language, grade, era, and **director-color** — inspired by the strength of **NOIR**: one word, whole world.
 
 | ID | Feel |
 |----|------|
-| `noir` | High contrast B&W |
+| `noir` | High contrast B&W crime-light (flagship look) |
 | `neon` | Night cyber teal/magenta |
 | `bleach` | Bleach-bypass harsh mids |
 | `teal_orange` | Blockbuster grade |
-| `anamorphic` | Horizontal streak / squeeze vibe (shader) |
+| `anamorphic` | Horizontal streak on brights |
 | `soft_glow` | Dream diffusion highlights |
+| `technicolor` | 3-strip dye-transfer primaries, carnival vivid |
+| `suspiria` | Argento — blood reds, gel-theater color, occult glam |
+| `silent_era` | Silver screen, flicker, iris, scratches |
+| `expressionist` | German silent horror — hard shadow geometry |
+| `giallo` | Italian thriller yellow heat (cousin to Suspiria) |
+| `golden_age` | Studio glam veil, warm key |
+
+**Director / era pack (1.0 naming):** we imply, we don’t license names as brands — **SUSPIRIA** is the look title (like NOIR).
 
 ### 4. PALETTE (analog ↔ digital)
 
@@ -130,6 +138,10 @@ Those keep their design docs; they are not 1.0 ADD EFFECT groups.
 | `vhs_fever` | PALETTE analog_vhs + ELSD hue + mood fever |
 | `clean_calm` | PALETTE digital_clean + mood calm |
 | `toasted_desk` | mood toasted + ELSD trail light + CINEMA soft_glow |
+| `suspiria_red` | CINEMA suspiria + mood fever + analog film |
+| `technicolor_dream` | technicolor + warm + soft glow |
+| `silent_reel` | silent era full wet |
+| `cabinet_shadows` | expressionist + mood night |
 
 ---
 

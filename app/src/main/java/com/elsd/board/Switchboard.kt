@@ -149,12 +149,6 @@ class Switchboard {
                 EffectFamily.CINEMA -> {
                     if (layer.enabled || layer.envelope() > 0.01f) {
                         mix.cinemaId = layer.id.catalogName
-                        // noir/neon also feed paint path for current single-pass shader
-                        when (layer.id) {
-                            EffectId.NOIR -> mix.paintId = "noir"
-                            EffectId.NEON -> mix.paintId = "neon"
-                            else -> { }
-                        }
                         last = "CINEMA"
                     }
                 }

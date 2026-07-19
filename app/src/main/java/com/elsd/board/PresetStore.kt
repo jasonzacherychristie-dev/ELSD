@@ -68,6 +68,28 @@ class PresetStore(context: Context) {
             addEffect(EffectId.TRAIL).fadeInSec = 0.5f
             addEffect(EffectId.SOFT_GLOW)
         }
+        seed("suspiria_red") {
+            globalWet = 0.8f
+            addEffect(EffectId.SUSPIRIA)
+            addEffect(EffectId.MOOD_FEVER)
+            addEffect(EffectId.ANALOG_FILM)
+        }
+        seed("technicolor_dream") {
+            globalWet = 0.7f
+            addEffect(EffectId.TECHNICOLOR)
+            addEffect(EffectId.MOOD_WARM)
+            addEffect(EffectId.SOFT_GLOW).fadeInSec = 1f
+        }
+        seed("silent_reel") {
+            globalWet = 0.85f
+            addEffect(EffectId.SILENT_ERA)
+            addEffect(EffectId.MOOD_NEUTRAL)
+        }
+        seed("cabinet_shadows") {
+            globalWet = 0.75f
+            addEffect(EffectId.EXPRESSIONIST)
+            addEffect(EffectId.MOOD_NIGHT)
+        }
     }
 
     private fun sanitize(name: String): String =

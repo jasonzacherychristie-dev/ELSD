@@ -14,7 +14,9 @@ uniform float uChromaHue;
 uniform int uPulse;
 uniform int uPaint;     // ART: 0 none, 1 gogh, 2 monet, 3 noir, 4 neon, 5 sketch, 6 melt
 uniform int uLsd;       // ELSD: 0 none, 1 trail, 2 hue, 3 split, 4 kaleido, 5 melt
-uniform int uCinema;    // 0 none, 1 noir, 2 neon, 3 bleach, 4 teal_orange, 5 anamorphic, 6 soft_glow
+// cinema: 0 none, 1 noir, 2 neon, 3 bleach, 4 teal_orange, 5 anamorphic, 6 soft_glow,
+// 7 technicolor, 8 suspiria, 9 silent_era, 10 expressionist, 11 giallo, 12 golden_age
+uniform int uCinema;
 uniform int uPalette;   // 0 none, 1 film, 2 vhs, 3 digital_clean, 4 digital_harsh, 5 polaroid
 uniform int uMood;      // 0 neutral, 1 calm, 2 warm, 3 cold, 4 night, 5 fever, 6 toasted
 
@@ -228,6 +230,91 @@ vec3 applyCinema(vec3 c, vec2 uv) {
         blur *= 0.2;
         float b = smoothstep(0.5, 1.0, luma(c));
         return mix(c, max(c, blur), 0.45 * b * uWet);
+    }
+    if (uCinema == 7) {
+        // Technicolor 3-strip: push primaries, slight dye-transfer bloom
+        vec3 p = c;
+        p.r = pow(clamp(p.r * 1.15, 0.0, 1.0), 0.92);
+        p.g = pow(clamp(p.g * 1.08, 0.0, 1.0), 0.95);
+        p.b = pow(clamp(p.b * 1.12, 0.0, 1.0), 0.9);
+        // separate dye feel
+        p = mix(p, vec3(p.r, luma(p), p.b), 0.12);
+        float b = smoothstep(0.55, 1.0, luma(p));
+        p += b * 0.06 * vec3(1.0, 0.9, 0.7);
+        return mix(c, p, uWet);
+    }
+    if (uCinema == 8) {
+        // Suspiria — Argento: blood reds, unnatural primaries, expressionist pools
+        vec3 hsv = rgb2hsv(c);
+        float redBias = smoothstep(0.9, 0.0, min(abs(hsv.x - 0.0), abs(hsv.x - 1.0)));
+        float blueBias = smoothstep(0.15, 0.0, abs(hsv.x - 0.6));
+        hsv.y = clamp(hsv.y * (1.25 + 0.55 * redBias), 0.0, 1.0);
+        hsv.z = pow(hsv.z, 0.88);
+        vec3 p = hsv2rgb(hsv);
+        p.r = clamp(p.r * (1.15 + 0.35 * redBias * uWet), 0.0, 1.0);
+        p.b = clamp(p.b * (1.05 + 0.25 * blueBias), 0.0, 1.0);
+        p.g *= 0.92;
+        // crushed corners like theatrical gels
+        float v = smoothstep(0.95, 0.35, length(uv - 0.5));
+        p *= mix(vec3(0.55, 0.15, 0.35), vec3(1.0), v);
+        return mix(c, p, uWet);
+    }
+    if (uCinema == 9) {
+        // Silent era — silver screen, flicker, soft iris, slight gate weave
+        float flicker = 0.92 + 0.08 * hash(vec2(floor(uTime * 16.0), 0.3));
+        float weave = (hash(vec2(floor(uTime * 12.0), 1.7)) - 0.5) * 0.004 * uWet;
+        vec3 src = texture(uWorld, uv + vec2(weave, 0.0)).rgb;
+        float y = luma(src);
+        // orthochromatic-ish: darken reds slightly in the grey
+        y = mix(y, y * 0.85, smoothstep(0.5, 0.0, abs(rgb2hsv(src).x)));
+        y = smoothstep(0.05, 0.92, y);
+        y *= flicker;
+        float iris = smoothstep(0.98, 0.42, length(uv - 0.5));
+        y *= mix(0.15, 1.0, iris);
+        // film scratches
+        float scratch = step(0.997, hash(vec2(uv.x * 3.0, floor(uTime * 24.0))));
+        y = max(y, scratch * 0.85);
+        return mix(c, vec3(y), uWet);
+    }
+    if (uCinema == 10) {
+        // German Expressionist — hard shadows, tilted contrast, sickly mid lift
+        float y = luma(c);
+        float hard = smoothstep(0.25, 0.55, y);
+        vec3 p = mix(vec3(0.02, 0.03, 0.05), vec3(0.95, 0.92, 0.85), hard);
+        // jagged edge emphasis
+        float e = length(vec2(
+            luma(texture(uWorld, uv + vec2(0.003, 0.0)).rgb) - y,
+            luma(texture(uWorld, uv + vec2(0.0, 0.003)).rgb) - y
+        ));
+        p = mix(p, vec3(0.0), smoothstep(0.05, 0.2, e) * 0.65 * uWet);
+        float v = smoothstep(1.0, 0.3, length(uv - vec2(0.45, 0.4)));
+        p *= mix(0.4, 1.0, v);
+        return mix(c, p, uWet);
+    }
+    if (uCinema == 11) {
+        // Giallo — yellow title heat, stylish violence of color (cousin to Suspiria)
+        vec3 hsv = rgb2hsv(c);
+        hsv.y = clamp(hsv.y * 1.3, 0.0, 1.0);
+        vec3 p = hsv2rgb(hsv);
+        p = mix(p, vec3(1.0, 0.9, 0.2), 0.08 * uWet);
+        p.r *= 1.1;
+        p.b *= 0.95;
+        float b = smoothstep(0.6, 1.0, luma(p));
+        p += b * vec3(0.15, 0.05, 0.1) * uWet;
+        return mix(c, p, uWet);
+    }
+    if (uCinema == 12) {
+        // Golden Age studio — soft glam, warm key, gentle veil
+        vec3 p = c * vec3(1.08, 1.02, 0.92);
+        vec3 blur = p;
+        blur += texture(uWorld, uv + vec2(0.004, 0.0)).rgb;
+        blur += texture(uWorld, uv - vec2(0.004, 0.0)).rgb;
+        blur *= 0.33;
+        float skin = smoothstep(0.35, 0.75, luma(c));
+        p = mix(p, max(p, blur), 0.35 * skin * uWet);
+        float v = smoothstep(0.9, 0.45, length(uv - 0.5));
+        p *= mix(0.85, 1.0, v);
+        return mix(c, p, uWet);
     }
     return c;
 }
