@@ -16,7 +16,7 @@ uniform int uPulse;
 uniform int uPaint;
 // PSYCHEDELIC: 0 none, 4 kaleido6, 5 melt, 6 k4, 7 k8, 8 k12, 9 kspin, 10 tri_mirror
 uniform int uLsd;
-// DESK: 0 none, 1 hue, 2 split, 3 negative, 4 posterize, 5 mirror H, 6 mirror V, 7 mirror quad
+// DESK: 0 none, 1 hue, 2 split, 3 negative, 4 posterize, 5 mirror H, 6 mirror V, 7 mirror quad, 8 solarize
 uniform int uDesk;
 uniform int uTrail;           // 1 = trails on (stackable)
 uniform int uFractal;         // 0 off, 1 mandelbrot, 2 julia
@@ -549,6 +549,16 @@ vec3 applyDesk(vec3 c, vec2 uv) {
         // also blend opposite corner sample for denser fold
         vec3 mc2 = texture(uWorld, 0.5 + q * vec2(-1.0, 1.0)).rgb;
         return mix(c, mix(mc, mc2, 0.5), w);
+    }
+    if (uDesk == 8) {
+        // SOLARIZE — import process (see docs/shaders/import/solarize/)
+        float l = dot(c, vec3(0.299, 0.587, 0.114));
+        float thr = mix(0.72, 0.38, w);
+        float k = smoothstep(thr - 0.08, thr + 0.12, l);
+        vec3 inv = 1.0 - c;
+        vec3 sol = mix(c, inv, k);
+        sol = mix(sol, sol * sol * (3.0 - 2.0 * sol), 0.15 * w);
+        return mix(c, sol, w);
     }
     return c;
 }

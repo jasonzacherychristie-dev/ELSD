@@ -118,11 +118,13 @@ See `docs/shaders/import/negative/SOURCE.md`.
 
 1. **posterize** — ✅ quantize  
 2. **mirror family** — ✅ H / V / quad (UV only) + kaleido 4/6/8/12/spin + tri_mirror  
+3. **solarize** — ✅ first full post-pilot import folder — [`import/solarize`](../shaders/import/solarize/SOURCE.md)  
 
 ### Next candidates
 
-1. External CC0 Shadertoy **only if** rewritten to contract  
-2. Stillness morph L2+ ROI recursion
+1. External CC0 Shadertoy **only if** rewritten to contract (and still fits APK budget)  
+2. Stillness morph L2+ ROI recursion  
+3. Optional `hue_by_luma` / desk color-map strip (see [`DESK_COLOR_MAP.md`](DESK_COLOR_MAP.md))
 
 ---
 

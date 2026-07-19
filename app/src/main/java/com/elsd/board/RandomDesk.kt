@@ -25,6 +25,7 @@ object RandomDesk {
     )
     private val deskToys = listOf(
         EffectId.HUE, EffectId.SPLIT, EffectId.NEGATIVE, EffectId.POSTERIZE,
+        EffectId.SOLARIZE,
         EffectId.MIRROR, EffectId.MIRROR_V, EffectId.MIRROR_QUAD,
     )
     private val palettes = listOf(

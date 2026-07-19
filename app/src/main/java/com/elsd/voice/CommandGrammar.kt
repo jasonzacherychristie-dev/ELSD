@@ -302,8 +302,10 @@ object CommandGrammar {
         Regex("phase off\\s+(\\w+)").find(t)?.let { m ->
             return Command.BoardPhase(m.groupValues[1], false)
         }
-        // Mirror / kaleido shorthand
+        // Mirror / kaleido / desk-import shorthand
         when {
+            t.contains("solarize") || t.contains("solarise") || t.contains("sabattier") ->
+                return Command.BoardAdd("solarize")
             t.contains("mirror quad") || t.contains("quad mirror") ->
                 return Command.BoardAdd("mirror_quad")
             t.contains("mirror vertical") || t.contains("mirror v") || t.contains("flip vertical") ->

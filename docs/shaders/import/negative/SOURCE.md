@@ -39,4 +39,5 @@ vec3 applyNegative(vec3 c) {
 
 ## Notes
 
-No third-party attribution required. Establishes the folder + checklist for the next import (**posterize**).
+No third-party attribution required. Established the folder + checklist.  
+Next full import folder after pilot: **solarize** — [`../solarize/SOURCE.md`](../solarize/SOURCE.md).

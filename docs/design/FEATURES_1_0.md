@@ -20,6 +20,7 @@ Four creative banks + two globals.
 | `split` | ✅ | RGB channel split |
 | `negative` | ✅ | **Shader import pilot** — invert |
 | `posterize` | ✅ | Quantize levels |
+| `solarize` | ✅ | **Import process** — Sabattier-style; [`import/solarize`](../shaders/import/solarize/SOURCE.md) |
 | `mirror` | ✅ | Horizontal mirror (L→R) |
 | `mirror_v` | ✅ | Vertical mirror (T→B) |
 | `mirror_quad` | ✅ | Four-fold desk fold |

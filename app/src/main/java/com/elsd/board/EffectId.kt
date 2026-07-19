@@ -28,6 +28,7 @@ enum class EffectId(
     SPLIT("split", EffectFamily.DESK, "SPLIT"),
     NEGATIVE("negative", EffectFamily.DESK, "NEGATIVE"),
     POSTERIZE("posterize", EffectFamily.DESK, "POSTERIZE"),
+    SOLARIZE("solarize", EffectFamily.DESK, "SOLARIZE"),
     MIRROR("mirror", EffectFamily.DESK, "MIRROR"),
     MIRROR_V("mirror_v", EffectFamily.DESK, "MIRROR V"),
     MIRROR_QUAD("mirror_quad", EffectFamily.DESK, "MIRROR QUAD"),

@@ -148,6 +148,7 @@ class EffectGraph(private val context: Context) {
         "mirror" -> 5
         "mirror_v" -> 6
         "mirror_quad" -> 7
+        "solarize" -> 8
         else -> 0
     }
 
