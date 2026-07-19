@@ -273,6 +273,53 @@ class SwitchboardActivity : ComponentActivity() {
             BoardSession.board.setPhaseEnabled(id, false)
             showDrill(id)
         })
+
+        // Mandelbrot / Julia: adjustable zoom rate + chromakey into FOV
+        if (id == EffectId.MANDELBROT || id == EffectId.JULIA) {
+            actionHost.addView(text("ZOOM RATE  (now ${layer.rate})").apply {
+                setTextColor(AMBER)
+                setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
+                setPadding(0, dp(10), 0, dp(4))
+            })
+            actionHost.addView(timeRow("SET ZOOM RATE", listOf(0.35f, 0.75f, 1f, 1.5f, 2.5f, 4f)) { r ->
+                layer.rate = r
+                showDrill(id)
+            })
+            actionHost.addView(text("FRACTAL KEY INTO FOV").apply {
+                setTextColor(AMBER)
+                setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
+                setPadding(0, dp(10), 0, dp(4))
+            })
+            val keyRow = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
+            listOf(
+                0 to "FULL",
+                1 to "DARKS",
+                2 to "BRIGHTS",
+                3 to "CHROMA",
+            ).forEach { (mode, label) ->
+                keyRow.addView(Button(this).apply {
+                    text = label
+                    setTextColor(BG)
+                    setBackgroundColor(
+                        if (BoardSession.board.fractalKeyMode == mode) LIME else CREAM,
+                    )
+                    setOnClickListener {
+                        BoardSession.board.fractalKeyMode = mode
+                        showDrill(id)
+                    }
+                    val lp = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+                    lp.marginEnd = dp(4)
+                    layoutParams = lp
+                })
+            }
+            actionHost.addView(keyRow)
+            actionHost.addView(text("CHROMA: green walls/sky → infinity. ADD TRAIL stacks afterimage.").apply {
+                setTextColor(DIM)
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 11f)
+                setPadding(0, dp(6), 0, dp(4))
+            })
+        }
+
         actionHost.addView(verbButton(BoardVerb.BACK) { showBoard() })
     }
 

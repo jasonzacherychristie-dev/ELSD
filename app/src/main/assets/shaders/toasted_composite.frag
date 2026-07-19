@@ -14,8 +14,12 @@ uniform float uChromaHue;
 uniform int uPulse;
 // ART: 0 none, 1 gogh, 2 monet, 3 noir, 4 neon, 5 sketch, 6 melt, 7 comic, 8 cartoon, 9 hyperreal
 uniform int uPaint;
-// ELSD: 0 none, 1 trail, 2 hue, 3 split, 4 kaleido, 5 melt, 6 mandelbrot, 7 julia
+// ELSD: 0 none, 1 trail, 2 hue, 3 split, 4 kaleido, 5 melt (6/7 legacy; prefer uFractal)
 uniform int uLsd;
+uniform int uTrail;           // 1 = trails on (stackable)
+uniform int uFractal;         // 0 off, 1 mandelbrot, 2 julia
+uniform float uFractalZoomRate; // adjustable dive speed
+uniform int uFractalKey;      // 0 full wet, 1 darks, 2 brights, 3 chroma into FOV
 // cinema: 0 none, 1 noir, 2 neon, 3 bleach, 4 teal_orange, 5 anamorphic, 6 soft_glow,
 // 7 technicolor, 8 suspiria, 9 silent_era, 10 expressionist, 11 giallo, 12 golden_age
 uniform int uCinema;
@@ -384,54 +388,60 @@ vec3 fractalPalette(float t) {
     return 0.5 + 0.5 * cos(6.28318 * (vec3(0.0, 0.33, 0.67) + t + uTime * 0.03));
 }
 
-// Map screen UV to complex plane; world luma steers zoom / seed
+// Adjustable-rate continuous zoom (log dive into the set)
+float fractalZoom(float worldLuma) {
+    float rate = max(uFractalZoomRate, 0.05);
+    // exponential zoom over time; world luma picks neighborhood richness
+    float z = exp(uTime * 0.22 * rate) * (0.55 + worldLuma * 1.8);
+    // gentle breathe so it never feels locked
+    z *= 1.0 + 0.08 * sin(uTime * 0.7 * rate);
+    return z;
+}
+
 vec2 complexPlane(vec2 uv, float zoom) {
-    vec2 p = (uv - 0.5) * vec2(3.2, 2.2) / max(zoom, 0.15);
-    p.x -= 0.5; // mandelbrot bias toward main cardioid
+    vec2 p = (uv - 0.5) * vec2(3.2, 2.2) / max(zoom, 0.05);
+    p.x -= 0.65;
     return p;
 }
 
-vec3 mandelbrotField(vec2 uv, vec3 worldColor) {
+// Pure fractal color (no world mix yet)
+vec3 mandelbrotColor(vec2 uv, vec3 worldColor) {
     float y = luma(worldColor);
-    // Stare / bright detail → deeper zoom into the set
-    float zoom = 0.85 + y * 2.8 + 0.35 * sin(uTime * 0.15);
+    float zoom = fractalZoom(y);
     vec2 c = complexPlane(uv, zoom);
-    // Nudge plane with scene (so the room “selects” a neighborhood)
-    c += (worldColor.rg - 0.5) * 0.35 * uWet;
+    c += (worldColor.rg - 0.5) * 0.25;
+    // slow pan of the plane with rate
+    c += 0.08 * uFractalZoomRate * vec2(sin(uTime * 0.11), cos(uTime * 0.09));
     vec2 z = vec2(0.0);
     float iter = 0.0;
-    const float MAX_I = 48.0;
+    const float MAX_I = 56.0;
     for (float i = 0.0; i < MAX_I; i++) {
         if (dot(z, z) > 4.0) break;
         z = vec2(z.x * z.x - z.y * z.y, 2.0 * z.x * z.y) + c;
         iter = i;
     }
     float t = iter / MAX_I;
-    // Smooth escape hint
     if (dot(z, z) > 4.0) {
-        t = (iter - log2(log2(dot(z, z))) + 1.0) / MAX_I;
+        t = (iter - log2(log2(max(dot(z, z), 1.001))) + 1.0) / MAX_I;
     }
     vec3 fcol = fractalPalette(t);
-    // Interior of set → deep world-tinted void
     if (iter >= MAX_I - 1.0) {
-        fcol = worldColor * vec3(0.15, 0.05, 0.25);
+        fcol = worldColor * vec3(0.12, 0.04, 0.22);
     }
-    // Blend structure of world edges into fractal
-    return mix(worldColor, fcol, uWet);
+    return fcol;
 }
 
-vec3 juliaField(vec2 uv, vec3 worldColor) {
+vec3 juliaColor(vec2 uv, vec3 worldColor) {
     float y = luma(worldColor);
-    // Julia seed c from world + time (the room becomes the parameter)
     vec2 jc = vec2(
         -0.4 + (worldColor.r - worldColor.b) * 0.55,
         0.6 + (worldColor.g - 0.5) * 0.7
     );
-    jc += 0.12 * vec2(sin(uTime * 0.4), cos(uTime * 0.33));
-    float zoom = 1.0 + y * 1.5;
-    vec2 z = (uv - 0.5) * vec2(3.0, 2.2) / zoom;
+    jc += 0.15 * uFractalZoomRate * vec2(sin(uTime * 0.35), cos(uTime * 0.28));
+    float zoom = fractalZoom(y) * 0.65;
+    vec2 z = (uv - 0.5) * vec2(3.0, 2.2) / max(zoom * 0.15, 0.08);
     float iter = 0.0;
-    const float MAX_I = 48.0;
+    const float MAX_I = 56.0;
     for (float i = 0.0; i < MAX_I; i++) {
         if (dot(z, z) > 4.0) break;
         z = vec2(z.x * z.x - z.y * z.y, 2.0 * z.x * z.y) + jc;
@@ -445,31 +455,69 @@ vec3 juliaField(vec2 uv, vec3 worldColor) {
     if (iter >= MAX_I - 1.0) {
         fcol = mix(worldColor, vec3(0.05, 0.0, 0.1), 0.7);
     }
-    return mix(worldColor, fcol, uWet);
+    return fcol;
+}
+
+// Chromakey / lumakey fractal into field of vision
+vec3 compositeFractal(vec3 worldColor, vec3 fractalColor) {
+    float w = uWet;
+    if (uFractalKey == 0) {
+        return mix(worldColor, fractalColor, w);
+    }
+    float y = luma(worldColor);
+    float mask = 0.0;
+    if (uFractalKey == 1) {
+        // fractal in the darks (shadows become infinity)
+        mask = 1.0 - smoothstep(0.15, 0.55, y);
+    } else if (uFractalKey == 2) {
+        // fractal in the brights (highlights open to the set)
+        mask = smoothstep(0.45, 0.85, y);
+    } else {
+        // chroma key — keyed hue becomes fractal window
+        vec3 hsv = rgb2hsv(worldColor);
+        float dist = abs(hsv.x - uChromaHue);
+        dist = min(dist, 1.0 - dist);
+        mask = smoothstep(0.14, 0.03, dist) * smoothstep(0.12, 0.4, hsv.y);
+    }
+    mask *= w;
+    // soft edge so it sits in the FOV, not a hard sticker
+    return mix(worldColor, fractalColor, clamp(mask, 0.0, 1.0));
+}
+
+vec3 applyTrail(vec3 c, vec2 uv) {
+    if (uTrail == 0) return c;
+    float w = uWet;
+    vec2 off = 0.012 * w * vec2(sin(uTime * 2.0), cos(uTime * 1.7));
+    // sample world history-ish offsets for afterimage
+    vec3 past1 = texture(uWorld, uv - off).rgb;
+    vec3 past2 = texture(uWorld, uv - off * 2.2).rgb;
+    vec3 trail = max(c, max(past1 * 0.85, past2 * 0.65));
+    // when fractal is on, also trail the fractal plane a bit via UV drift
+    if (uFractal > 0) {
+        vec3 fPast = (uFractal == 1)
+            ? mandelbrotColor(uv - off * 0.5, c)
+            : juliaColor(uv - off * 0.5, c);
+        trail = max(trail, mix(c, fPast, 0.5 * w));
+    }
+    return mix(c, trail, 0.55 * w);
 }
 
 vec3 applyLsd(vec3 c, vec2 uv) {
-    if (uLsd == 0) return c;
+    // Stack: optional secondary trip (hue/split/kaleido/melt) then fractal key + trails
     float w = uWet;
-    if (uLsd == 1) {
-        vec2 off = 0.01 * w * vec2(sin(uTime * 2.0), cos(uTime * 1.7));
-        vec3 past = texture(uWorld, uv - off).rgb;
-        return mix(c, max(c, past), 0.55 * w);
-    }
+    vec3 o = c;
     if (uLsd == 2) {
-        vec3 hsv = rgb2hsv(c);
+        vec3 hsv = rgb2hsv(o);
         hsv.x = fract(hsv.x + uTime * 0.05 * w);
-        return hsv2rgb(hsv);
-    }
-    if (uLsd == 3) {
+        o = hsv2rgb(hsv);
+    } else if (uLsd == 3) {
         float s = 0.006 * w;
-        return vec3(
+        o = vec3(
             texture(uWorld, uv + vec2(s, 0.0)).r,
-            c.g,
+            o.g,
             texture(uWorld, uv - vec2(s, 0.0)).b
         );
-    }
-    if (uLsd == 4) {
+    } else if (uLsd == 4) {
         vec2 d = uv - 0.5;
         float r = length(d);
         float ang = atan(d.y, d.x);
@@ -477,20 +525,33 @@ vec3 applyLsd(vec3 c, vec2 uv) {
         ang = mod(ang, 6.28318 / segments);
         ang = abs(ang - 3.14159 / segments);
         vec2 kuv = vec2(cos(ang), sin(ang)) * r + 0.5;
-        return mix(c, texture(uWorld, kuv).rgb, w);
-    }
-    if (uLsd == 5) {
+        o = mix(o, texture(uWorld, kuv).rgb, w);
+    } else if (uLsd == 5) {
         vec2 d = uv - 0.5;
         float m = 0.03 * w * sin(10.0 * d.x + uTime) * cos(8.0 * d.y - uTime);
-        return texture(uWorld, uv + d * m).rgb;
+        o = texture(uWorld, uv + d * m).rgb;
+    } else if (uLsd == 1 && uTrail == 0) {
+        // legacy trail via uLsd only
+        o = applyTrail(o, uv);
     }
-    if (uLsd == 6) {
-        return mandelbrotField(uv, c);
+
+    // Fractal chromakeyed into FOV (stackable with trail)
+    int frac = uFractal;
+    if (frac == 0 && (uLsd == 6 || uLsd == 7)) {
+        frac = (uLsd == 6) ? 1 : 2;
     }
-    if (uLsd == 7) {
-        return juliaField(uv, c);
+    if (frac == 1) {
+        vec3 fcol = mandelbrotColor(uv, o);
+        o = compositeFractal(o, fcol);
+    } else if (frac == 2) {
+        vec3 fcol = juliaColor(uv, o);
+        o = compositeFractal(o, fcol);
     }
-    return c;
+
+    if (uTrail == 1) {
+        o = applyTrail(o, uv);
+    }
+    return o;
 }
 
 void main() {

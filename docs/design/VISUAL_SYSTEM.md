@@ -28,8 +28,11 @@ Electronic LSD — trip geometry and time.
 | `split` | RGB split |
 | `kaleido` | Kaleidoscope |
 | `melt` | Domain warp melt |
-| `mandelbrot` | Escape-time set; world luma/color steers zoom & plane |
-| `julia` | Julia set; room RGB becomes complex seed *c* |
+| `mandelbrot` | Escape-time set; **adjustable zoom rate**; chromakey into FOV |
+| `julia` | Julia set; room RGB = seed *c*; same key + rate stack |
+| `trail` | Stacks with fractals — afterimage on world + fractal dive |
+
+**Hero stack:** Mandelbrot + zoom rate + chroma key + trail — [`FRACTAL_FOV.md`](FRACTAL_FOV.md).
 
 ### 2. ART (art styles)
 

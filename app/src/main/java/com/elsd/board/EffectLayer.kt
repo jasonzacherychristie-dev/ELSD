@@ -14,6 +14,11 @@ data class EffectLayer(
     var phaseSec: Float = 0f,
     var phaseEnabled: Boolean = false,
     var wet: Float = 1f,
+    /**
+     * Effect-specific continuous param.
+     * Mandelbrot/Julia: zoom rate (0.25..4). Default 1.
+     */
+    var rate: Float = 1f,
     /** Elapsed since last enable edge or phase epoch. */
     var clockSec: Float = 0f,
 ) {
@@ -62,6 +67,7 @@ data class EffectLayer(
         put("phaseSec", phaseSec.toDouble())
         put("phaseEnabled", phaseEnabled)
         put("wet", wet.toDouble())
+        put("rate", rate.toDouble())
     }
 
     companion object {
@@ -75,6 +81,7 @@ data class EffectLayer(
                 phaseSec = o.optDouble("phaseSec", 0.0).toFloat(),
                 phaseEnabled = o.optBoolean("phaseEnabled", false),
                 wet = o.optDouble("wet", 1.0).toFloat(),
+                rate = o.optDouble("rate", 1.0).toFloat(),
             )
         }
 

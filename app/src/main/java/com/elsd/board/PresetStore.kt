@@ -132,6 +132,32 @@ class PresetStore(context: Context) {
             addEffect(EffectId.MOOD_FEVER)
             addEffect(EffectId.NEON).fadeInSec = 1f
         }
+        // Adjustable-rate mandelbrot chromakeyed into FOV + trails — the etv special
+        seed("mandel_key_trails") {
+            globalWet = 0.85f
+            targetFps = 24
+            allowDroppedFrames = true
+            fractalKeyMode = 3 // chroma into FOV
+            fractalKeyHue = 0.33f // green-ish windows / plants / chroma cloth
+            addEffect(EffectId.MANDELBROT).apply {
+                rate = 1.25f
+                fadeInSec = 1.5f
+            }
+            addEffect(EffectId.TRAIL).apply {
+                fadeInSec = 0.5f
+                wet = 0.9f
+            }
+            addEffect(EffectId.MOOD_TOASTED)
+        }
+        seed("mandel_shadow_dive") {
+            globalWet = 0.8f
+            targetFps = 20
+            allowDroppedFrames = true
+            fractalKeyMode = 1 // darks = infinity
+            addEffect(EffectId.MANDELBROT).rate = 2.0f
+            addEffect(EffectId.TRAIL)
+            addEffect(EffectId.MOOD_NIGHT)
+        }
     }
 
     private fun sanitize(name: String): String =

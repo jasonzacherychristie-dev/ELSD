@@ -35,5 +35,7 @@ sealed class Command {
     data class SetFramerate(val fps: Int) : Command()
     data class DroppedFrames(val enabled: Boolean) : Command()
     data object UnlockFramerate : Command()
+    data class FractalZoomRate(val rate: Float) : Command()
+    data class FractalKeyMode(val mode: Int) : Command()
     data class Unknown(val raw: String) : Command()
 }

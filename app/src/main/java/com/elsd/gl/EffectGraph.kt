@@ -92,6 +92,10 @@ class EffectGraph(private val context: Context) {
         p.setUniform1i("uCinema", cinemaIndex(mix.cinemaId))
         p.setUniform1i("uPalette", paletteIndex(mix.paletteId))
         p.setUniform1i("uMood", moodIndex(mix.moodId))
+        p.setUniform1i("uTrail", if (mix.trailOn) 1 else 0)
+        p.setUniform1i("uFractal", mix.fractalMode.coerceIn(0, 2))
+        p.setUniform1f("uFractalZoomRate", mix.fractalZoomRate.coerceIn(0.15f, 6f))
+        p.setUniform1i("uFractalKey", mix.fractalKeyMode.coerceIn(0, 3))
 
         val aPos = p.attrib("aPos")
         val aUv = p.attrib("aUv")

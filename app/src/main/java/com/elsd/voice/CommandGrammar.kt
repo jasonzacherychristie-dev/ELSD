@@ -37,6 +37,21 @@ object CommandGrammar {
             t.contains("broadcast fps") -> return Command.SetFramerate(30)
             t.contains("live glass") || t.contains("smooth fps") -> return Command.SetFramerate(60)
         }
+        Regex("(?:zoom rate|mandel rate|julia rate|set zoom)\\s*(\\d+(?:\\.\\d+)?)").find(t)?.let { m ->
+            return Command.FractalZoomRate(m.groupValues[1].toFloat().coerceIn(0.15f, 6f))
+        }
+        when {
+            t.contains("fractal key chroma") || t.contains("key fractal chroma") ||
+                t.contains("chromakey fractal") || t.contains("chroma key fractal") ->
+                return Command.FractalKeyMode(3)
+            t.contains("fractal key bright") || t.contains("fractal in brights") ->
+                return Command.FractalKeyMode(2)
+            t.contains("fractal key dark") || t.contains("fractal in dark") ||
+                t.contains("fractal in shadows") ->
+                return Command.FractalKeyMode(1)
+            t.contains("fractal full") || t.contains("fractal mix full") ->
+                return Command.FractalKeyMode(0)
+        }
 
         // Switchboard vocabulary (UI twins)
         parseBoard(t)?.let { return it }

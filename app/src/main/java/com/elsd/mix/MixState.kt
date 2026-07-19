@@ -18,8 +18,16 @@ class MixState {
     @Volatile var pulseEnabled: Boolean = false
     /** ART family → shader paint path */
     @Volatile var paintId: String = "none"
-    /** ELSD family */
+    /** ELSD family (legacy single id for hue/split/etc.) */
     @Volatile var lsdId: String = "none"
+    /** Stackable: trails + fractal chromakey */
+    @Volatile var trailOn: Boolean = false
+    /** 0 off, 1 mandelbrot, 2 julia */
+    @Volatile var fractalMode: Int = 0
+    /** Zoom speed multiplier for fractal dive */
+    @Volatile var fractalZoomRate: Float = 1f
+    /** 0 full mix, 1 key darks, 2 key brights, 3 chroma key into FOV */
+    @Volatile var fractalKeyMode: Int = 3
     /** CINEMA family */
     @Volatile var cinemaId: String = "none"
     /** PALETTE family — analog/digital medium */
@@ -143,6 +151,15 @@ class MixState {
             is Command.UnlockFramerate -> {
                 targetFps = 0
                 BoardSession.board.targetFps = 0
+            }
+            is Command.FractalZoomRate -> {
+                fractalZoomRate = cmd.rate
+                BoardSession.board.get(EffectId.MANDELBROT)?.rate = cmd.rate
+                BoardSession.board.get(EffectId.JULIA)?.rate = cmd.rate
+            }
+            is Command.FractalKeyMode -> {
+                fractalKeyMode = cmd.mode.coerceIn(0, 3)
+                BoardSession.board.fractalKeyMode = fractalKeyMode
             }
             is Command.Unknown -> { /* ignore */ }
         }

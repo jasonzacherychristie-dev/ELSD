@@ -16,6 +16,12 @@ class Switchboard {
     /** 0 = unlock */
     var targetFps: Int = 30
     var allowDroppedFrames: Boolean = true
+    /**
+     * Where fractal sits in the FOV:
+     * 0 = full wet mix, 1 = luma key darks, 2 = luma key brights, 3 = chroma key
+     */
+    var fractalKeyMode: Int = 3
+    var fractalKeyHue: Float = 0.33f
 
     fun layersInOrder(): List<EffectLayer> = layers.values.toList()
 
@@ -98,6 +104,8 @@ class Switchboard {
         put("amyMuted", amyMuted)
         put("targetFps", targetFps)
         put("allowDroppedFrames", allowDroppedFrames)
+        put("fractalKeyMode", fractalKeyMode)
+        put("fractalKeyHue", fractalKeyHue.toDouble())
         val arr = JSONArray()
         layers.values.forEach { arr.put(it.toJson()) }
         put("layers", arr)
@@ -110,6 +118,8 @@ class Switchboard {
         amyMuted = o.optBoolean("amyMuted", false)
         targetFps = o.optInt("targetFps", 30)
         allowDroppedFrames = o.optBoolean("allowDroppedFrames", true)
+        fractalKeyMode = o.optInt("fractalKeyMode", 3)
+        fractalKeyHue = o.optDouble("fractalKeyHue", 0.33).toFloat()
         val arr = o.optJSONArray("layers") ?: return
         for (i in 0 until arr.length()) {
             val layer = EffectLayer.fromJson(arr.getJSONObject(i)) ?: continue
@@ -130,6 +140,11 @@ class Switchboard {
         mix.paletteId = "none"
         mix.moodId = "mood_neutral"
         mix.stillnessMorph = false
+        mix.trailOn = false
+        mix.fractalMode = 0
+        mix.fractalZoomRate = 1f
+        mix.fractalKeyMode = fractalKeyMode
+        mix.chromaHue = fractalKeyHue
         mix.keyMode = com.elsd.mix.KeyMode.OFF
         mix.pulseEnabled = false
         mix.spatialMode = com.elsd.audio.SpatialMode.OFF
@@ -142,12 +157,37 @@ class Switchboard {
             when (layer.id.family) {
                 EffectFamily.ELSD -> {
                     if (layer.enabled || layer.envelope() > 0.01f) {
-                        if (layer.id == EffectId.STILLNESS_MORPH) {
-                            mix.stillnessMorph = true
-                            last = "ELSD"
-                        } else {
-                            mix.lsdId = layer.id.catalogName
-                            last = "ELSD"
+                        when (layer.id) {
+                            EffectId.STILLNESS_MORPH -> {
+                                mix.stillnessMorph = true
+                                last = "ELSD"
+                            }
+                            EffectId.TRAIL -> {
+                                mix.trailOn = true
+                                last = "ELSD"
+                            }
+                            EffectId.MANDELBROT -> {
+                                mix.fractalMode = 1
+                                mix.fractalZoomRate = layer.rate.coerceIn(0.15f, 6f)
+                                mix.lsdId = "mandelbrot"
+                                last = "ELSD"
+                            }
+                            EffectId.JULIA -> {
+                                mix.fractalMode = 2
+                                mix.fractalZoomRate = layer.rate.coerceIn(0.15f, 6f)
+                                mix.lsdId = "julia"
+                                last = "ELSD"
+                            }
+                            else -> {
+                                // hue/split/kaleido/melt — last non-fractal trip still maps
+                                if (mix.fractalMode == 0 && !mix.trailOn) {
+                                    mix.lsdId = layer.id.catalogName
+                                } else if (layer.id != EffectId.TRAIL) {
+                                    // keep secondary trip id for hue etc. via lsdId only if no fractal
+                                    if (mix.fractalMode == 0) mix.lsdId = layer.id.catalogName
+                                }
+                                last = "ELSD"
+                            }
                         }
                     }
                 }
