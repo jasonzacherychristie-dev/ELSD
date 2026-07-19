@@ -1,0 +1,18 @@
+ELSD (Electronic LSD)
+Copyright 2026 Jason Z. Christie and contributors
+
+This product includes software developed by third parties under open-source
+licenses. Attribution for bundled or linked components will be expanded as
+dependencies are added to the Android build. Core planned components:
+
+  - Google Cardboard SDK (Apache-2.0) — https://github.com/googlevr/cardboard
+  - AndroidX CameraX (Apache-2.0) — https://developer.android.com/training/camerax
+  - AndroidX Media3 / ExoPlayer (Apache-2.0) — https://github.com/androidx/media
+  - Vosk speech recognition (Apache-2.0) — https://github.com/alphacep/vosk-api
+
+"Google Cardboard" is a trademark of Google LLC. ELSD is an independent
+project and is not affiliated with, endorsed by, or sponsored by Google.
+Describe compatibility factually (e.g. "compatible with Cardboard viewers").
+
+Design lineage references research by Jason Z. Christie (1998 / republished 2017)
+and related essays; those writings remain under their original publication terms.

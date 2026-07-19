@@ -1,0 +1,47 @@
+# Android / Gradle
+*.iml
+.gradle/
+/local.properties
+/.idea/
+.DS_Store
+/build/
+**/build/
+/captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Kotlin
+.kotlin/
+
+# NDK / CMake
+cmake-build-*/
+
+# Upstream clones (keep outside or ignore if nested)
+/upstream/
+../upstream/
+
+# Secrets
+*.jks
+*.keystore
+google-services.json
+
+# OS
+Thumbs.db
+Desktop.ini
+
+# Editor
+*.swp
+*~
+
+# Python tooling (if any scripts)
+.venv/
+__pycache__/
+
+# Large local models (Vosk etc.) — document download instead
+**/models/**/*.zip
+**/models/**/*.tar.gz
+**/assets/model-*/
