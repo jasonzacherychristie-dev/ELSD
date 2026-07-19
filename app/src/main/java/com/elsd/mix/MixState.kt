@@ -14,10 +14,18 @@ import com.elsd.voice.Command
 class MixState {
     @Volatile var wet: Float = 0.35f
     @Volatile var keyMode: KeyMode = KeyMode.OFF
-    @Volatile var chromaHue: Float = 0.33f // default green-ish
+    @Volatile var chromaHue: Float = 0.33f
     @Volatile var pulseEnabled: Boolean = false
+    /** ART family → shader paint path */
     @Volatile var paintId: String = "none"
+    /** ELSD family */
     @Volatile var lsdId: String = "none"
+    /** CINEMA family */
+    @Volatile var cinemaId: String = "none"
+    /** PALETTE family — analog/digital medium */
+    @Volatile var paletteId: String = "none"
+    /** MOOD global toggle */
+    @Volatile var moodId: String = "mood_neutral"
     @Volatile var bounceMode: BounceMode = BounceMode.FLAT
     @Volatile var spatialMode: SpatialMode = SpatialMode.OFF
     @Volatile var earWet: Float = 0f
@@ -125,9 +133,11 @@ class MixState {
     private fun softClear() {
         wet = 0f
         lsdId = "none"
-        // Keep paint/pulse gentle; clear means sober eyes + ears
-        pulseEnabled = false
         paintId = "none"
+        cinemaId = "none"
+        paletteId = "none"
+        moodId = "mood_neutral"
+        pulseEnabled = false
         keyMode = KeyMode.OFF
         spatialMode = SpatialMode.OFF
         earWet = 0f
@@ -141,43 +151,49 @@ class MixState {
     }
 
     private fun applyPreset(name: String) {
+        // Prefer switchboard JSON presets; legacy names map visually only
+        if (BoardSession::presets.isInitialized &&
+            BoardSession.presets.load(name, BoardSession.board)
+        ) {
+            BoardSession.board.applyToMix(this)
+            return
+        }
         presetName = name
         when (name) {
-            "window_tv" -> {
-                keyMode = KeyMode.LUMA
-                wet = 0.7f
-                lsdId = "trail"
-                paintId = "none"
-                lastBank = "KEY"
-            }
             "gogh_walk" -> {
                 paintId = "gogh"
-                pulseEnabled = true
                 lsdId = "trail"
+                moodId = "mood_warm"
                 wet = 0.55f
-                lastBank = "PAINT"
+                lastBank = "ART"
             }
-            "sky_cinema" -> {
-                keyMode = KeyMode.CHROMA
-                chromaHue = 0.58f
-                wet = 0.75f
-                lastBank = "KEY"
+            "noir_night" -> {
+                cinemaId = "noir"
+                paintId = "noir"
+                paletteId = "digital_harsh"
+                moodId = "mood_night"
+                wet = 0.7f
+                lastBank = "CINEMA"
             }
-            "quiet_toasted" -> {
-                wet = 0.8f
-                lsdId = "melt"
-                bounceMode = BounceMode.MUTED
-                spatialMode = SpatialMode.ORBIT
-                earWet = 0.65f
-                lastBank = "LSD"
+            "vhs_fever" -> {
+                paletteId = "analog_vhs"
+                lsdId = "hue"
+                moodId = "mood_fever"
+                wet = 0.65f
+                lastBank = "PALETTE"
             }
-            "full_hallucination" -> {
-                wet = 0.75f
-                pulseEnabled = true
+            "clean_calm" -> {
+                paletteId = "digital_clean"
+                moodId = "mood_calm"
+                wet = 0.4f
+                lastBank = "MOOD"
+            }
+            "toasted_desk" -> {
+                moodId = "mood_toasted"
                 lsdId = "trail"
-                spatialMode = SpatialMode.HALLUCINATE_EARS
-                earWet = 0.8f
-                lastBank = "EARS"
+                cinemaId = "soft_glow"
+                wet = 0.75f
+                lastBank = "MOOD"
             }
             else -> { /* keep state */ }
         }
@@ -189,8 +205,8 @@ class MixState {
             BounceMode.SPATIAL -> "Amy 3D"
             BounceMode.MUTED -> "Amy quiet"
         }
-        return "PGM eyes=${"%.2f".format(wet)} ears=${spatialMode.id}/${"%.2f".format(earWet)}  " +
-            "$bounce  bank=$lastBank  key=$keyMode  paint=$paintId  lsd=$lsdId  preset=$presetName"
+        return "PGM wet=${"%.2f".format(wet)} mood=$moodId pal=$paletteId " +
+            "art=$paintId cine=$cinemaId elsd=$lsdId $bounce preset=$presetName"
     }
 }
 

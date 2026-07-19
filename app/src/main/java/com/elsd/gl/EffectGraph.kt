@@ -89,6 +89,9 @@ class EffectGraph(private val context: Context) {
         p.setUniform1i("uPulse", if (mix.pulseEnabled) 1 else 0)
         p.setUniform1i("uPaint", paintIndex(mix.paintId))
         p.setUniform1i("uLsd", lsdIndex(mix.lsdId))
+        p.setUniform1i("uCinema", cinemaIndex(mix.cinemaId))
+        p.setUniform1i("uPalette", paletteIndex(mix.paletteId))
+        p.setUniform1i("uMood", moodIndex(mix.moodId))
 
         val aPos = p.attrib("aPos")
         val aUv = p.attrib("aUv")
@@ -124,6 +127,35 @@ class EffectGraph(private val context: Context) {
         "split" -> 3
         "kaleido" -> 4
         "melt" -> 5
+        else -> 0
+    }
+
+    private fun cinemaIndex(id: String): Int = when (id) {
+        "noir" -> 1
+        "neon" -> 2
+        "bleach" -> 3
+        "teal_orange" -> 4
+        "anamorphic" -> 5
+        "soft_glow" -> 6
+        else -> 0
+    }
+
+    private fun paletteIndex(id: String): Int = when (id) {
+        "analog_film" -> 1
+        "analog_vhs" -> 2
+        "digital_clean" -> 3
+        "digital_harsh" -> 4
+        "polaroid" -> 5
+        else -> 0
+    }
+
+    private fun moodIndex(id: String): Int = when (id) {
+        "mood_calm" -> 1
+        "mood_warm" -> 2
+        "mood_cold" -> 3
+        "mood_night" -> 4
+        "mood_fever" -> 5
+        "mood_toasted" -> 6
         else -> 0
     }
 }

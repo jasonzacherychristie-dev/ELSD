@@ -5,7 +5,7 @@ import org.json.JSONObject
 import java.io.File
 
 /**
- * SAVE PRESET / LOAD PRESET — JSON files on device.
+ * SAVE PRESET / LOAD PRESET — visual boards only for 1.0 factory seeds.
  */
 class PresetStore(context: Context) {
     private val dir = File(context.filesDir, "presets").also { it.mkdirs() }
@@ -36,36 +36,37 @@ class PresetStore(context: Context) {
             b.build()
             save(name, b)
         }
-        seed("window_tv") {
-            globalWet = 0.7f
-            addEffect(EffectId.KEY_LUMA)
-            addEffect(EffectId.TRAIL).fadeInSec = 1f
-        }
         seed("gogh_walk") {
             globalWet = 0.55f
             addEffect(EffectId.GOGH)
-            addEffect(EffectId.CITY_PULSE)
-            addEffect(EffectId.TRAIL)
+            addEffect(EffectId.TRAIL).fadeInSec = 1f
+            addEffect(EffectId.MOOD_WARM)
         }
-        seed("sky_cinema") {
-            globalWet = 0.75f
-            addEffect(EffectId.KEY_CHROMA)
+        seed("noir_night") {
+            globalWet = 0.7f
+            addEffect(EffectId.NOIR)
+            addEffect(EffectId.DIGITAL_HARSH)
+            addEffect(EffectId.MOOD_NIGHT)
         }
-        seed("quiet_toasted") {
-            globalWet = 0.8f
-            amyMuted = true
-            addEffect(EffectId.MELT).apply {
-                fadeInSec = 2f
-                phaseSec = 16f
+        seed("vhs_fever") {
+            globalWet = 0.65f
+            addEffect(EffectId.ANALOG_VHS)
+            addEffect(EffectId.HUE).apply {
+                phaseSec = 12f
                 phaseEnabled = true
             }
-            addEffect(EffectId.ORBIT).fadeInSec = 1.5f
+            addEffect(EffectId.MOOD_FEVER)
         }
-        seed("full_hallucination") {
+        seed("clean_calm") {
+            globalWet = 0.4f
+            addEffect(EffectId.DIGITAL_CLEAN)
+            addEffect(EffectId.MOOD_CALM).fadeInSec = 2f
+        }
+        seed("toasted_desk") {
             globalWet = 0.75f
-            addEffect(EffectId.CITY_PULSE)
-            addEffect(EffectId.TRAIL)
-            addEffect(EffectId.HALLUCINATE_EARS)
+            addEffect(EffectId.MOOD_TOASTED)
+            addEffect(EffectId.TRAIL).fadeInSec = 0.5f
+            addEffect(EffectId.SOFT_GLOW)
         }
     }
 

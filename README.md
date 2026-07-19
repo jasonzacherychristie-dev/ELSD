@@ -38,14 +38,14 @@ Third-party libraries (Cardboard SDK, CameraX, Media3, Vosk, AndroidX, …) rema
 
 ## Status
 
-**Active release: 1.0** — perception mixer (shaders, keys, Amy, pulse, spatial ears).  
-**Not in 1.0:** DeepDream / heavy neural vision → **3.0 wishlist**.
+**Active release: 1.0** — **visuals only** on live camera: ELSD · Art · Cinema · Palette · Mood.  
+**2.0:** live video in / stream out / key / ears. **3.0:** DeepDream.
 
 | Release | Theme | Status |
 |---------|--------|--------|
-| **1.0** | TOASTED desk — GLSL + audio analysis + Amy + Cardboard | **In progress** (M1 landed) |
-| **2.0** | Deeper mixer — richer FBO, spatial, presets | After 1.0 |
-| **3.0** | Dream machine — **DeepDream mode**, neural layers | Wishlist |
+| **1.0** | Visual desk — camera + styles + mood + Amy + switchboard | **In progress** |
+| **2.0** | Media in/out + key + spatial ears + depth-pop | After 1.0 |
+| **3.0** | Dream machine — **DeepDream** | Wishlist |
 
 Full map: **[docs/design/ROADMAP.md](docs/design/ROADMAP.md)** · 1.0 execution: **[docs/design/PROJECT_PLAN.md](docs/design/PROJECT_PLAN.md)**
 
@@ -117,7 +117,8 @@ Install `app/build/outputs/apk/debug/app-debug.apk`, grant camera + mic, landsca
 | Doc | What |
 |-----|------|
 | [MISSION.md](MISSION.md) | Mission, vision, principles |
-| [docs/design/ROADMAP.md](docs/design/ROADMAP.md) | **1.0 / 2.0 / 3.0** (DeepDream in 3.0) |
+| [docs/design/ROADMAP.md](docs/design/ROADMAP.md) | **1.0 / 2.0 / 3.0** |
+| [docs/design/VISUAL_SYSTEM.md](docs/design/VISUAL_SYSTEM.md) | ELSD · Art · Cinema · Palette · Mood |
 | [docs/design/SOUL.md](docs/design/SOUL.md) | Look, Amy, TOASTED |
 | [docs/design/VISION_1_0.md](docs/design/VISION_1_0.md) | Product vision |
 | [docs/design/VOICE_AND_CURSOR.md](docs/design/VOICE_AND_CURSOR.md) | Voice-only + cursor |

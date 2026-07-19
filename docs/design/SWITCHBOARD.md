@@ -81,18 +81,20 @@ Envelope: linear or smoothstep ramp; if `phaseEnabled && phaseSec > 0`, triangle
 
 ---
 
-## Catalog (1.0 — ADD EFFECT picks from these)
+## Catalog (1.0 — visuals only)
 
-| ID | Family | Notes |
-|----|--------|-------|
-| `key_luma` | KEY | |
-| `key_chroma` | KEY | |
-| `city_pulse` | PULSE | |
-| `gogh` `monet` `noir` `neon` `sketch` `melt_paint` | PAINT | |
-| `trail` `hue` `split` `kaleido` `melt` | LSD | |
-| `orbit` `behind` `cathedral` `bass_crawl` `hallucinate_ears` | EARS | |
+See [`VISUAL_SYSTEM.md`](VISUAL_SYSTEM.md).
 
-**3.0:** `deepdream` appears in catalog only when release ≥ 3.0 — not on 1.0 board.
+| Family | Examples |
+|--------|----------|
+| **ELSD** | trail, hue, split, kaleido, melt |
+| **ART** | gogh, monet, sketch, comic, melt_paint |
+| **CINEMA** | noir, neon, bleach, teal_orange, anamorphic, soft_glow |
+| **PALETTE** | analog_film, analog_vhs, digital_clean, digital_harsh, polaroid (single-select) |
+| **MOOD** | calm, warm, cold, night, fever, toasted, neutral (single-select overall toggle) |
+
+**2.0 catalog adds:** plate/key, stream, ears, pulse-audio.  
+**3.0:** `deepdream`.
 
 ---
 

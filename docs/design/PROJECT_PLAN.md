@@ -5,13 +5,13 @@
 
 ## 1.0 goals
 
-1. Ship a **usable 1.0 APK** that demos KEY + PULSE + PAINT + LSD on target hardware.  
-2. Keep the repo **easy to fork**: **MIT** app code; Apache deps in NOTICE.  
-3. **TOASTED** live desk: wet/dry, world-first, composable banks.  
-4. **Voice only** + **Amy** (lean-in, FLAT / SPATIAL / MUTED) — [`SOUL.md`](SOUL.md).  
-5. Eyes **and** ears can hallucinate; `clear` dries both.  
-6. Imply heritage; no forbidden brand names — [`TRADEMARK_SAFE_LANGUAGE.md`](TRADEMARK_SAFE_LANGUAGE.md).  
-7. **No neural DeepDream in 1.0** — that is **3.0** ([`ROADMAP.md`](ROADMAP.md)).
+1. Ship a **usable 1.0 APK** focused on **visuals only** (camera WORLD).  
+2. Switchboard families: **ELSD · ART · CINEMA · PALETTE · MOOD** — [`VISUAL_SYSTEM.md`](VISUAL_SYSTEM.md).  
+3. **TOASTED** desk: wet/dry, phase times, SAVE/LOAD PRESET.  
+4. **Amy** + voice vocabulary twin of switchboard — [`SOUL.md`](SOUL.md) · [`SWITCHBOARD.md`](SWITCHBOARD.md).  
+5. **No** live video in / stream out / key / ears in 1.0 — those are **2.0**.  
+6. **No** DeepDream in 1.0 — **3.0** ([`ROADMAP.md`](ROADMAP.md)).  
+7. MIT + NOTICE; target hardware OP12 + large-tray viewer.
 
 ## Hardware baseline
 

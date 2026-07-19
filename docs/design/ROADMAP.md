@@ -1,140 +1,80 @@
 # ELSD release roadmap — 1.0 · 2.0 · 3.0
 
-**Focus rule:** Build and discuss the **current major** only.  
-Wishlist items for later majors stay documented so they don’t sneak into the active milestone list.
+**Focus rule:** Build the **current major** only.
 
 | Now | Next | Later |
 |-----|------|--------|
-| **→ 1.0** ship | **2.0** deepen | **3.0** dream |
-
-Internal sprint tags (M0–M5) roll up into **1.0**. Do not invent M6–M20 for 2.0/3.0 until 1.0 ships.
+| **→ 1.0 visuals** | **2.0 media + senses** | **3.0 dream** |
 
 ---
 
-## 1.0 — Perception mixer (ship this)
+## 1.0 — Visual perception desk (**active**)
 
-**Theme:** TOASTED live desk on target hardware. Shader + audio analysis. No heavy neural nets.
+**Theme:** Camera WORLD + switchboard looks. **No live video in, no stream out.**
 
 ### In scope
 
 | Area | Deliverable |
 |------|-------------|
-| **Hardware** | OnePlus 12–class phone + large-tray Cardboard-compatible viewer ([`TARGET_HARDWARE.md`](TARGET_HARDWARE.md)) |
-| **WORLD / PLATE** | CameraX + Media3 (local + HLS); luma/chroma key |
-| **FX banks** | KEY · PULSE · PAINT (shader styles) · LSD (trail/hue/split/kaleido/melt) |
-| **Eyes** | Sound-activated visual pulse (BandEnergy → uniforms) |
-| **Ears** | Spatial hallucination control + wet stereo path (orbit/behind/cathedral…); Resonance optional if it stays light |
-| **Amy** | Checker-orb pilot; lean-in on speech; FLAT / SPATIAL / MUTED |
-| **Voice** | SpeechRecognizer + grammar; Vosk offline if size OK |
-| **Stereo** | Cardboard NDK distortion on target viewer |
-| **Safety** | `clear` / `sober` / `stop`; soft landing; session timer; dry eyes **and** ears |
-| **License** | MIT app; NOTICE for Apache deps |
+| **Hardware** | OP12-class + large-tray Cardboard viewer |
+| **WORLD** | CameraX only |
+| **Switchboard** | One page; ADD/REMOVE EFFECT; presets; phase times |
+| **Visual families** | **ELSD** · **ART** · **CINEMA** · **PALETTE** · **MOOD** — [`VISUAL_SYSTEM.md`](VISUAL_SYSTEM.md) |
+| **Amy** | Lean-in pilot |
+| **Voice** | Same vocabulary as switchboard |
+| **Stereo** | Cardboard path when ready |
+| **Safety** | clear / sober / stop |
 
-### Explicitly out of 1.0
+### Explicitly **not** 1.0
 
-- DeepDream / CNN iterative dream layers  
-- On-device diffusion or large style-transfer every frame  
-- Cloud vision APIs as required path  
-- Amiga 9000 dome hardware  
-- iOS  
-- Social / accounts / always-on telemetry  
+| Parked | Release |
+|--------|---------|
+| Live video / plate **in** | **2.0** |
+| Stream / record **out** | **2.0** |
+| Luma/chroma key of plate | **2.0** |
+| Spatial audio / wet ears product | **2.0** |
+| Audio-reactive pulse as hero | **2.0** (optional light later) |
+| DeepDream / neural | **3.0** |
 
-### 1.0 exit (stranger demo)
+### 1.0 exit
 
-Voice-only, &lt; 60s to magic: Window TV, Gogh Walk, City Pulse, hallucinate ears, Amy lean-in, **clear** works. Stereo on target headset.
-
-**Internal milestones:** M0–M5 in [`PROJECT_PLAN.md`](PROJECT_PLAN.md).
+Stranger: ADD EFFECT GOGH + MOOD WARM → GO LIVE → world is painted → CLEAR.  
+Presets: gogh_walk, noir_night, vhs_fever, clean_calm, toasted_desk.
 
 ---
 
-## 2.0 — Deeper mixer (after 1.0)
+## 2.0 — Media in/out + deeper desk
 
-**Theme:** Richer live desk, better spatial, stronger coupling of senses — still real-time first.
-
-### Planned (not committed until 1.0 ships)
+**Theme:** Pipe other video through the same visual system; optional ears/depth.
 
 | Area | Direction |
 |------|-----------|
-| **Feedback graph** | True multi-pass FBO trails; Milk-warp class (MIT original) |
-| **Spatial audio** | Full Resonance Audio / world-lock from Cardboard pose; ghost choir quality |
-| **Paint** | More painters; optional **lite** one-shot style snapshot (not full DeepDream) |
-| **Amy** | Quip packs, captions, serious mode polish |
-| **Presets** | User save/load; shareable preset files |
-| **Perf** | Thermal profiles per SoC; half-res ladders |
-| **A11y** | Captions, high-contrast Amy, seizure-safe profiles |
-| **CI / store** | F-Droid notes, release automation |
-
-### Explicitly out of 2.0 (unless research spike)
-
-- Full DeepDream continuous dream  
-- Multi-user linked helmets as required  
-- Dome / outer-display Amiga 9000 product  
+| **Live video in** | Plate bus (file / HLS / stream) |
+| **Stream / cast out** | PGM share or record |
+| **Key** | Luma/chroma plate into world |
+| **Spatial audio** | Wet ears (design already exists) |
+| **Stereo enhance** | Optional depth-pop |
+| **Richer FBO** | True multi-layer wet blend |
 
 ---
 
-## 3.0 — Dream machine (wishlist)
-
-**Theme:** Neural perception layers on the live world — Electronic LSD meets classic deep generative vision — still open, still exit-safe.
-
-### Wishlist (documented, not scheduled)
-
-#### DeepDream mode ⭐
-
-| | |
-|--|--|
-| **Name** | `deepdream` / voice: `deep dream` / `dream layer` |
-| **Family** | New bank or PAINT++ : **DREAM** |
-| **Feel** | Iterative CNN “enhance” on WORLD (or PGM): dog-slash-pareidolia, recursive patterns blooming out of streets and faces |
-| **Why 3.0** | Real-time or near-real-time DeepDream on a hot flagship is a **research + thermal + model-license** problem. Shipping it as 1.0 would blow focus, APK size, and FPS. |
-| **Product rules** | Always under wet/dry; `clear` kills dream layers immediately; session timer stricter; never default-on |
-| **Tech candidates (explore later)** | TFLite / ONNX / MediaPipe-class on-device models; lower-res dream FBO at 5–15 fps composited over 30–60 fps passthrough; optional “freeze + dream” still mode for quality |
-| **Open-source bar** | Prefer models and code we can redistribute under MIT/Apache-compatible terms; document weights in NOTICE |
-| **Couple** | Bass → dream step count or octave layer; Amy: *“I’m seeing dogs in your drywall.”* (jokes mode) |
-
-**DeepDream is not** a substitute for shader PAINT in 1.0 — Gogh/Noir stay GLSL.
-
-#### Other 3.0 wishlist (parked)
+## 3.0 — Dream machine
 
 | Item | Note |
 |------|------|
-| Continuous neural style transfer | Related to DeepDream; same release bucket |
-| Thought / BCI hooks | Ultimate Reality paper lineage; research only |
-| Multi-user shared PGM | Networked TOASTED |
-| Amiga 9000–class dome + outer display | Horizon hardware |
-| iOS port | After Android 1.x stable |
-| Personalized HRTF / SOFA | Spatial ears pro tier |
+| **DeepDream mode** | Neural recursive enhance — wishlist |
+| Continuous neural style | Same bucket |
+| Horizon hardware / multi-user | Parked |
 
 ---
 
 ## Focus discipline
 
-| If someone asks… | Answer |
-|------------------|--------|
-| DeepDream now? | **3.0 wishlist** — tracked here; not a 1.0 ticket |
-| New painter shader? | **1.0 / 2.0** — yes if GLSL real-time |
-| Cloud dream API? | Only as **optional 3.0** opt-in; never required core |
-| Scope creep mid-1.0? | Point at this file; open a `wishlist` issue labeled `3.0` |
+| Ask | Answer |
+|-----|--------|
+| Streaming in/out? | **2.0** |
+| DeepDream? | **3.0** |
+| New art/cinema/palette/mood? | **1.0** if GLSL real-time |
+| Keying a movie onto a wall? | **2.0** |
 
-### Issue labels (recommended)
-
-- `1.0` · `2.0` · `3.0`  
-- `wishlist` · `shader` · `audio` · `neural` · `hardware`  
-
----
-
-## Version naming
-
-| Tag | Meaning |
-|-----|---------|
-| `v0.x` | Pre-1.0 public alpha |
-| `v1.0.0` | First stranger-demo solid release |
-| `v2.0.0` | Deeper mixer (no neural core required) |
-| `v3.0.0` | Dream machine — DeepDream mode eligible to ship |
-
----
-
-## One-line summary
-
-**1.0** ships the open TOASTED desk (shaders, keys, Amy, pulse, spatial ears).  
-**2.0** deepens the desk.  
-**3.0** may dream — **DeepDream mode** lives there, not in the critical path today.
+Labels: `1.0` `2.0` `3.0` `wishlist` `visual` `media`

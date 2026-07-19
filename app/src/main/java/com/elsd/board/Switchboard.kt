@@ -1,13 +1,12 @@
 package com.elsd.board
 
-import com.elsd.audio.SpatialMode
 import com.elsd.bounce.BounceMode
 import org.json.JSONArray
 import org.json.JSONObject
 
 /**
- * Single switchboard model: ordered effect layers + global wet.
- * Source of truth for UI and for applying into live Mix/render.
+ * Visual switchboard: ELSD · ART · CINEMA · PALETTE · MOOD.
+ * PALETTE and MOOD are single-select (last add wins within family).
  */
 class Switchboard {
     private val layers = linkedMapOf<EffectId, EffectLayer>()
@@ -20,6 +19,12 @@ class Switchboard {
     fun get(id: EffectId): EffectLayer? = layers[id]
 
     fun addEffect(id: EffectId): EffectLayer {
+        // Single-select families
+        if (id.family == EffectFamily.MOOD || id.family == EffectFamily.PALETTE) {
+            layers.keys.filter { layers[it]?.id?.family == id.family && it != id }
+                .toList()
+                .forEach { layers.remove(it) }
+        }
         val existing = layers[id]
         if (existing != null) {
             existing.onEnabledChanged(true)
@@ -74,6 +79,16 @@ class Switchboard {
 
     fun envelope(id: EffectId): Float = layers[id]?.envelope() ?: 0f
 
+    fun activeMood(): EffectId? =
+        layers.values.firstOrNull {
+            it.id.family == EffectFamily.MOOD && (it.enabled || it.envelope() > 0.01f)
+        }?.id
+
+    fun activePalette(): EffectId? =
+        layers.values.firstOrNull {
+            it.id.family == EffectFamily.PALETTE && (it.enabled || it.envelope() > 0.01f)
+        }?.id
+
     fun toJson(): JSONObject = JSONObject().apply {
         put("presetName", presetName)
         put("globalWet", globalWet.toDouble())
@@ -95,68 +110,64 @@ class Switchboard {
         }
     }
 
-    /**
-     * Project board into legacy MixState fields for current renderer.
-     */
     fun applyToMix(mix: com.elsd.mix.MixState) {
         mix.wet = globalWet
         mix.presetName = presetName
         mix.bounceMode = if (amyMuted) BounceMode.MUTED else BounceMode.FLAT
 
-        // Defaults off
-        mix.keyMode = com.elsd.mix.KeyMode.OFF
-        mix.pulseEnabled = false
         mix.paintId = "none"
         mix.lsdId = "none"
-        mix.spatialMode = SpatialMode.OFF
+        mix.cinemaId = "none"
+        mix.paletteId = "none"
+        mix.moodId = "mood_neutral"
+        mix.keyMode = com.elsd.mix.KeyMode.OFF
+        mix.pulseEnabled = false
+        mix.spatialMode = com.elsd.audio.SpatialMode.OFF
         mix.earWet = 0f
 
         var last = "—"
         for (layer in layers.values) {
-            if (layer.envelope() <= 0.001f && !layer.enabled) continue
-            val on = layer.envelope() > 0.01f || layer.enabled
-            if (!on && !layer.phaseEnabled) continue
-            when (layer.id) {
-                EffectId.KEY_LUMA -> {
+            val active = layer.enabled || layer.envelope() > 0.01f || layer.phaseEnabled
+            if (!active) continue
+            when (layer.id.family) {
+                EffectFamily.ELSD -> {
                     if (layer.enabled || layer.envelope() > 0.01f) {
-                        mix.keyMode = com.elsd.mix.KeyMode.LUMA
-                        last = "KEY"
+                        mix.lsdId = layer.id.catalogName
+                        last = "ELSD"
                     }
                 }
-                EffectId.KEY_CHROMA -> {
-                    if (layer.enabled || layer.envelope() > 0.01f) {
-                        mix.keyMode = com.elsd.mix.KeyMode.CHROMA
-                        last = "KEY"
-                    }
-                }
-                EffectId.CITY_PULSE -> {
-                    mix.pulseEnabled = layer.enabled || layer.phaseEnabled
-                    last = "PULSE"
-                }
-                EffectId.GOGH, EffectId.MONET, EffectId.NOIR, EffectId.NEON,
-                EffectId.SKETCH, EffectId.MELT_PAINT,
-                -> {
+                EffectFamily.ART -> {
                     if (layer.enabled || layer.envelope() > 0.01f) {
                         mix.paintId = when (layer.id) {
                             EffectId.MELT_PAINT -> "melt"
+                            EffectId.COMIC -> "sketch" // map until comic shader lands
                             else -> layer.id.catalogName
                         }
-                        last = "PAINT"
+                        last = "ART"
                     }
                 }
-                EffectId.TRAIL, EffectId.HUE, EffectId.SPLIT, EffectId.KALEIDO, EffectId.MELT -> {
+                EffectFamily.CINEMA -> {
                     if (layer.enabled || layer.envelope() > 0.01f) {
-                        mix.lsdId = layer.id.catalogName
-                        last = "LSD"
+                        mix.cinemaId = layer.id.catalogName
+                        // noir/neon also feed paint path for current single-pass shader
+                        when (layer.id) {
+                            EffectId.NOIR -> mix.paintId = "noir"
+                            EffectId.NEON -> mix.paintId = "neon"
+                            else -> { }
+                        }
+                        last = "CINEMA"
                     }
                 }
-                EffectId.ORBIT, EffectId.BEHIND, EffectId.CATHEDRAL,
-                EffectId.BASS_CRAWL, EffectId.HALLUCINATE_EARS,
-                -> {
+                EffectFamily.PALETTE -> {
                     if (layer.enabled || layer.envelope() > 0.01f) {
-                        mix.spatialMode = SpatialMode.fromId(layer.id.catalogName)
-                        mix.earWet = (layer.envelope() * globalWet).coerceIn(0f, 1f)
-                        last = "EARS"
+                        mix.paletteId = layer.id.catalogName
+                        last = "PALETTE"
+                    }
+                }
+                EffectFamily.MOOD -> {
+                    if (layer.enabled || layer.envelope() > 0.01f) {
+                        mix.moodId = layer.id.catalogName
+                        last = "MOOD"
                     }
                 }
             }

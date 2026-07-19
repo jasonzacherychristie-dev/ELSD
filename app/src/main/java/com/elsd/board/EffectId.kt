@@ -1,10 +1,17 @@
 package com.elsd.board
 
 /**
- * Catalog of switchboard effects. DeepDream is 3.0 — not listed for 1.0 ADD EFFECT.
+ * 1.0 catalog — **visuals only**.
+ * ELSD · ART · CINEMA · PALETTE · MOOD
+ * Plate/stream/key/ears → 2.0 (not in catalog1_0).
+ * DeepDream → 3.0.
  */
 enum class EffectFamily {
-    KEY, PULSE, PAINT, LSD, EARS
+    ELSD,
+    ART,
+    CINEMA,
+    PALETTE,
+    MOOD,
 }
 
 enum class EffectId(
@@ -12,36 +19,57 @@ enum class EffectId(
     val family: EffectFamily,
     val label: String,
 ) {
-    KEY_LUMA("key_luma", EffectFamily.KEY, "KEY LUMA"),
-    KEY_CHROMA("key_chroma", EffectFamily.KEY, "KEY CHROMA"),
-    CITY_PULSE("city_pulse", EffectFamily.PULSE, "CITY PULSE"),
-    GOGH("gogh", EffectFamily.PAINT, "GOGH"),
-    MONET("monet", EffectFamily.PAINT, "MONET"),
-    NOIR("noir", EffectFamily.PAINT, "NOIR"),
-    NEON("neon", EffectFamily.PAINT, "NEON"),
-    SKETCH("sketch", EffectFamily.PAINT, "SKETCH"),
-    MELT_PAINT("melt_paint", EffectFamily.PAINT, "MELT PAINT"),
-    TRAIL("trail", EffectFamily.LSD, "TRAIL"),
-    HUE("hue", EffectFamily.LSD, "HUE"),
-    SPLIT("split", EffectFamily.LSD, "SPLIT"),
-    KALEIDO("kaleido", EffectFamily.LSD, "KALEIDO"),
-    MELT("melt", EffectFamily.LSD, "MELT"),
-    ORBIT("orbit", EffectFamily.EARS, "ORBIT"),
-    BEHIND("behind", EffectFamily.EARS, "BEHIND"),
-    CATHEDRAL("cathedral", EffectFamily.EARS, "CATHEDRAL"),
-    BASS_CRAWL("bass_crawl", EffectFamily.EARS, "BASS CRAWL"),
-    HALLUCINATE_EARS("hallucinate_ears", EffectFamily.EARS, "HALLUCINATE EARS"),
+    // —— ELSD (trip) ——
+    TRAIL("trail", EffectFamily.ELSD, "TRAIL"),
+    HUE("hue", EffectFamily.ELSD, "HUE"),
+    SPLIT("split", EffectFamily.ELSD, "SPLIT"),
+    KALEIDO("kaleido", EffectFamily.ELSD, "KALEIDO"),
+    MELT("melt", EffectFamily.ELSD, "MELT"),
+
+    // —— ART styles ——
+    GOGH("gogh", EffectFamily.ART, "GOGH"),
+    MONET("monet", EffectFamily.ART, "MONET"),
+    SKETCH("sketch", EffectFamily.ART, "SKETCH"),
+    COMIC("comic", EffectFamily.ART, "COMIC"),
+    MELT_PAINT("melt_paint", EffectFamily.ART, "MELT PAINT"),
+
+    // —— CINEMA styles ——
+    NOIR("noir", EffectFamily.CINEMA, "NOIR"),
+    NEON("neon", EffectFamily.CINEMA, "NEON"),
+    BLEACH("bleach", EffectFamily.CINEMA, "BLEACH"),
+    TEAL_ORANGE("teal_orange", EffectFamily.CINEMA, "TEAL ORANGE"),
+    ANAMORPHIC("anamorphic", EffectFamily.CINEMA, "ANAMORPHIC"),
+    SOFT_GLOW("soft_glow", EffectFamily.CINEMA, "SOFT GLOW"),
+
+    // —— PALETTE (analog / digital medium) ——
+    ANALOG_FILM("analog_film", EffectFamily.PALETTE, "ANALOG FILM"),
+    ANALOG_VHS("analog_vhs", EffectFamily.PALETTE, "ANALOG VHS"),
+    DIGITAL_CLEAN("digital_clean", EffectFamily.PALETTE, "DIGITAL CLEAN"),
+    DIGITAL_HARSH("digital_harsh", EffectFamily.PALETTE, "DIGITAL HARSH"),
+    POLAROID("polaroid", EffectFamily.PALETTE, "POLAROID"),
+
+    // —— MOOD (single overall toggle) ——
+    MOOD_NEUTRAL("mood_neutral", EffectFamily.MOOD, "MOOD NEUTRAL"),
+    MOOD_CALM("mood_calm", EffectFamily.MOOD, "MOOD CALM"),
+    MOOD_WARM("mood_warm", EffectFamily.MOOD, "MOOD WARM"),
+    MOOD_COLD("mood_cold", EffectFamily.MOOD, "MOOD COLD"),
+    MOOD_NIGHT("mood_night", EffectFamily.MOOD, "MOOD NIGHT"),
+    MOOD_FEVER("mood_fever", EffectFamily.MOOD, "MOOD FEVER"),
+    MOOD_TOASTED("mood_toasted", EffectFamily.MOOD, "MOOD TOASTED"),
     ;
 
     companion object {
-        fun fromCatalog(name: String): EffectId? =
-            entries.find {
-                it.catalogName.equals(name, true) ||
-                    it.label.replace(" ", "_").equals(name, true) ||
+        fun fromCatalog(name: String): EffectId? {
+            val n = name.trim().lowercase().replace(" ", "_")
+            return entries.find {
+                it.catalogName == n ||
+                    it.label.replace(" ", "_").lowercase() == n ||
                     it.name.equals(name, true)
             }
+        }
 
-        /** 1.0 ADD EFFECT menu — no neural dream. */
         fun catalog1_0(): List<EffectId> = entries.toList()
+
+        fun moods(): List<EffectId> = entries.filter { it.family == EffectFamily.MOOD }
     }
 }
