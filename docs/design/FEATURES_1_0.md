@@ -73,7 +73,7 @@ Four creative banks + two globals.
 | **Switchboard** | ✅ single page, drill-down, phase times |
 | **SAVE / LOAD PRESET** | ✅ JSON + factory seeds |
 | **SET FRAMERATE / DROPPED FRAMES** | ✅ film cadence + budget |
-| **Amy** lean-in | ✅ |
+| **Amy** lean-in | ✅ procedural quad (not live 3D mesh) — [`AMY_RENDER.md`](AMY_RENDER.md) |
 | **Voice** = switchboard verbs | ✅ |
 | **CLEAR / sober** | ✅ |
 | **GO LIVE** (camera PGM) | ✅ |
