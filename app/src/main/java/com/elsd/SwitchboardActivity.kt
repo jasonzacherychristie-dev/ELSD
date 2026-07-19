@@ -107,7 +107,6 @@ class SwitchboardActivity : ComponentActivity() {
             showBoard()
         })
         actionHost.addView(verbButton(BoardVerb.GO_LIVE) {
-            board.applyToMix(com.elsd.mix.MixState()) // warm
             startActivity(Intent(this, MainActivity::class.java))
         })
     }
