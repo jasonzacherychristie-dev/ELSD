@@ -98,7 +98,31 @@ class SwitchboardActivity : ComponentActivity() {
             }
         }
 
+        val fpsLabel = if (board.targetFps <= 0) "UNLOCK" else "${board.targetFps} FPS"
+        val dropLabel = if (board.allowDroppedFrames) "DROPPED FRAMES ON" else "DROPPED FRAMES OFF"
+        listHost.addView(text("FRAME  $fpsLabel  ·  $dropLabel").apply {
+            setTextColor(AMBER)
+            setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
+            setPadding(0, dp(4), 0, dp(10))
+        })
+
         actionHost.addView(verbButton(BoardVerb.ADD_EFFECT) { showAddPick() })
+        actionHost.addView(frameRateRow())
+        actionHost.addView(
+            verbButton(
+                if (board.allowDroppedFrames) BoardVerb.DISABLE_DROPPED_FRAMES
+                else BoardVerb.ENABLE_DROPPED_FRAMES,
+            ) {
+                board.allowDroppedFrames = !board.allowDroppedFrames
+                Toast.makeText(
+                    this,
+                    if (board.allowDroppedFrames) BoardVerb.ENABLE_DROPPED_FRAMES.label
+                    else BoardVerb.DISABLE_DROPPED_FRAMES.label,
+                    Toast.LENGTH_SHORT,
+                ).show()
+                showBoard()
+            },
+        )
         actionHost.addView(verbButton(BoardVerb.SAVE_PRESET) { showPresetSave() })
         actionHost.addView(verbButton(BoardVerb.LOAD_PRESET) { showPresetLoad() })
         actionHost.addView(verbButton(BoardVerb.CLEAR_BOARD) {
@@ -109,6 +133,39 @@ class SwitchboardActivity : ComponentActivity() {
         actionHost.addView(verbButton(BoardVerb.GO_LIVE) {
             startActivity(Intent(this, MainActivity::class.java))
         })
+    }
+
+    private fun frameRateRow(): View {
+        val col = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        col.addView(text(BoardVerb.SET_FRAMERATE.label).apply {
+            setTextColor(AMBER)
+            setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
+            setPadding(0, dp(8), 0, dp(4))
+        })
+        val row = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
+        val options = listOf(12, 16, 24, 30, 60, 0)
+        options.forEach { fps ->
+            row.addView(Button(this).apply {
+                text = if (fps == 0) "UNLOCK" else "$fps"
+                setTextColor(BG)
+                setBackgroundColor(CREAM)
+                setOnClickListener {
+                    BoardSession.board.targetFps = fps
+                    Toast.makeText(
+                        this@SwitchboardActivity,
+                        if (fps == 0) BoardVerb.UNLOCK_FRAMERATE.label
+                        else "${BoardVerb.SET_FRAMERATE.label} $fps",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                    showBoard()
+                }
+                val lp = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+                lp.marginEnd = dp(4)
+                layoutParams = lp
+            })
+        }
+        col.addView(row)
+        return col
     }
 
     private fun layerRow(layer: EffectLayer): View {

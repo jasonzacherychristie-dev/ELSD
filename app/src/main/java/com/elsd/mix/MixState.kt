@@ -28,6 +28,10 @@ class MixState {
     @Volatile var moodId: String = "mood_neutral"
     /** Stare-to-morph master (StillnessTracker + MorphBudget). */
     @Volatile var stillnessMorph: Boolean = false
+    /** 0 = unlocked; else cap (12, 24, 30, 60…). */
+    @Volatile var targetFps: Int = 30
+    @Volatile var allowDroppedFrames: Boolean = true
+    @Volatile var navBoostFps: Boolean = true
     @Volatile var bounceMode: BounceMode = BounceMode.FLAT
     @Volatile var spatialMode: SpatialMode = SpatialMode.OFF
     @Volatile var earWet: Float = 0f
@@ -128,6 +132,18 @@ class MixState {
                 BoardSession.board.clearBoard()
                 BoardSession.board.applyToMix(this)
             }
+            is Command.SetFramerate -> {
+                targetFps = cmd.fps
+                BoardSession.board.targetFps = cmd.fps
+            }
+            is Command.DroppedFrames -> {
+                allowDroppedFrames = cmd.enabled
+                BoardSession.board.allowDroppedFrames = cmd.enabled
+            }
+            is Command.UnlockFramerate -> {
+                targetFps = 0
+                BoardSession.board.targetFps = 0
+            }
             is Command.Unknown -> { /* ignore */ }
         }
     }
@@ -208,7 +224,9 @@ class MixState {
             BounceMode.SPATIAL -> "Amy 3D"
             BounceMode.MUTED -> "Amy quiet"
         }
-        return "PGM wet=${"%.2f".format(wet)} mood=$moodId pal=$paletteId " +
+        val fps = if (targetFps <= 0) "UNLOCK" else "${targetFps}fps"
+        val drop = if (allowDroppedFrames) "DROP" else "NODROP"
+        return "PGM wet=${"%.2f".format(wet)} $fps $drop mood=$moodId pal=$paletteId " +
             "art=$paintId cine=$cinemaId elsd=$lsdId $bounce preset=$presetName"
     }
 }

@@ -14,6 +14,30 @@ object CommandGrammar {
             .trim()
         if (t.isEmpty()) return Command.Unknown(raw)
 
+        // Framerate / dropped frames
+        if (t.contains("unlock framerate") || t.contains("framerate off") || t.contains("unlock frame")) {
+            return Command.UnlockFramerate
+        }
+        if (t.contains("enable dropped frames") || t.contains("dropped frames on") ||
+            t.contains("allow dropped frames")
+        ) {
+            return Command.DroppedFrames(true)
+        }
+        if (t.contains("disable dropped frames") || t.contains("dropped frames off") ||
+            t.contains("no dropped frames")
+        ) {
+            return Command.DroppedFrames(false)
+        }
+        Regex("(?:set framerate|framerate|frame rate|fps)\\s*(\\d+)").find(t)?.let { m ->
+            return Command.SetFramerate(m.groupValues[1].toInt().coerceIn(8, 120))
+        }
+        when {
+            t.contains("cinema fps") || t.contains("film fps") -> return Command.SetFramerate(24)
+            t.contains("silent fps") || t.contains("hand crank") -> return Command.SetFramerate(12)
+            t.contains("broadcast fps") -> return Command.SetFramerate(30)
+            t.contains("live glass") || t.contains("smooth fps") -> return Command.SetFramerate(60)
+        }
+
         // Switchboard vocabulary (UI twins)
         parseBoard(t)?.let { return it }
 

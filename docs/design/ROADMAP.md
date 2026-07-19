@@ -25,6 +25,7 @@
 | **Stereo** | Cardboard path when ready |
 | **Safety** | clear / sober / stop |
 | **Stillness (stretch)** | Track hold; L0–L1 morph boost — [`STILLNESS_MORPH.md`](STILLNESS_MORPH.md) |
+| **Framerate** | SET FRAMERATE + ENABLE DROPPED FRAMES — look + morph headroom — [`FRAMERATE.md`](FRAMERATE.md) |
 
 ### Explicitly **not** 1.0
 

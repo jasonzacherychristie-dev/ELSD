@@ -70,18 +70,24 @@ class PresetStore(context: Context) {
         }
         seed("suspiria_red") {
             globalWet = 0.8f
+            targetFps = 24
+            allowDroppedFrames = true
             addEffect(EffectId.SUSPIRIA)
             addEffect(EffectId.MOOD_FEVER)
             addEffect(EffectId.ANALOG_FILM)
         }
         seed("technicolor_dream") {
             globalWet = 0.7f
+            targetFps = 24
+            allowDroppedFrames = true
             addEffect(EffectId.TECHNICOLOR)
             addEffect(EffectId.MOOD_WARM)
             addEffect(EffectId.SOFT_GLOW).fadeInSec = 1f
         }
         seed("silent_reel") {
             globalWet = 0.85f
+            targetFps = 12
+            allowDroppedFrames = true
             addEffect(EffectId.SILENT_ERA)
             addEffect(EffectId.MOOD_NEUTRAL)
         }
@@ -104,6 +110,8 @@ class PresetStore(context: Context) {
         }
         seed("stare_dream") {
             globalWet = 0.65f
+            targetFps = 15
+            allowDroppedFrames = true
             addEffect(EffectId.STILLNESS_MORPH)
             addEffect(EffectId.MELT).fadeInSec = 2f
             addEffect(EffectId.SOFT_GLOW)

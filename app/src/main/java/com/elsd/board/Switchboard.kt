@@ -13,6 +13,9 @@ class Switchboard {
     var globalWet: Float = 0.7f
     var amyMuted: Boolean = false
     var presetName: String = "untitled"
+    /** 0 = unlock */
+    var targetFps: Int = 30
+    var allowDroppedFrames: Boolean = true
 
     fun layersInOrder(): List<EffectLayer> = layers.values.toList()
 
@@ -93,6 +96,8 @@ class Switchboard {
         put("presetName", presetName)
         put("globalWet", globalWet.toDouble())
         put("amyMuted", amyMuted)
+        put("targetFps", targetFps)
+        put("allowDroppedFrames", allowDroppedFrames)
         val arr = JSONArray()
         layers.values.forEach { arr.put(it.toJson()) }
         put("layers", arr)
@@ -103,6 +108,8 @@ class Switchboard {
         presetName = o.optString("presetName", "loaded")
         globalWet = o.optDouble("globalWet", 0.7).toFloat()
         amyMuted = o.optBoolean("amyMuted", false)
+        targetFps = o.optInt("targetFps", 30)
+        allowDroppedFrames = o.optBoolean("allowDroppedFrames", true)
         val arr = o.optJSONArray("layers") ?: return
         for (i in 0 until arr.length()) {
             val layer = EffectLayer.fromJson(arr.getJSONObject(i)) ?: continue
@@ -113,6 +120,8 @@ class Switchboard {
     fun applyToMix(mix: com.elsd.mix.MixState) {
         mix.wet = globalWet
         mix.presetName = presetName
+        mix.targetFps = targetFps
+        mix.allowDroppedFrames = allowDroppedFrames
         mix.bounceMode = if (amyMuted) BounceMode.MUTED else BounceMode.FLAT
 
         mix.paintId = "none"

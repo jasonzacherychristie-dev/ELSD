@@ -64,9 +64,9 @@ Full map: **[docs/design/ROADMAP.md](docs/design/ROADMAP.md)** · 1.0 execution:
 
 One page. Drill down. Same words as voice:
 
-**ADD EFFECT** · **REMOVE EFFECT** · **TOGGLE EFFECT** · **ADD EFFECT TIME** · **REMOVE EFFECT TIME** · **PHASE TIME** · **PHASE ON/OFF** · **SAVE PRESET** · **LOAD PRESET** · **CLEAR BOARD** · **GO LIVE**
+**ADD EFFECT** · **REMOVE EFFECT** · **TOGGLE EFFECT** · **ADD EFFECT TIME** · **PHASE …** · **SET FRAMERATE** · **ENABLE DROPPED FRAMES** · **SAVE PRESET** · **LOAD PRESET** · **GO LIVE**
 
-Spec: [docs/design/SWITCHBOARD.md](docs/design/SWITCHBOARD.md)
+Spec: [docs/design/SWITCHBOARD.md](docs/design/SWITCHBOARD.md) · [docs/design/FRAMERATE.md](docs/design/FRAMERATE.md)
 
 ## Target hardware
 
