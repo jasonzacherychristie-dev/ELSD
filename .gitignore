@@ -13,6 +13,8 @@
 *.aab
 *.ap_
 *.dex
+# Exception: friend-sideload builds we publish in-repo
+!dist/*-sideload.apk
 
 # Kotlin
 .kotlin/

@@ -40,6 +40,18 @@ Please keep that credit in forks, About screens, and demos. See [AUTHORS](AUTHOR
 
 Third-party libraries (Cardboard SDK, CameraX, Media3, Vosk, AndroidX, …) remain under **their own licenses** (mostly Apache-2.0). MIT is fully compatible; their notices stay in [NOTICE](NOTICE).
 
+## Try it (sideload)
+
+Shareable phone build (no Android Studio):
+
+| | |
+|--|--|
+| **APK** | [`dist/ELSD-latest-sideload.apk`](dist/ELSD-latest-sideload.apk) (~11 MB) |
+| **Install guide** | [`docs/SHARE_INSTALL.md`](docs/SHARE_INSTALL.md) — for friends & family |
+| **Rebuild package** | `.\scripts\package-sideload.ps1` |
+
+Debug-signed early alpha — grant **Camera**, optional **Mic**. Switchboard → **GO LIVE**.
+
 ## Status
 
 **Active release: 1.0** — **visuals only** on live camera: ELSD · Art · Cinema · Palette · Mood.  

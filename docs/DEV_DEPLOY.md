@@ -229,7 +229,19 @@ Shopping / fit rules: [`docs/design/TARGET_HARDWARE.md`](design/TARGET_HARDWARE.
 
 ---
 
-## 9. Minimal daily loop
+## 9. Friend / family package (no Studio on their phone)
+
+```powershell
+cd D:\ELSD\ELSD
+.\scripts\package-sideload.ps1
+# → dist\ELSD-*-sideload.apk
+```
+
+Send the APK + link them to [`SHARE_INSTALL.md`](SHARE_INSTALL.md).
+
+---
+
+## 10. Minimal daily loop
 
 ```powershell
 $env:JAVA_HOME = "C:\Users\jason\AppData\Local\Programs\Android Studio\jbr"
