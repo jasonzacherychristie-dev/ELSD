@@ -16,7 +16,7 @@
 
 | Area | Deliverable |
 |------|-------------|
-| **Hardware** | **OP9 floor** + OP12 ship + large-tray Cardboard viewer |
+| **Hardware** | **OP9 floor** + OP12 ship + Pixel desk OK + large-tray Cardboard headset — [`TARGET_HARDWARE.md`](TARGET_HARDWARE.md) · deploy [`../DEV_DEPLOY.md`](../DEV_DEPLOY.md) |
 | **WORLD** | CameraX only |
 | **Switchboard** | One page; ADD/REMOVE EFFECT; presets; phase times |
 | **Visual families** | **ELSD** · **ART** · **CINEMA** · **PALETTE** · **MOOD** — [`VISUAL_SYSTEM.md`](VISUAL_SYSTEM.md) |
@@ -33,7 +33,9 @@
 |--------|---------|
 | Live video / plate **in** | **2.0** |
 | Stream / record **out** | **2.0** |
-| Luma/chroma key of plate | **2.0** |
+| Luma/chroma key of plate | **2.0** — methods catalog: [`KEYING_AND_SENSORS.md`](KEYING_AND_SENSORS.md) |
+| Desk luma map / solarize bank | **1.0** candidate — [`DESK_COLOR_MAP.md`](DESK_COLOR_MAP.md) |
+| Motion-tied trails (gyro) | **1.0** candidate — [`KEYING_AND_SENSORS.md`](KEYING_AND_SENSORS.md) |
 | Spatial audio / wet ears product | **2.0** |
 | Heavy L2–L3 strike morph | **2.0** |
 | DeepDream / neural L4 | **3.0** |

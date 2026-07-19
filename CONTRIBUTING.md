@@ -15,8 +15,10 @@ Thanks for helping build an open **perception mixer** for Android.
 
 - Android Studio (latest stable)  
 - JDK 17+  
-- Device with gyroscope recommended for Cardboard mode  
-- Optional: cardboard viewer  
+- Physical phone for camera tests (lab: OP9 floor, OP12 ship, Pixel OK for desk)  
+- Gyroscope recommended for later Cardboard stereo  
+- Optional: **large-tray** Cardboard-compatible headset (6.5–7.0") — see `docs/design/TARGET_HARDWARE.md`  
+- Deploy steps: `docs/DEV_DEPLOY.md` · `scripts/deploy-debug.ps1`
 
 Upstream reference clones (not required to open a PR): see `docs/frameworks/CHECKOUTS.md`.
 

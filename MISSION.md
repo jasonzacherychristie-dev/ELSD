@@ -13,7 +13,7 @@ Sound can possess buildings. Paint can walk down the street. A keyed stream can 
 
 We build **TOASTED**: a live-desk spirit for perception — wet/dry, banks, program out — without locking the soul of the machine behind a brand name.
 
-Long horizon: dream layers, then **time travel** — the local world reskinned into any era (past or future). Near term: a **Cardboard-compatible Android** app on **large flagship + large-tray phone headset** (OnePlus 12 class) under **MIT**. See `docs/design/TARGET_HARDWARE.md` · `docs/design/TIME_TRAVEL.md`.
+Long horizon: dream layers, then **time travel** — the local world reskinned into any era (past or future). Near term: a **Cardboard-compatible Android** app on a **large-tray phone headset**, proved on **OnePlus 9**, shipped for **OnePlus 12** class, under **MIT** (Praxis Software, informal). See `docs/design/TARGET_HARDWARE.md` · `docs/DEV_DEPLOY.md` · `docs/design/TIME_TRAVEL.md`.
 
 ## What we ship for
 

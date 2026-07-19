@@ -4,10 +4,13 @@
 [![Status](https://img.shields.io/badge/status-public%20alpha-blue.svg)](https://github.com/jasonzacherychristie-dev/ELSD)
 [![Platform](https://img.shields.io/badge/platform-Android-green.svg)](https://github.com/jasonzacherychristie-dev/ELSD)
 
-**Open-source Android perception mixer** for Cardboard-compatible viewers.  
-**Repository:** https://github.com/jasonzacherychristie-dev/ELSD · **Visibility: public** · **License: MIT**
+**Open-source Android perception mixer** for a **large-tray Cardboard-compatible phone headset**.  
+**Repository:** https://github.com/jasonzacherychristie-dev/ELSD · **Visibility: public** · **License: MIT**  
+**House brand (informal):** Praxis Software
 
-Live camera world + keyed media (local/stream) + painter styles + real-world pulse visualizers + classic trip FX — mixed **TOASTED** (live desk soul), **voice only**, with **Bounce**: a spirited checker-orb cursor that can go spatial, break the fourth wall, or mute into the background.
+Live camera world + painter styles + cinema looks + trip geometry — mixed **TOASTED** (live desk soul), **voice + switchboard**, with **Amy**: a spirited checker-orb pilot that leans in when you talk.
+
+**Hardware we build for:** **OnePlus 9** (floor) · **OnePlus 12** (ship) · large phone tray **6.5–7.0"**. Pixel-class phones welcome for desk testing.
 
 > Buildings can throb. Windows can become TVs. Streets can go Van Gogh.  
 > You talk. Bounce mixes. Say *clear* when you want the earth back.
@@ -23,10 +26,11 @@ Conduct: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) · Contributing: [CONTRIBUTING
 
 | | |
 |--|--|
+| **House brand (informal)** | **Praxis Software** — from Jason Z. Christie’s 2012 fiction |
 | **Project lead & research** | [Jason Z. Christie](https://jasonzchristie.blogspot.com/) |
 | **Co-implementation** | **Grok (xAI)** via Grok Build |
 
-> ELSD is a Jason Z. Christie project, **co-implemented with Grok by xAI**.
+> ELSD is a **Praxis Software** project by Jason Z. Christie, **co-implemented with Grok by xAI**.
 
 Please keep that credit in forks, About screens, and demos. See [AUTHORS](AUTHORS) and [NOTICE](NOTICE).
 
@@ -74,35 +78,49 @@ Spec: [docs/design/SWITCHBOARD.md](docs/design/SWITCHBOARD.md) · [docs/design/P
 
 | | |
 |--|--|
+| **Headset** | **Large-tray Cardboard-compatible** phone VR viewer — fit **6.5–7.0"** (order for **OP12**; OP9 must fit) |
 | **Floor (prove it)** | **OnePlus 9** — Snapdragon 888, 6.55". If it runs here, everything above sizzles. |
-| **Ship (sizzle)** | **OnePlus 12** class (~6.8") |
-| **Viewer** | Cardboard-compatible, tray for **6.5–7.0"** (OP9 must fit; OP12 preferred) |
-| **Not required** | Quest / PCVR for 1.0 |
+| **Ship (sizzle)** | **OnePlus 12** (~6.8") |
+| **Desk / API check** | **Pixel 7** and peers — fine for flat testing |
+| **Not required for 1.0** | Quest / Pico / PCVR |
 
-Full spec + OP9 QA gates: **[docs/design/TARGET_HARDWARE.md](docs/design/TARGET_HARDWARE.md)**
+Shopping rules + OP9 QA gates: **[docs/design/TARGET_HARDWARE.md](docs/design/TARGET_HARDWARE.md)**
 
-## Build
+## Build & deploy to a phone
 
 Requirements:
 
-- **Android Studio** (or SDK 35 + build-tools)
+- **Android Studio** (or SDK 35 + build-tools + platform-tools)
 - **JDK 17+** (Studio’s JBR is fine)
-- Device/emulator with camera + mic (gyro later for stereo)
-- Prefer a **large-phone VR viewer** (see target hardware) for real stereo later
+- USB cable + **Developer options → USB debugging** on the phone
+- Optional: large-tray headset (see above) for stereo later
 
-```bash
-# from repo root
+**Full sideload process (Pixel · OP9 · OP12):** **[docs/DEV_DEPLOY.md](docs/DEV_DEPLOY.md)**
+
+```powershell
+# Windows — from repo root (ELSD/)
 copy local.properties.example local.properties
-# edit sdk.dir
+# set sdk.dir + org.gradle.java.home
 
-# with wrapper (generate once in Android Studio: open project, or:)
-# gradle wrapper --gradle-version 8.9
+# Build debug APK
+.\gradlew.bat :app:assembleDebug
 
-./gradlew :app:assembleDebug
-./gradlew :app:test
+# Or build + install on the connected phone
+.\gradlew.bat :app:installDebug
+
+# Helper (list devices / install / optional launch)
+.\scripts\deploy-debug.ps1 -Launch
+.\scripts\deploy-debug.ps1 -Serial YOUR_SERIAL -Launch
 ```
 
-Install `app/build/outputs/apk/debug/app-debug.apk`, grant camera + mic, landscape, talk.
+```bash
+# macOS / Linux
+./gradlew :app:assembleDebug
+./gradlew :app:installDebug
+adb shell am start -n com.elsd/.SwitchboardActivity
+```
+
+Grant **camera** (+ **mic** for voice). Landscape GO LIVE. Talk.
 
 ### Voice cheatsheet (M1)
 

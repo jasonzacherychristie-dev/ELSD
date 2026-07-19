@@ -1,7 +1,21 @@
 # Target hardware — ELSD 1.0
 
 ELSD is a **phone-in-viewer** perception mixer first.  
-We optimize FOV, thermal notes, and QA for **real OnePlus devices we can hold** — not boutique PC VR, not tiny 2015 Cardboard shells.
+We optimize FOV, thermal notes, and QA for **real phones we hold** — not boutique PC VR, not tiny 2015 Cardboard shells.
+
+**Public pitch:** large-tray **Cardboard-compatible** headset · prove on **OnePlus 9** · ship feel on **OnePlus 12**.
+
+**Sideload / adb process:** [`../DEV_DEPLOY.md`](../DEV_DEPLOY.md)
+
+---
+
+## Lab devices (Jason)
+
+| Device | Role in lab |
+|--------|-------------|
+| **OnePlus 9** | Floor / thermal gate / daily headset torture |
+| **OnePlus 12** | Ship reference / “sizzle” |
+| **Pixel 7** | Clean Android reference, permissions & camera sanity (flat desk; ~6.3" tray fit varies) |
 
 ---
 
@@ -10,10 +24,11 @@ We optimize FOV, thermal notes, and QA for **real OnePlus devices we can hold** 
 | Tier | Device | Role |
 |------|--------|------|
 | **Floor / torture test** | **OnePlus 9** | If it runs here, everything above sizzles |
-| **Reference / ship** | **OnePlus 12** | Primary “it should feel great” target |
+| **Ship** | **OnePlus 12** | Primary “it should feel great” target |
+| **API reference** | **Pixel 7** | Stock-ish behavior; not the design-center size |
 | **Peers** | Large flagships ≥ ~2021 | Snapdragon 8-gen class, 6.5"+ AMOLED |
 
-**Rule:** Feature work is not “done” until it survives the **OnePlus 9** with usable fps, heat, and comfort — then we polish on OP12.
+**Rule:** Feature work is not “done” until it survives the **OnePlus 9** with usable fps, heat, and comfort — then we polish on OP12. Pixel 7 proves we’re not OEM-locked.
 
 ---
 
@@ -76,24 +91,37 @@ When OP9 is green, OP12 should **sizzle**: higher unlocked fps, richer wet, fast
 
 ---
 
-## Reference viewer (primary)
+## Reference viewer (primary) — order this class
 
 | Spec | Target |
 |------|--------|
-| **Class** | Plastic **Cardboard-compatible** phone VR headset |
-| **Not** | Meta Quest / PC PCVR as 1.0 required hardware |
-| **Phone fit** | **6.5–7.0"** (must fit **OP9 6.55"** and preferably **OP12 6.82"**) |
-| **Tray** | Prefer max size **≥ 170 × 85 mm** if OP12 is daily; OP9 alone allows slightly smaller trays |
-| **Reject** | Viewers that only list “up to 6.0–6.3 inch” |
-| **Optics** | Focus adjust preferred; IPD nice |
-| **Mount** | Head **strap**; OP9 is lighter — still prefer strap |
-| **Access** | USB-C cutout preferred |
-| **Comfort** | Venting for 20–30 min (888 throttles hard when sealed) |
+| **Class** | Plastic **Cardboard-compatible** phone VR headset (lenses + tray + strap) |
+| **Not required** | Meta Quest / Pico / PC PCVR for 1.0 |
+| **Phone fit** | **6.5–7.0"** — must fit **OP9 6.55"** and **OP12 ~6.82"** |
+| **Tray** | Prefer interior **≥ ~170 × 85 mm** (or listing that explicitly includes 6.7–7.0") |
+| **Reject** | Boxes that only list “up to 6.0–6.3 inch” (Pixel 7 may fit; OP12 will not) |
+| **Optics** | Focus dial preferred; dual IPD nicer but optional |
+| **Mount** | Head **strap** (not nose-balance only) |
+| **Access** | **USB-C cutout** for charge during long dives |
+| **Comfort** | Foam + some venting for 20–30 min (SD888 throttles when sealed) |
 
-**Shopping rule:**  
-- Must fit **OnePlus 9**.  
-- Ideally also **OnePlus 12** / S23 Ultra class.  
-If forced to choose one tray for both: buy large enough for OP12.
+### Shopping checklist (before you click buy)
+
+1. **Max phone size** includes **≥ 6.8"** or lists S23 Ultra / large flagship explicitly.  
+2. Photos show a **deep tray** and side walls that won’t crush a 75+ mm-wide body.  
+3. **Strap** included (or cheap to add).  
+4. **USB-C / cable notch** if you can get it.  
+5. Avoid “mini” / kids / 4.7–6.0-only shells.  
+6. Cardboard **QR / viewer profile** is optional for 1.0 (we can start flat or generic distortion later).
+
+**One order covers the lab:** buy **large enough for OP12**; OP9 and most large phones will fit.  
+Pixel 7 (~6.3") is a **desk test** phone first — don’t size the headset around it.
+
+### What we call it in public copy
+
+- “**Large-tray Cardboard-compatible phone headset**”  
+- “**Phone-in-viewer**” / “**stereo eyes**”  
+- Not “official Google Cardboard product” · not Quest
 
 ---
 
@@ -152,4 +180,4 @@ If forced to choose one tray for both: buy large enough for OP12.
 
 ## One-line pitch
 
-> **Prove it on the OnePlus 9. Ship it feeling great on the OnePlus 12. Large-tray Cardboard-compatible viewer. Voice + switchboard. World as canvas.**
+> **Prove it on the OnePlus 9. Ship it feeling great on the OnePlus 12. Pixel for clean API checks. Large-tray Cardboard-compatible headset. Voice + switchboard. World as canvas.**
