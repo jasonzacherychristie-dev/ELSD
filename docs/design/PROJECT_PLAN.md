@@ -85,15 +85,19 @@ Gradle can start as a **single `app` module** and split when files hurt; the tab
 
 **Exit:** Window TV works in a controlled room.
 
-### M2.5 — Sound-activated hallucinations
+### M2.5 — Sound-activated hallucinations (eyes + ears)
 
-- [ ] `BandEnergy` + `MediaVisualizerSource` + `MicEnergySource` (skeleton landed)  
+- [x] `BandEnergy` + `MediaVisualizerSource` + `MicEnergySource` (skeleton)  
+- [x] `SpatialHallucinationEngine` + modes + voice grammar (control math)  
 - [ ] Wire bands into renderer uniforms every frame  
-- [ ] Modes: City Pulse, Nerve, Sparkle, Heartbeat  
-- [ ] Voice: `hallucinate`, `city pulse`, `pulse off`  
+- [ ] Wire spatial engine → AudioTrack / Media3 wet chain (actual ears)  
+- [ ] Modes eyes: City Pulse, Nerve, Sparkle, Heartbeat  
+- [ ] Modes ears: orbit, behind, cathedral, bass crawl, hallucinate ears  
+- [ ] Voice: `hallucinate`, `hallucinate ears`, `ears dry`, `city pulse`, `pulse off`  
+- [ ] `clear` dries eyes **and** ears  
 
-**Exit:** Bass visibly possesses the world (camera still underneath).  
-**Refs:** [`../frameworks/VISUALIZERS.md`](../frameworks/VISUALIZERS.md)
+**Exit:** Bass possesses the world *and* something can move behind your head.  
+**Refs:** [`../frameworks/VISUALIZERS.md`](../frameworks/VISUALIZERS.md) · [`../frameworks/SPATIAL_AUDIO.md`](../frameworks/SPATIAL_AUDIO.md)
 
 ### M3 — RAD banks
 

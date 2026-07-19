@@ -104,7 +104,8 @@ Install `app/build/outputs/apk/debug/app-debug.apk`, grant camera + mic, landsca
 | [docs/design/VOICE_AND_CURSOR.md](docs/design/VOICE_AND_CURSOR.md) | Voice-only + cursor |
 | [docs/design/PROJECT_PLAN.md](docs/design/PROJECT_PLAN.md) | Milestones |
 | [docs/frameworks/STACK.md](docs/frameworks/STACK.md) | Libraries |
-| [docs/frameworks/VISUALIZERS.md](docs/frameworks/VISUALIZERS.md) | Sound-activated hallucinations |
+| [docs/frameworks/VISUALIZERS.md](docs/frameworks/VISUALIZERS.md) | Sound → *visual* hallucinations |
+| [docs/frameworks/SPATIAL_AUDIO.md](docs/frameworks/SPATIAL_AUDIO.md) | Sound → *spatial ear* hallucinations |
 | [docs/bookmarks/FRAMEWORKS.md](docs/bookmarks/FRAMEWORKS.md) | Bookmarks |
 | [SECURITY.md](SECURITY.md) | Vulnerability reporting |
 

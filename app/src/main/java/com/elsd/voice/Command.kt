@@ -17,5 +17,9 @@ sealed class Command {
     data class BounceModeSet(val mode: BounceMode) : Command()
     data class Jokes(val enabled: Boolean) : Command()
     data class Preset(val name: String) : Command()
+    /** Spatial audio hallucination — wet ears. */
+    data class Spatial(val modeId: String) : Command()
+    data class EarWet(val value: Float) : Command()
+    data object EarsDry : Command()
     data class Unknown(val raw: String) : Command()
 }

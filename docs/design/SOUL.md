@@ -18,6 +18,7 @@
 |--------|---------|----------|
 | **Spirited** | Playful, a little cocky, glad to be alive | Corporate sterile HUD |
 | **Live** | Always feels like a desk on-air, not a gallery app | Modal settings labyrinth |
+| **Dual wet** | Eyes *and* ears can hallucinate (spatial audio mode) | Wet eyes with silent dry ears only as a choice, not a missing feature |
 | **Implied heritage** | Red/white checks, bounce physics, program/preview, wet/dry | Trademarked names, logos, or slogans from the past |
 | **Voice-first** | Mouth is the T-bar | Finger-first menus as primary UX |
 | **Consent to weird** | Fourth wall is opt-in personality; clear always wins | Trapping the user in a bit |

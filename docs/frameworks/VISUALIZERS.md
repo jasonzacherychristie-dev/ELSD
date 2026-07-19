@@ -3,6 +3,9 @@
 ELSD’s **PULSE** family and parts of **LSD** are not “music player skins.”  
 They are **audio → perception drivers**: bass makes buildings thump, mids fray edges, highs sparkle chroma — hallucinations *of the real world*, not a sealed kaleidoscope app.
 
+**Ears too:** spatial audio hallucination (orbit, behind, cathedral…) lives in  
+[`SPATIAL_AUDIO.md`](SPATIAL_AUDIO.md) — same BandEnergy, different sensory channel.
+
 This doc bookmarks **open** analysis + visualization sources we can learn from, port, or depend on under MIT/Apache-compatible terms.
 
 ---

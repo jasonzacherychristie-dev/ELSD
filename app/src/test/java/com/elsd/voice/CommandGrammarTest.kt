@@ -33,4 +33,12 @@ class CommandGrammarTest {
     fun paintGogh() {
         assertEquals(Command.Paint("gogh"), CommandGrammar.parse("gogh"))
     }
+
+    @Test
+    fun spatialEars() {
+        assertEquals(Command.Spatial("hallucinate_ears"), CommandGrammar.parse("hallucinate ears"))
+        assertEquals(Command.EarsDry, CommandGrammar.parse("ears dry"))
+        assertEquals(Command.Spatial("orbit"), CommandGrammar.parse("orbit"))
+        assertEquals(Command.Spatial("behind"), CommandGrammar.parse("something behind me"))
+    }
 }

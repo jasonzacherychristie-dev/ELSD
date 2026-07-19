@@ -16,7 +16,7 @@ We optimize the product, FOV assumptions, thermal notes, and QA matrix for this 
 | **With thin case** | ~**166–168 × 78–80 × 11–13 mm** |
 | **Weight** | ~**220 g** (+ case) |
 | **Sensors** | Gyro + accelerometer required; magnetometer nice |
-| **I/O** | USB-C; mic + speakers; rear camera usable while seated in tray if open-back or when testing flat |
+| **I/O** | USB-C; mic + **headphones or sealed headset speakers** (spatial audio hallucination); rear camera usable while seated in tray if open-back or when testing flat |
 
 **Peer phones (same QA tier):**  
 Samsung Galaxy S23/S24 Ultra class, Pixel large flagships, other ~6.7–6.9" Androids with similar footprint.

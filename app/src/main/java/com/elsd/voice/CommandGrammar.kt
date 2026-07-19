@@ -77,7 +77,35 @@ object CommandGrammar {
             return Command.KeyOff
         }
 
-        // Pulse / hallucinations
+        // Spatial audio hallucination (ears) — before generic "hallucinate"
+        if (t.contains("ears dry") || t.contains("dry ears") || t.contains("spatial off") ||
+            t.contains("no spatial")
+        ) {
+            return Command.EarsDry
+        }
+        if (t.contains("hallucinate ears") || t.contains("wet ears") || t.contains("spatial on") ||
+            t.contains("ear trip")
+        ) {
+            return Command.Spatial("hallucinate_ears")
+        }
+        if (t.contains("something behind") || t.contains("behind me")) {
+            return Command.Spatial("behind")
+        }
+        if (t.contains("ghost choir")) return Command.Spatial("ghost_choir")
+        if (t.contains("bass crawl")) return Command.Spatial("bass_crawl")
+        if (t.contains("amy whisper") || t.contains("whisper amy")) {
+            return Command.Spatial("amy_whisper")
+        }
+        if (t.contains("world lock audio") || t.contains("world lock ears")) {
+            return Command.Spatial("world_lock")
+        }
+        if (t.contains("insect ears") || t == "insect") return Command.Spatial("insect")
+        if (t.contains("cathedral")) return Command.Spatial("cathedral")
+        if (t.contains("orbit") || t.contains("sounds spin") || t.contains("spin sound")) {
+            return Command.Spatial("orbit")
+        }
+
+        // Pulse / visual hallucinations
         if (t.contains("hallucinate") || t.contains("sound trip") || t.contains("audio trip")) {
             return Command.PulseOn
         }
@@ -86,6 +114,9 @@ object CommandGrammar {
         }
         if (t.contains("pulse off") || t.contains("no pulse")) {
             return Command.PulseOff
+        }
+        if (t.contains("full hallucination") || t.contains("full trip")) {
+            return Command.Preset("full_hallucination")
         }
 
         // Paint

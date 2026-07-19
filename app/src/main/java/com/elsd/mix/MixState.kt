@@ -1,10 +1,12 @@
 package com.elsd.mix
 
+import com.elsd.audio.SpatialMode
 import com.elsd.bounce.BounceMode
 import com.elsd.voice.Command
 
 /**
  * Live desk state — WORLD / PLATE / PGM mental model, wet/dry, banks.
+ * Eyes (visual wet) and ears (spatial mode) can couple or diverge.
  * TOASTED: high wet with pride.
  */
 class MixState {
@@ -15,6 +17,8 @@ class MixState {
     @Volatile var paintId: String = "none"
     @Volatile var lsdId: String = "none"
     @Volatile var bounceMode: BounceMode = BounceMode.FLAT
+    @Volatile var spatialMode: SpatialMode = SpatialMode.OFF
+    @Volatile var earWet: Float = 0f
     @Volatile var jokes: Boolean = true
     @Volatile var lastBank: String = "—"
     @Volatile var presetName: String = "boot"

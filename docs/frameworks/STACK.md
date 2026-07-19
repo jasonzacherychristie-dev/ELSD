@@ -14,8 +14,11 @@ How open frameworks map onto the **Video Toaster / Electronic LSD** architecture
   Cardboard SDK ─────────► stereo meshes + lens distortion + head pose
          │
   Vosk / SpeechRecognizer ► voice T-bar (wet/dry, banks, clear)
-  Visualizer / Mic FFT ──► BandEnergy → bass/mid/high/beat → PULSE + LSD drive
-  (Butterchurn-inspired looks re-authored MIT; see VISUALIZERS.md)
+  Visualizer / Mic FFT ──► BandEnergy → bass/mid/high/beat
+         │                      ├──► PULSE + LSD (eyes)
+         │                      └──► SpatialHallucinationEngine (ears)
+  Gyro / head pose ─────────────► world-lock audio
+  (Butterchurn-inspired looks; Resonance Audio later — see VISUALIZERS.md + SPATIAL_AUDIO.md)
 ```
 
 ---
@@ -106,8 +109,18 @@ How open frameworks map onto the **Video Toaster / Electronic LSD** architecture
 | **Smoothing** | `elsd.audio.BandEnergy` → `bass` / `mid` / `high` / `beat` |
 | **Upgrade** | Oboe (Apache-2.0) if latency is poor |
 | **Visual DNA** | Butterchurn (MIT) inspiration; projectM/TarsosDSP = ideas only (LGPL/GPL) |
-| **ELSD use** | Uniforms drive PULSE (buildings thump) + LSD amounts + Bounce squash |
+| **ELSD use** | Uniforms drive PULSE (buildings thump) + LSD amounts + Amy squash |
 | **Deep dive** | [`VISUALIZERS.md`](VISUALIZERS.md) |
+
+## 6b. Spatial audio hallucination (ears)
+
+| | |
+|--|--|
+| **Early** | MIT stereo orbit / rear bias / reverb send (`SpatialHallucinationEngine`) |
+| **1.0 target** | Resonance Audio (Apache-2.0) and/or Media3 spatial processors |
+| **Pose** | Gyro / Cardboard head pose for world-lock |
+| **Safety** | `clear` dries **ears and eyes**; command voice stays intelligible |
+| **Deep dive** | [`SPATIAL_AUDIO.md`](SPATIAL_AUDIO.md) |
 
 ---
 
@@ -123,12 +136,4 @@ How open frameworks map onto the **Video Toaster / Electronic LSD** architecture
 
 ---
 
-## What we deliberately skip in 1.0
-
-| Skip | Reason |
-|------|--------|
-| Filament as required engine | Extra weight; GL ES enough for full-screen quads |
-| ARCore mesh city | Proprietary runtime; pulse fakes are enough |
-| Unity / Unreal | Not fully open; harder community fork |
-| Real-time neural style transfer | Ship shader painters first; NST as optional later module |
-| iOS | Android-first open source; iOS can fork later with Cardboard iOS bits |
+## What we deliberately skip i
