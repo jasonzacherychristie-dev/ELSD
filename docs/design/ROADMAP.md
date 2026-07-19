@@ -16,7 +16,7 @@
 
 | Area | Deliverable |
 |------|-------------|
-| **Hardware** | OP12-class + large-tray Cardboard viewer |
+| **Hardware** | **OP9 floor** + OP12 ship + large-tray Cardboard viewer |
 | **WORLD** | CameraX only |
 | **Switchboard** | One page; ADD/REMOVE EFFECT; presets; phase times |
 | **Visual families** | **ELSD** · **ART** · **CINEMA** · **PALETTE** · **MOOD** — [`VISUAL_SYSTEM.md`](VISUAL_SYSTEM.md) |

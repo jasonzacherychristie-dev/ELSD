@@ -38,11 +38,11 @@ Recommended presets:
 
 | Label | FPS | Dropped | Feel |
 |-------|-----|---------|------|
-| LIVE GLASS | 60 | off | Modern AR |
+| LIVE GLASS | 60 | off | Modern AR (OP12; OP9 only when light effects) |
 | BROADCAST | 30 | on | Desk / TOASTED default |
-| CINEMA | 24 | on | Feature film |
+| CINEMA | 24 | on | Feature film — **OP9 heavy-preset default** |
 | SILENT REEL | 12–16 | on | Hand-crank cousin |
-| STARE HEAVY | 12–20 | **on** | Morph/dream headroom |
+| STARE HEAVY | 12–20 | **on** | Morph/dream headroom — **OP9 fractal dives** |
 
 Pair with CINEMA **SILENT ERA** at 12–16 fps for free authenticity.
 

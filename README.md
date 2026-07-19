@@ -72,11 +72,12 @@ Spec: [docs/design/SWITCHBOARD.md](docs/design/SWITCHBOARD.md) · [docs/design/F
 
 | | |
 |--|--|
-| **Phone** | Large Android flagship — **OnePlus 12 class** (~6.8", ~164×76 mm) |
-| **Viewer** | Plastic **Cardboard-compatible** headset with tray for **6.7–7.0"** / **≥ ~170×85 mm** |
+| **Floor (prove it)** | **OnePlus 9** — Snapdragon 888, 6.55". If it runs here, everything above sizzles. |
+| **Ship (sizzle)** | **OnePlus 12** class (~6.8") |
+| **Viewer** | Cardboard-compatible, tray for **6.5–7.0"** (OP9 must fit; OP12 preferred) |
 | **Not required** | Quest / PCVR for 1.0 |
 
-Full spec + shopping QA: **[docs/design/TARGET_HARDWARE.md](docs/design/TARGET_HARDWARE.md)**
+Full spec + OP9 QA gates: **[docs/design/TARGET_HARDWARE.md](docs/design/TARGET_HARDWARE.md)**
 
 ## Build
 

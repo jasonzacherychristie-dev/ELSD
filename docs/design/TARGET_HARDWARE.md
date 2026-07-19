@@ -1,28 +1,78 @@
 # Target hardware — ELSD 1.0
 
 ELSD is a **phone-in-viewer** perception mixer first.  
-We optimize the product, FOV assumptions, thermal notes, and QA matrix for this class of device — not for boutique PC VR and not for tiny 2015 Cardboard shells.
+We optimize FOV, thermal notes, and QA for **real OnePlus devices we can hold** — not boutique PC VR, not tiny 2015 Cardboard shells.
 
 ---
 
-## Reference phone (primary)
+## Performance ladder (test downward)
 
-| Spec | Target |
+| Tier | Device | Role |
+|------|--------|------|
+| **Floor / torture test** | **OnePlus 9** | If it runs here, everything above sizzles |
+| **Reference / ship** | **OnePlus 12** | Primary “it should feel great” target |
+| **Peers** | Large flagships ≥ ~2021 | Snapdragon 8-gen class, 6.5"+ AMOLED |
+
+**Rule:** Feature work is not “done” until it survives the **OnePlus 9** with usable fps, heat, and comfort — then we polish on OP12.
+
+---
+
+## Floor device — OnePlus 9 (POS, beloved)
+
+| Spec | Value |
 |------|--------|
-| **Class** | Large modern Android flagship |
-| **Reference device** | **OnePlus 12** (and peers) |
-| **Display** | ~**6.7–6.9"** AMOLED, high refresh OK |
-| **Body (no case)** | ~**164 × 76 × 9 mm** (OP12: 164.3 × 75.8 × 9.15 mm) |
-| **With thin case** | ~**166–168 × 78–80 × 11–13 mm** |
-| **Weight** | ~**220 g** (+ case) |
-| **Sensors** | Gyro + accelerometer required; magnetometer nice |
-| **I/O** | USB-C; mic + **headphones or sealed headset speakers** (spatial audio hallucination); rear camera usable while seated in tray if open-back or when testing flat |
+| **Display** | **6.55"** Fluid AMOLED, 1080×2400, up to 120 Hz |
+| **Body** | **160.0 × 74.2 × 8.7 mm** |
+| **Weight** | **192 g** (easier on the neck than OP12) |
+| **SoC** | **Snapdragon 888** |
+| **GPU** | **Adreno 660** |
+| **RAM** | 8 / 12 GB |
+| **Android** | Launched 11; expect **13–14** if updated |
+| **GLES** | 3.2 capable — meets ELSD min |
 
-**Peer phones (same QA tier):**  
-Samsung Galaxy S23/S24 Ultra class, Pixel large flagships, other ~6.7–6.9" Androids with similar footprint.
+### Why this is the right floor
 
-**Secondary (should still run):**  
-Smaller phones (6.1–6.5") in the same headset with foam/spacer if needed — but we do **not** shrink the tray requirement to fit only them.
+- Still a real flagship GPU (not a budget Mali from 2018)  
+- Smaller/lighter in a cardboard shell  
+- Thermals and 888 throttling are **honest** — forces framerate drops, effect budget, fractal iter discipline  
+- Fits many “6.5–6.7"” trays that OP12 might stretch  
+
+### OP9 QA gates (must pass)
+
+- [ ] Switchboard + GO LIVE + camera WORLD  
+- [ ] Amy lean-in on speech  
+- [ ] CINEMA **NOIR** / **SUSPIRIA** / **SILENT ERA** usable  
+- [ ] ART **CARTOON** / **HYPERREAL** without multi-second freezes  
+- [ ] **MANDELBROT** + trails at **24 fps + DROPPED FRAMES ON** (or 12–20 if needed)  
+- [ ] Preset `mandel_key_trails` runs ≥ ~15–20 present fps with drops, no ANR  
+- [ ] 10+ minutes in headset without thermal death (throttle OK; crash not OK)  
+- [ ] CLEAR / sober still instant  
+
+### OP9 default recommendations (ship hints)
+
+| Setting | OP9 default bias |
+|---------|------------------|
+| Framerate | **24** or **30**, not unlocked 60 under heavy ELSD |
+| Dropped frames | **ON** |
+| Fractal zoom rate | ≤ **1.25** for comfort; 2.0 only in “dive” presets |
+| Mandel iterations | Shader ~56; if needed later, quality tier scales iters |
+| Stillness morph | Cap max level lower than OP12 |
+
+---
+
+## Ship device — OnePlus 12
+
+| Spec | Value |
+|------|--------|
+| **Display** | ~**6.82"** AMOLED |
+| **Body** | **164.3 × 75.8 × 9.15 mm** |
+| **Weight** | ~**220 g** |
+| **Class** | Current large flagship |
+
+**Peer phones (same ship tier):**  
+S23/S24 Ultra class, large Pixels, other ~6.7–6.9" Androids.
+
+When OP9 is green, OP12 should **sizzle**: higher unlocked fps, richer wet, faster zoom rates, longer sessions.
 
 ---
 
@@ -32,23 +82,18 @@ Smaller phones (6.1–6.5") in the same headset with foam/spacer if needed — b
 |------|--------|
 | **Class** | Plastic **Cardboard-compatible** phone VR headset |
 | **Not** | Meta Quest / PC PCVR as 1.0 required hardware |
-| **Phone fit** | Explicitly **6.7–7.0"** (or max tray **≥ 170 × 85 mm**) |
+| **Phone fit** | **6.5–7.0"** (must fit **OP9 6.55"** and preferably **OP12 6.82"**) |
+| **Tray** | Prefer max size **≥ 170 × 85 mm** if OP12 is daily; OP9 alone allows slightly smaller trays |
 | **Reject** | Viewers that only list “up to 6.0–6.3 inch” |
-| **Optics** | Biconvex aspheric or equivalent; user **focus** adjust preferred |
-| **IPD** | Adjustable preferred; fixed ~63 mm acceptable for v1 |
-| **Mount** | Head **strap** (not temple-only); supports ~250 g phone+case |
-| **Access** | Side/top opening for phone; **USB-C cutout** preferred |
-| **Comfort** | Replaceable foam; vented enough for 20–30 min sessions |
-| **Button** | Optional magnetic/conductive Button for “next preset” later |
+| **Optics** | Focus adjust preferred; IPD nice |
+| **Mount** | Head **strap**; OP9 is lighter — still prefer strap |
+| **Access** | USB-C cutout preferred |
+| **Comfort** | Venting for 20–30 min (888 throttles hard when sealed) |
 
-**Shopping rule of thumb:**  
-If reviews say **S23 Ultra / 6.8" fits**, the OnePlus 12 class is in.
-
-**Examples of the class** (availability changes; buy by tray size, not nostalgia):
-
-- Large-phone BOBOVR Z4/Z5-style plastic headsets  
-- Merge-class goggles **if** current SKU lists large-phone fit  
-- Any solid “3D VR glasses 4.7–**6.7+** inch” with verified big-phone reviews  
+**Shopping rule:**  
+- Must fit **OnePlus 9**.  
+- Ideally also **OnePlus 12** / S23 Ultra class.  
+If forced to choose one tray for both: buy large enough for OP12.
 
 ---
 
@@ -56,57 +101,55 @@ If reviews say **S23 Ultra / 6.8" fits**, the OnePlus 12 class is in.
 
 | Item | Target |
 |------|--------|
-| **OS** | Android **8.0+** (minSdk 26); develop/test on **Android 14/15** flagships |
-| **GPU** | OpenGL ES **3.0+** |
-| **Stereo** | Side-by-side Cardboard distortion (M5); **flat landscape** valid for M1–M4 |
-| **Audio** | Mic for voice + optional hallucination drive; media session FFT when plate plays |
-| **Permissions** | Camera, mic; no mandatory accounts |
+| **minSdk** | **26** (Android 8) |
+| **Test OS** | OP9 on latest available; OP12 on 14/15 |
+| **GPU** | OpenGL ES **3.0+** (888 / Adreno 660 OK) |
+| **Stereo** | Cardboard NDK when ready; flat landscape for early QA |
+| **Permissions** | Camera, mic |
 
 ---
 
-## Thermal & power (design constraints)
+## Thermal & power
 
-Large flagships in a closed shell get hot. Target hardware assumes:
-
-- Prefer **front flap open** or ventilated designs during long TOASTED sessions  
-- USB-C **pass-through charge** when possible  
-- Effect budget: drop feedback resolution / FX count before cooking the SoC  
-- Session timer (M4) is a product feature **and** a hardware mercy  
+- Sealed headset + **888** = throttle city — **ENABLE DROPPED FRAMES** is a feature  
+- Prefer flap open / USB-C charge during long fractal dives  
+- Effect budget: reduce wet / fractal rate / present fps before crash  
+- Session timer = product + hardware mercy  
 
 ---
 
-## Amy / UX assumptions on this hardware
+## Amy / UX
 
-- Amy is drawn in **stereo or flat** over a full-bleed camera (or PGM)  
-- Lean-in is toward the **viewer’s face** (screen-space center / scale-up)  
-- User cannot touch UI easily → **voice-only** is not optional flavor; it matches the headset  
-- Status text is secondary; most feedback is Amy + world FX  
+- Voice + switchboard same vocabulary  
+- Lean-in on speech  
+- Status secondary  
 
 ---
 
-## Non-targets (explicit)
+## Non-targets
 
 | Hardware | Status |
 |----------|--------|
-| Meta Quest / Pico / Vision Pro as required runtime | **Out of 1.0 scope** (possible later ports) |
-| Daydream-only controllers | Not required |
-| Foldables unfolded as primary | Best-effort only |
+| Quest / Pico / Vision Pro as required | Out of 1.0 |
+| Daydream controllers | Not required |
 | iOS | Post–Android 1.0 |
-| PC + SteamVR | Not ELSD 1.0 |
+| Sub-6.0" phones as design center | Best-effort only |
 
 ---
 
-## QA checklist (buy / accept a headset)
+## QA checklist (session on OP9)
 
-- [ ] OP12 (or peer) **clicks into tray** without forcing  
-- [ ] Lenses cover most of the panel; no huge black bars from undersized tray  
-- [ ] Focus can reach sharp text/UI legends  
-- [ ] Straps hold 10+ minutes without face pain  
-- [ ] USB-C accessible or flap allows quick removal  
-- [ ] Can launch ELSD, grant camera/mic, see WORLD bus, Amy lean-in on speech  
+- [ ] Install debug APK on **OnePlus 9**  
+- [ ] Switchboard loads; factory presets present  
+- [ ] `silent_reel` @ 12 fps feels intentional, not broken  
+- [ ] `mandel_key_trails` @ 24 + drops survives 2+ minutes  
+- [ ] `suspiria_red` / `noir_night` look correct  
+- [ ] CLEAR recovers immediately  
+- [ ] Heat: warm OK; reboot/thermal kill = fail  
+- [ ] Then re-check same presets on **OnePlus 12** for “sizzle”  
 
 ---
 
-## One-line product hardware pitch
+## One-line pitch
 
-> **ELSD 1.0 targets a large Android flagship (OnePlus 12 class) in a large-tray Cardboard-compatible plastic headset — voice-first, phone-in-box, world as canvas.**
+> **Prove it on the OnePlus 9. Ship it feeling great on the OnePlus 12. Large-tray Cardboard-compatible viewer. Voice + switchboard. World as canvas.**
