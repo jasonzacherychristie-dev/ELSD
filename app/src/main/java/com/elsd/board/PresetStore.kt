@@ -44,6 +44,8 @@ class PresetStore(context: Context) {
         }
         seed("noir_night") {
             globalWet = 0.7f
+            targetFps = 24
+            allowDroppedFrames = true
             addEffect(EffectId.NOIR)
             addEffect(EffectId.DIGITAL_HARSH)
             addEffect(EffectId.MOOD_NIGHT)
@@ -93,6 +95,8 @@ class PresetStore(context: Context) {
         }
         seed("cabinet_shadows") {
             globalWet = 0.75f
+            targetFps = 16
+            allowDroppedFrames = true
             addEffect(EffectId.EXPRESSIONIST)
             addEffect(EffectId.MOOD_NIGHT)
         }

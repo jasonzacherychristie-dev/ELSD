@@ -34,17 +34,35 @@ Switchboard: global strip on main board (not buried) — same words as voice.
 **ENABLE DROPPED FRAMES** turns on **budget drops** (and may strengthen aesthetic hold).  
 **SET FRAMERATE** sets the **cadence ceiling** (and target for budget).
 
-Recommended presets:
+## Film styles ↔ framerate (important)
+
+Variable FPS is not an afterthought for CINEMA — it **is** half the style.
+
+| CINEMA / era look | Suggested FPS | Dropped | Why |
+|-------------------|---------------|---------|-----|
+| **SILENT ERA** | **12–16** | on | Hand-crank / early projection cadence |
+| **EXPRESSIONIST** | **16–18** | on | Uneasy, theatrical stutter |
+| **GOLDEN AGE** | **24** | on | Studio classical |
+| **TECHNICOLOR** | **24** | on | Dye-transfer feature rhythm |
+| **NOIR** | **24** | on | Classic crime picture |
+| **SUSPIRIA** / **GIALLO** | **24** | on | Theatrical European feature |
+| **BLEACH** / **TEAL ORANGE** | **24** | on | Modern theatrical |
+| **ANAMORPHIC** / **SOFT GLOW** | **24–30** | on | Lens romance |
+| **NEON** | **30–60** | optional | Night city / live-ish |
+| Live glass / no cinema | **30–60** | off/on | AR default |
+
+**Policy:** Adding a CINEMA effect may **suggest** a framerate (soft apply if user hasn’t hard-locked UNLOCK).  
+Presets always ship with matching FPS. User can still override (SET FRAMERATE wins).
+
+### Cadence presets (board / voice)
 
 | Label | FPS | Dropped | Feel |
 |-------|-----|---------|------|
-| LIVE GLASS | 60 | off | Modern AR (OP12; OP9 only when light effects) |
+| LIVE GLASS | 60 | off | Modern AR (OP12; OP9 only when light) |
 | BROADCAST | 30 | on | Desk / TOASTED default |
-| CINEMA | 24 | on | Feature film — **OP9 heavy-preset default** |
-| SILENT REEL | 12–16 | on | Hand-crank cousin |
-| STARE HEAVY | 12–20 | **on** | Morph/dream headroom — **OP9 fractal dives** |
-
-Pair with CINEMA **SILENT ERA** at 12–16 fps for free authenticity.
+| CINEMA | 24 | on | Feature film — **default for most CINEMA** |
+| SILENT REEL | 12–16 | on | Hand-crank — **SILENT ERA / EXPRESSIONIST** |
+| STARE HEAVY | 12–20 | **on** | Morph/dream headroom — OP9 fractal dives |
 
 ---
 

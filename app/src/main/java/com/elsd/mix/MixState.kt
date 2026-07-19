@@ -143,6 +143,8 @@ class MixState {
             is Command.SetFramerate -> {
                 targetFps = cmd.fps
                 BoardSession.board.targetFps = cmd.fps
+                // Explicit fps = user owns cadence (cinema soft-apply won't fight)
+                BoardSession.board.framerateHardLocked = false
             }
             is Command.DroppedFrames -> {
                 allowDroppedFrames = cmd.enabled
@@ -151,6 +153,7 @@ class MixState {
             is Command.UnlockFramerate -> {
                 targetFps = 0
                 BoardSession.board.targetFps = 0
+                BoardSession.board.framerateHardLocked = true
             }
             is Command.FractalZoomRate -> {
                 fractalZoomRate = cmd.rate

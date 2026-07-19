@@ -22,6 +22,8 @@ class Switchboard {
      */
     var fractalKeyMode: Int = 3
     var fractalKeyHue: Float = 0.33f
+    /** When true, ADD CINEMA will not change targetFps (user chose UNLOCK). */
+    var framerateHardLocked: Boolean = false
 
     fun layersInOrder(): List<EffectLayer> = layers.values.toList()
 
@@ -37,10 +39,17 @@ class Switchboard {
         val existing = layers[id]
         if (existing != null) {
             existing.onEnabledChanged(true)
+            if (id.family == EffectFamily.CINEMA) {
+                CinemaCadence.applySoft(this, id, framerateHardLocked)
+            }
             return existing
         }
         val layer = EffectLayer(id = id, enabled = true, clockSec = 0f)
         layers[id] = layer
+        // Film styles own their cadence — variable FPS is part of the look
+        if (id.family == EffectFamily.CINEMA) {
+            CinemaCadence.applySoft(this, id, framerateHardLocked)
+        }
         return layer
     }
 
@@ -106,6 +115,7 @@ class Switchboard {
         put("allowDroppedFrames", allowDroppedFrames)
         put("fractalKeyMode", fractalKeyMode)
         put("fractalKeyHue", fractalKeyHue.toDouble())
+        put("framerateHardLocked", framerateHardLocked)
         val arr = JSONArray()
         layers.values.forEach { arr.put(it.toJson()) }
         put("layers", arr)
@@ -120,6 +130,7 @@ class Switchboard {
         allowDroppedFrames = o.optBoolean("allowDroppedFrames", true)
         fractalKeyMode = o.optInt("fractalKeyMode", 3)
         fractalKeyHue = o.optDouble("fractalKeyHue", 0.33).toFloat()
+        framerateHardLocked = o.optBoolean("framerateHardLocked", false)
         val arr = o.optJSONArray("layers") ?: return
         for (i in 0 until arr.length()) {
             val layer = EffectLayer.fromJson(arr.getJSONObject(i)) ?: continue

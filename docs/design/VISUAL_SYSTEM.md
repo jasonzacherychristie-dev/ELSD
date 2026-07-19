@@ -69,6 +69,9 @@ Shot language, grade, era, and **director-color** — inspired by the strength o
 
 **Director / era pack (1.0 naming):** we imply, we don’t license names as brands — **SUSPIRIA** is the look title (like NOIR).
 
+**Framerate is part of CINEMA:** silent wants ~12–16 fps; classic features ~24; neon/live can sit higher.  
+See [`FRAMERATE.md`](FRAMERATE.md) — variable FPS is a film tool, not only a performance toggle.
+
 ### 4. PALETTE (analog ↔ digital)
 
 Overall signal character — “what medium is this world on?”

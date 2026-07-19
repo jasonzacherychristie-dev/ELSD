@@ -151,6 +151,8 @@ class SwitchboardActivity : ComponentActivity() {
                 setBackgroundColor(CREAM)
                 setOnClickListener {
                     BoardSession.board.targetFps = fps
+                    // UNLOCK hard-locks so ADD CINEMA won't stomp; numeric set allows soft cinema again after
+                    BoardSession.board.framerateHardLocked = (fps == 0)
                     Toast.makeText(
                         this@SwitchboardActivity,
                         if (fps == 0) BoardVerb.UNLOCK_FRAMERATE.label

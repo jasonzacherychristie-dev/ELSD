@@ -26,10 +26,12 @@ All user-facing actions use this lexicon (UI labels + voice):
 | **SAVE PRESET** | Write current board to a named preset |
 | **LOAD PRESET** | Replace board from a named preset |
 | **CLEAR BOARD** | Remove all effects (soft sober of layers; not full STOP) |
-| **SET FRAMERATE** | Cap cadence (12 / 16 / 24 / 30 / 60 / unlock) |
+| **SET FRAMERATE** | Cap cadence (12 / 16 / 24 / 30 / 60 / unlock) — **film language** |
 | **ENABLE DROPPED FRAMES** | Allow budget + aesthetic frame holds |
 | **DISABLE DROPPED FRAMES** | Prefer smooth; less morph headroom |
-| **UNLOCK FRAMERATE** | No cap |
+| **UNLOCK FRAMERATE** | No cap (cinema ADD won't auto-set fps until you pick a number again) |
+
+Adding **CINEMA** effects soft-sets fps (silent→12, feature→24, neon→30) unless unlocked.
 | **GO LIVE** | Open PGM view (camera / Cardboard session) |
 | **BACK** | Leave drill-down; return to board list |
 
