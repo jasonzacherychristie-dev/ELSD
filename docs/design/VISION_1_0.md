@@ -3,8 +3,9 @@
 **Working name:** ELSD (Electronic LSD)  
 **Platform:** Android (Cardboard-compatible)  
 **License (code):** MIT (third-party deps keep Apache-2.0 etc.; see NOTICE)  
-**Soul:** Voice-only **TOASTED** perception mixer with **Bounce** — a spirited checker-orb cursor that can go spatial, break the fourth wall, or mute to pure trip.  
-**Look bible:** [`SOUL.md`](SOUL.md)
+**Soul:** Voice-only **TOASTED** perception mixer with **Amy** — spirited checker-orb pilot (lean-in on speech), can go spatial, break the fourth wall, or mute to pure trip.  
+**Look bible:** [`SOUL.md`](SOUL.md)  
+**Target hardware:** Large flagship (**OnePlus 12 class**) + large-tray phone VR viewer — [`TARGET_HARDWARE.md`](TARGET_HARDWARE.md)
 
 ## Lineage (history, not branding)
 

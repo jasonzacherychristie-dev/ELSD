@@ -49,6 +49,16 @@ Third-party libraries (Cardboard SDK, CameraX, Media3, Vosk, AndroidX, …) rema
 | M4 | Vosk offline, Bounce quips, TOASTED chrome |
 | M5 | Stereo Cardboard NDK, v1.0.0 |
 
+## Target hardware
+
+| | |
+|--|--|
+| **Phone** | Large Android flagship — **OnePlus 12 class** (~6.8", ~164×76 mm) |
+| **Viewer** | Plastic **Cardboard-compatible** headset with tray for **6.7–7.0"** / **≥ ~170×85 mm** |
+| **Not required** | Quest / PCVR for 1.0 |
+
+Full spec + shopping QA: **[docs/design/TARGET_HARDWARE.md](docs/design/TARGET_HARDWARE.md)**
+
 ## Build
 
 Requirements:
@@ -56,6 +66,7 @@ Requirements:
 - **Android Studio** (or SDK 35 + build-tools)
 - **JDK 17+** (Studio’s JBR is fine)
 - Device/emulator with camera + mic (gyro later for stereo)
+- Prefer a **large-phone VR viewer** (see target hardware) for real stereo later
 
 ```bash
 # from repo root

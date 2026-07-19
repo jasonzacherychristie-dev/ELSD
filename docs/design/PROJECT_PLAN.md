@@ -61,14 +61,19 @@ Gradle can start as a **single `app` module** and split when files hurt; the tab
 - [x] LICENSE, README, .gitignore  
 - [x] Upstream clones under `D:\ELSD\upstream`
 
+### Hardware baseline
+
+- **Target:** OnePlus 12–class phone + large-tray Cardboard-compatible viewer — [`TARGET_HARDWARE.md`](TARGET_HARDWARE.md)
+
 ### M1 — Hello eyes
 
-- [ ] Android app skeleton (Kotlin, min SDK documented)  
-- [ ] Fullscreen GL surface, 60/30 fps clear + textured quad  
-- [ ] CameraX → OES texture on quad (flat phone preview)  
-- [ ] Cardboard hello: stereo + distortion of same texture  
+- [x] Android app skeleton (Kotlin, min SDK documented)  
+- [x] Fullscreen GL surface, 60/30 fps clear + textured quad  
+- [x] CameraX → OES texture on quad (flat phone preview)  
+- [x] Amy lean-in on speech (flat)  
+- [ ] Cardboard hello: stereo + distortion of same texture (on target viewer)  
 
-**Exit:** You see the room in Cardboard.
+**Exit:** You see the room on the reference phone; stereo on target headset when M5/partial stereo lands.
 
 ### M2 — TOASTED minimum
 

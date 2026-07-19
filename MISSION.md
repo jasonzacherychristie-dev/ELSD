@@ -13,7 +13,7 @@ Sound can possess buildings. Paint can walk down the street. A keyed stream can 
 
 We build **TOASTED**: a live-desk spirit for perception — wet/dry, banks, program out — without locking the soul of the machine behind a brand name.
 
-Long horizon: richer stereo, safer trips, collaborative seeing. Near term: a **Cardboard-compatible Android** app that a hobbyist can run, demo, and fork under **MIT**.
+Long horizon: richer stereo, safer trips, collaborative seeing. Near term: a **Cardboard-compatible Android** app on **large flagship + large-tray phone headset** (OnePlus 12 class) that a hobbyist can run, demo, and fork under **MIT**. See `docs/design/TARGET_HARDWARE.md`.
 
 ## What we ship for
 
