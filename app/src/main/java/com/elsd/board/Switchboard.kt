@@ -120,6 +120,7 @@ class Switchboard {
         mix.cinemaId = "none"
         mix.paletteId = "none"
         mix.moodId = "mood_neutral"
+        mix.stillnessMorph = false
         mix.keyMode = com.elsd.mix.KeyMode.OFF
         mix.pulseEnabled = false
         mix.spatialMode = com.elsd.audio.SpatialMode.OFF
@@ -132,8 +133,13 @@ class Switchboard {
             when (layer.id.family) {
                 EffectFamily.ELSD -> {
                     if (layer.enabled || layer.envelope() > 0.01f) {
-                        mix.lsdId = layer.id.catalogName
-                        last = "ELSD"
+                        if (layer.id == EffectId.STILLNESS_MORPH) {
+                            mix.stillnessMorph = true
+                            last = "ELSD"
+                        } else {
+                            mix.lsdId = layer.id.catalogName
+                            last = "ELSD"
+                        }
                     }
                 }
                 EffectFamily.ART -> {

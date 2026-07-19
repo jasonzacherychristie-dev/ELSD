@@ -119,6 +119,7 @@ Install `app/build/outputs/apk/debug/app-debug.apk`, grant camera + mic, landsca
 | [MISSION.md](MISSION.md) | Mission, vision, principles |
 | [docs/design/ROADMAP.md](docs/design/ROADMAP.md) | **1.0 / 2.0 / 3.0** |
 | [docs/design/VISUAL_SYSTEM.md](docs/design/VISUAL_SYSTEM.md) | ELSD · Art · Cinema · Palette · Mood |
+| [docs/design/STILLNESS_MORPH.md](docs/design/STILLNESS_MORPH.md) | Stare longer → morph budget (DeepDream later) |
 | [docs/design/SOUL.md](docs/design/SOUL.md) | Look, Amy, TOASTED |
 | [docs/design/VISION_1_0.md](docs/design/VISION_1_0.md) | Product vision |
 | [docs/design/VOICE_AND_CURSOR.md](docs/design/VOICE_AND_CURSOR.md) | Voice-only + cursor |

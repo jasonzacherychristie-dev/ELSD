@@ -24,6 +24,7 @@
 | **Voice** | Same vocabulary as switchboard |
 | **Stereo** | Cardboard path when ready |
 | **Safety** | clear / sober / stop |
+| **Stillness (stretch)** | Track hold; L0–L1 morph boost — [`STILLNESS_MORPH.md`](STILLNESS_MORPH.md) |
 
 ### Explicitly **not** 1.0
 
@@ -34,7 +35,8 @@
 | Luma/chroma key of plate | **2.0** |
 | Spatial audio / wet ears product | **2.0** |
 | Audio-reactive pulse as hero | **2.0** (optional light later) |
-| DeepDream / neural | **3.0** |
+| Heavy L2–L3 strike morph passes | **2.0** |
+| DeepDream / neural L4 | **3.0** (same stillness trigger) |
 
 ### 1.0 exit
 
@@ -55,6 +57,7 @@ Presets: gogh_walk, noir_night, vhs_fever, clean_calm, toasted_desk.
 | **Spatial audio** | Wet ears (design already exists) |
 | **Stereo enhance** | Optional depth-pop |
 | **Richer FBO** | True multi-layer wet blend |
+| **Stillness morph L2–L3** | Strike morph while user stares at still objects |
 
 ---
 
@@ -63,6 +66,7 @@ Presets: gogh_walk, noir_night, vhs_fever, clean_calm, toasted_desk.
 | Item | Note |
 |------|------|
 | **DeepDream mode** | Neural recursive enhance — wishlist |
+| **Stillness → L4 Dream** | Same hold engine; CNN only when still + budget |
 | Continuous neural style | Same bucket |
 | Horizon hardware / multi-user | Parked |
 

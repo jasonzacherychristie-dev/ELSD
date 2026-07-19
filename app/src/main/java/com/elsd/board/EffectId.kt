@@ -25,6 +25,8 @@ enum class EffectId(
     SPLIT("split", EffectFamily.ELSD, "SPLIT"),
     KALEIDO("kaleido", EffectFamily.ELSD, "KALEIDO"),
     MELT("melt", EffectFamily.ELSD, "MELT"),
+    /** Stare longer → morph budget (see STILLNESS_MORPH.md). */
+    STILLNESS_MORPH("stillness_morph", EffectFamily.ELSD, "STILLNESS MORPH"),
 
     // —— ART styles ——
     GOGH("gogh", EffectFamily.ART, "GOGH"),

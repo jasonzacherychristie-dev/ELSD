@@ -26,6 +26,8 @@ class MixState {
     @Volatile var paletteId: String = "none"
     /** MOOD global toggle */
     @Volatile var moodId: String = "mood_neutral"
+    /** Stare-to-morph master (StillnessTracker + MorphBudget). */
+    @Volatile var stillnessMorph: Boolean = false
     @Volatile var bounceMode: BounceMode = BounceMode.FLAT
     @Volatile var spatialMode: SpatialMode = SpatialMode.OFF
     @Volatile var earWet: Float = 0f
@@ -137,6 +139,7 @@ class MixState {
         cinemaId = "none"
         paletteId = "none"
         moodId = "mood_neutral"
+        stillnessMorph = false
         pulseEnabled = false
         keyMode = KeyMode.OFF
         spatialMode = SpatialMode.OFF

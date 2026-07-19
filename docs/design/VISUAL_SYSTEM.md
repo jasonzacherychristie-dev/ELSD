@@ -147,8 +147,13 @@ Those keep their design docs; they are not 1.0 ADD EFFECT groups.
 
 ---
 
+## Stillness morph (related)
+
+When the user **holds still** on **still subjects**, spare cycles fund deeper morph — up to DeepDream at L4.  
+Design: [`STILLNESS_MORPH.md`](STILLNESS_MORPH.md). Does not replace ART/CINEMA; it **amplifies** investment over hold time.
+
 ## Product sentence
 
 **1.0:** Point the phone at the world. Paint it, grade it, trip it, set the mood.  
-**2.0:** Pipe other video in and out.  
-**3.0:** Dream.
+**2.0:** Pipe other video in and out; stare longer for strike morphs.  
+**3.0:** Hold still — and dream.

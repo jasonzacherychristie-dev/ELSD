@@ -102,6 +102,13 @@ class PresetStore(context: Context) {
             addEffect(EffectId.MOOD_NEUTRAL)
             addEffect(EffectId.DIGITAL_HARSH)
         }
+        seed("stare_dream") {
+            globalWet = 0.65f
+            addEffect(EffectId.STILLNESS_MORPH)
+            addEffect(EffectId.MELT).fadeInSec = 2f
+            addEffect(EffectId.SOFT_GLOW)
+            addEffect(EffectId.MOOD_CALM)
+        }
     }
 
     private fun sanitize(name: String): String =
