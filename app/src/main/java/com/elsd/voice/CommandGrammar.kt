@@ -22,17 +22,23 @@ object CommandGrammar {
             return Command.SafetyStop
         }
 
-        // Bounce presence
-        if (t.contains("mute bounce") || t == "quiet" || t.contains("bounce off")) {
+        // Amy / Bounce presence
+        if (t.contains("mute amy") || t.contains("mute bounce") || t == "quiet" ||
+            t.contains("bounce off") || t.contains("amy off") || t.contains("go away amy")
+        ) {
             return Command.BounceModeSet(BounceMode.MUTED)
         }
-        if (t.contains("bounce on") || t.contains("hey bounce") || t.contains("show bounce")) {
+        if (t.contains("amy on") || t.contains("hey amy") || t.contains("show amy") ||
+            t.contains("bounce on") || t.contains("hey bounce") || t.contains("show bounce")
+        ) {
             return Command.BounceModeSet(BounceMode.FLAT)
         }
-        if (t.contains("bounce 3d") || t.contains("bounce spatial") || t.contains("bounce three")) {
+        if (t.contains("amy 3d") || t.contains("bounce 3d") || t.contains("bounce spatial") ||
+            t.contains("bounce three") || t.contains("amy spatial")
+        ) {
             return Command.BounceModeSet(BounceMode.SPATIAL)
         }
-        if (t.contains("bounce flat") || t.contains("bounce 2d")) {
+        if (t.contains("amy flat") || t.contains("bounce flat") || t.contains("bounce 2d")) {
             return Command.BounceModeSet(BounceMode.FLAT)
         }
 

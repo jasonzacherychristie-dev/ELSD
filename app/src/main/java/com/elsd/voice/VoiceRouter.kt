@@ -13,12 +13,14 @@ import java.util.Locale
 
 /**
  * Voice-only command path (M1 uses platform SpeechRecognizer).
- * Vosk offline swap-in later without changing CommandGrammar.
+ * Fires [onSpeechStart] as soon as the user begins speaking so Amy can lean in.
  */
 class VoiceRouter(
     private val context: Context,
     private val onCommand: (Command) -> Unit,
     private val onPartial: (String) -> Unit = {},
+    private val onSpeechStart: () -> Unit = {},
+    private val onSpeechEnd: () -> Unit = {},
 ) {
     private var recognizer: SpeechRecognizer? = null
     private val main = Handler(Looper.getMainLooper())
@@ -71,12 +73,21 @@ class VoiceRouter(
 
     private val listener = object : RecognitionListener {
         override fun onReadyForSpeech(params: Bundle?) {}
-        override fun onBeginningOfSpeech() {}
+
+        override fun onBeginningOfSpeech() {
+            // Amy leans in the instant voice is detected — before words resolve
+            onSpeechStart()
+        }
+
         override fun onRmsChanged(rmsdB: Float) {}
         override fun onBufferReceived(buffer: ByteArray?) {}
-        override fun onEndOfSpeech() {}
+
+        override fun onEndOfSpeech() {
+            onSpeechEnd()
+        }
 
         override fun onError(error: Int) {
+            onSpeechEnd()
             if (running) main.postDelayed(restart, 400)
         }
 
@@ -90,6 +101,7 @@ class VoiceRouter(
                 Log.i(TAG, "heard=\"$best\" -> $cmd")
                 onCommand(cmd)
             }
+            onSpeechEnd()
             if (running) main.postDelayed(restart, 250)
         }
 
@@ -97,7 +109,10 @@ class VoiceRouter(
             val texts = partialResults
                 ?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
                 .orEmpty()
-            texts.firstOrNull()?.let { onPartial(it) }
+            texts.firstOrNull()?.let {
+                onSpeechStart()
+                onPartial(it)
+            }
         }
 
         override fun onEvent(eventType: Int, params: Bundle?) {}

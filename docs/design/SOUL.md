@@ -24,12 +24,13 @@
 
 ---
 
-## The cursor: **Bounce**
+## The cursor: **Amy** (the checker-orb pilot)
 
-**Working name:** Bounce (codename OK in code: `BounceCursor`, `sprite.bounce`)  
-**Public optional epithets:** “the orb,” “the check,” “your pilot” — not a registered mascot speech every line.
+**Character name:** **Amy** — public, spoken, lovable.  
+**Code / bank names:** Bounce still OK (`BounceCursor`, `bounce on`) as technical aliases; voice can accept both `amy` and `bounce`.  
+**Look:** Classic **boing-ball** checker energy (red/cream), never branded to a restricted platform name.
 
-### What Bounce is
+### What Amy is
 
 | Mode | Appearance | Behavior |
 |------|------------|----------|
@@ -37,23 +38,37 @@
 | **3D spatial** | Full **checker sphere** with light roll / squash-stretch | Enters the stereo scene; bounces on “planes” (floor hint, window rect, key matte edge) |
 | **Muted / background** | Shrinks, desaturates, parks in a corner or halo-fades | No chatter; no steal of focus; FX continue |
 | **On-air** | Crisp, high contrast, optional scanline kiss | When mix is live / wet high |
+| **Lean-in (listening)** | Larger in FOV, slides toward center, tips toward viewer, frontal light + soft lime attention | **Fires on beginning of speech** — Amy physically leans toward the user before words resolve |
 
 **Not a mouse pointer.** Not a reticle. Not a laser.  
-**A character that happens to aim.**
+**A character that happens to aim — and listens with her whole face.**
+
+### Lean-in (signature beat)
+
+When the recognizer fires *beginning of speech* (or partials):
+
+1. Amy **grows** (closer to the eyes)  
+2. She **slides toward center** and nods slightly  
+3. Lighting swings **frontal** (eye-contact glint)  
+4. Soft **lime** attention rim  
+5. On end-of-speech / result / error she **eases back** to idle float  
+
+This is the difference between a widget and a pilot. Ship it.
 
 ### Personality (fourth wall allowed)
 
-Bounce may:
+Amy may:
 
 - Answer voice with a short quip (*“Keyed. Looking crispy.”*)
-- Admit it’s software (*“I’m a ball in your phone. Don’t overthink it.”*)
+- Admit she’s software (*“I’m Amy. Checker optional. Don’t overthink it.”*)
 - React to the world bus (*“That window wants to be a TV.”*)
 - Celebrate a good mix (*“TOASTED.”* as a one-word win sting)
 - Refuse unsafe chaos gently (*“Nope. Soft landing.”* when sober/clear)
+- Lean in when they speak — silent body language first, words second
 
-Bounce must **never**:
+Amy must **never**:
 
-- Ignore `clear` / `sober` / `stop` / `mute bounce`
+- Ignore `clear` / `sober` / `stop` / `mute amy` / `mute bounce`
 - Talk over emergency exits
 - Shame the user
 - Imply corporate endorsement of any vintage brand
@@ -66,18 +81,19 @@ Bounce must **never**:
 | **No touch UI** | No hamburger menus, no seek bars as the real UX |
 | **OS exceptions** | System back / notification shade / permission dialogs remain (platform) |
 | **Hardware** | Optional viewer button → “next preset” only if we need a dumb fallback; still secondary to voice |
-| **First run** | Bounce *speaks* the grammar; short listen-and-repeat; no 12-page wizard |
+| **First run** | Amy *speaks* the grammar; short listen-and-repeat; no 12-page wizard |
+| **Lean-in** | `onBeginningOfSpeech` → lean; end/error/result → ease back |
 
-**Mute Bounce** ≠ mute audio world.  
+**Mute Amy** ≠ mute audio world.  
 Commands:
 
-- `mute bounce` / `bounce off` / `quiet` → background mode  
-- `bounce on` / `hey bounce` → restore personality + cursor  
-- `clear` / `sober` / `stop` → hard dry FX **and** Bounce stands down chatter  
+- `mute amy` / `mute bounce` / `quiet` → background mode  
+- `amy on` / `hey amy` / `bounce on` → restore personality + cursor  
+- `clear` / `sober` / `stop` → hard dry FX **and** Amy stands down chatter  
 
 ### Spatial interaction (stereo)
 
-When Bounce is 3D:
+When Amy is 3D:
 
 - Sphere **casts a soft attention cone** (what we’re keying / painting)
 - Can **bounce-roll** toward bright regions (Window TV assist) or sky patch (Sky Cinema)

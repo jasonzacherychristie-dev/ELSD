@@ -5,10 +5,11 @@ Companion to [`SOUL.md`](SOUL.md). Engineering-facing.
 ## Principles
 
 1. **Voice is the only first-class input** for ELSD commands.  
-2. **Bounce** is the only first-class pointer / companion.  
+2. **Amy** (checker-orb pilot; code: Bounce) is the only first-class pointer / companion.  
 3. Touch is not offered as a control surface (platform dialogs excepted).  
-4. Bounce can be **muted to background** without killing the mix.  
-5. Safety phrases preempt personality.
+4. Amy can be **muted to background** without killing the mix.  
+5. Safety phrases preempt personality.  
+6. **Lean-in on speech start** — body language before text.
 
 ## Bounce states
 
@@ -29,9 +30,11 @@ FLAT ──voice "bounce 3d"──► SPATIAL
 
 ## Listening UX
 
-- Continuous or push-to-listen via phrase `hey bounce` (decide in M4; prefer low-power duty cycle).  
+- Continuous or push-to-listen via phrase `hey amy` / `hey bounce` (decide in M4; prefer low-power duty cycle).  
+- **`onBeginningOfSpeech` → lean-in** (grow, center, frontal light, lime rim).  
+- **End of speech / result / error → ease back** to idle float.  
 - **Lime check flash** = partial/final heard.  
-- Fail: Bounce *once* — *“Say again?”* — no loop nagging.
+- Fail: Amy *once* — *“Say again?”* — no loop nagging.
 
 ## Command priority
 

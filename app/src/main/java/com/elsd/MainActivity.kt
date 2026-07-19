@@ -117,6 +117,13 @@ class MainActivity : ComponentActivity() {
                     status.text = "… $partial\n${ElsdApp.CREDIT_SHORT}"
                 }
             },
+            onSpeechStart = {
+                // Amy leans in as soon as the user starts speaking
+                runOnUiThread { renderer.setListening(true) }
+            },
+            onSpeechEnd = {
+                runOnUiThread { renderer.setListening(false) }
+            },
         )
 
         ensurePermissions()
