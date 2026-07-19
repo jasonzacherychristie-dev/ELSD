@@ -97,13 +97,17 @@ How open frameworks map onto the **Video Toaster / Electronic LSD** architecture
 
 ---
 
-## 6. Audio → Pulse
+## 6. Audio → Pulse / sound-activated hallucinations
 
 | | |
 |--|--|
-| **Primary** | `android.media.audiofx.Visualizer` on ExoPlayer audio session id |
-| **Upgrade** | Oboe if we need mic-reactive pulse without media playback |
-| **ELSD use** | Map FFT bands → uniforms `uBass`, `uMid`, `uHigh` for building pulse |
+| **Primary (media)** | `android.media.audiofx.Visualizer` on ExoPlayer audio session id |
+| **Primary (mic)** | `AudioRecord` + in-repo FFT (`MicEnergySource`) — MIT |
+| **Smoothing** | `elsd.audio.BandEnergy` → `bass` / `mid` / `high` / `beat` |
+| **Upgrade** | Oboe (Apache-2.0) if latency is poor |
+| **Visual DNA** | Butterchurn (MIT) inspiration; projectM/TarsosDSP = ideas only (LGPL/GPL) |
+| **ELSD use** | Uniforms drive PULSE (buildings thump) + LSD amounts + Bounce squash |
+| **Deep dive** | [`VISUALIZERS.md`](VISUALIZERS.md) |
 
 ---
 

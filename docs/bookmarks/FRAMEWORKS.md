@@ -23,6 +23,21 @@ Local mirrors of key pages live in [`../frameworks/raw/`](../frameworks/raw/). S
 
 ---
 
+## Sound-activated hallucinations (open visualizer lineage)
+
+Full write-up: [`../frameworks/VISUALIZERS.md`](../frameworks/VISUALIZERS.md)
+
+| Source | License | ELSD use |
+|--------|---------|----------|
+| Android `Visualizer` | Platform | FFT from Media3 session → bass/mid/high |
+| In-repo `BandEnergy` + mic FFT | **MIT** | Live-room drive without GPL deps |
+| [Butterchurn](https://github.com/jberg/butterchurn) | **MIT** | Best open MilkDrop-style shader *inspiration* (re-author, don’t paste blindly) |
+| [projectM](https://github.com/projectM-visualizer/projectm) | LGPL-2.1 | Ideas only in core APK |
+| [TarsosDSP](https://github.com/JorenSix/TarsosDSP) | GPL-3.0 | **Do not link** — study only |
+| [Oboe](https://github.com/google/oboe) | Apache-2.0 | Low-latency PCM later |
+
+---
+
 ## Tier 2 — Strong optional accelerators
 
 | Role | Project | License | Link |
