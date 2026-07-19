@@ -28,6 +28,8 @@ Electronic LSD — trip geometry and time.
 | `split` | RGB split |
 | `kaleido` | Kaleidoscope |
 | `melt` | Domain warp melt |
+| `mandelbrot` | Escape-time set; world luma/color steers zoom & plane |
+| `julia` | Julia set; room RGB becomes complex seed *c* |
 
 ### 2. ART (art styles)
 

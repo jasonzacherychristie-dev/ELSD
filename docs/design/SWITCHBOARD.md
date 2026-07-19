@@ -93,7 +93,7 @@ See [`VISUAL_SYSTEM.md`](VISUAL_SYSTEM.md).
 
 | Family | Examples |
 |--------|----------|
-| **ELSD** | trail, hue, split, kaleido, melt |
+| **ELSD** | trail, hue, split, kaleido, melt, **mandelbrot**, **julia**, stillness_morph |
 | **ART** | gogh, monet, sketch, comic, **cartoon**, **hyperreal**, melt_paint |
 | **CINEMA** | noir, neon, bleach, teal_orange, anamorphic, soft_glow, **technicolor**, **suspiria**, **silent_era**, expressionist, giallo, golden_age |
 | **PALETTE** | analog_film, analog_vhs, digital_clean, digital_harsh, polaroid (single-select) |

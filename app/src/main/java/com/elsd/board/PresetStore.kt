@@ -117,6 +117,21 @@ class PresetStore(context: Context) {
             addEffect(EffectId.SOFT_GLOW)
             addEffect(EffectId.MOOD_CALM)
         }
+        seed("mandel_room") {
+            globalWet = 0.75f
+            targetFps = 24
+            allowDroppedFrames = true
+            addEffect(EffectId.MANDELBROT)
+            addEffect(EffectId.MOOD_TOASTED)
+        }
+        seed("julia_seed") {
+            globalWet = 0.8f
+            targetFps = 24
+            allowDroppedFrames = true
+            addEffect(EffectId.JULIA)
+            addEffect(EffectId.MOOD_FEVER)
+            addEffect(EffectId.NEON).fadeInSec = 1f
+        }
     }
 
     private fun sanitize(name: String): String =

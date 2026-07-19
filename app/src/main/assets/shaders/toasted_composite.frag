@@ -14,7 +14,8 @@ uniform float uChromaHue;
 uniform int uPulse;
 // ART: 0 none, 1 gogh, 2 monet, 3 noir, 4 neon, 5 sketch, 6 melt, 7 comic, 8 cartoon, 9 hyperreal
 uniform int uPaint;
-uniform int uLsd;       // ELSD: 0 none, 1 trail, 2 hue, 3 split, 4 kaleido, 5 melt
+// ELSD: 0 none, 1 trail, 2 hue, 3 split, 4 kaleido, 5 melt, 6 mandelbrot, 7 julia
+uniform int uLsd;
 // cinema: 0 none, 1 noir, 2 neon, 3 bleach, 4 teal_orange, 5 anamorphic, 6 soft_glow,
 // 7 technicolor, 8 suspiria, 9 silent_era, 10 expressionist, 11 giallo, 12 golden_age
 uniform int uCinema;
@@ -377,6 +378,76 @@ vec3 applyCinema(vec3 c, vec2 uv) {
     return c;
 }
 
+// Classic escape-time fractal palette (smooth-ish)
+vec3 fractalPalette(float t) {
+    t = clamp(t, 0.0, 1.0);
+    return 0.5 + 0.5 * cos(6.28318 * (vec3(0.0, 0.33, 0.67) + t + uTime * 0.03));
+}
+
+// Map screen UV to complex plane; world luma steers zoom / seed
+vec2 complexPlane(vec2 uv, float zoom) {
+    vec2 p = (uv - 0.5) * vec2(3.2, 2.2) / max(zoom, 0.15);
+    p.x -= 0.5; // mandelbrot bias toward main cardioid
+    return p;
+}
+
+vec3 mandelbrotField(vec2 uv, vec3 worldColor) {
+    float y = luma(worldColor);
+    // Stare / bright detail → deeper zoom into the set
+    float zoom = 0.85 + y * 2.8 + 0.35 * sin(uTime * 0.15);
+    vec2 c = complexPlane(uv, zoom);
+    // Nudge plane with scene (so the room “selects” a neighborhood)
+    c += (worldColor.rg - 0.5) * 0.35 * uWet;
+    vec2 z = vec2(0.0);
+    float iter = 0.0;
+    const float MAX_I = 48.0;
+    for (float i = 0.0; i < MAX_I; i++) {
+        if (dot(z, z) > 4.0) break;
+        z = vec2(z.x * z.x - z.y * z.y, 2.0 * z.x * z.y) + c;
+        iter = i;
+    }
+    float t = iter / MAX_I;
+    // Smooth escape hint
+    if (dot(z, z) > 4.0) {
+        t = (iter - log2(log2(dot(z, z))) + 1.0) / MAX_I;
+    }
+    vec3 fcol = fractalPalette(t);
+    // Interior of set → deep world-tinted void
+    if (iter >= MAX_I - 1.0) {
+        fcol = worldColor * vec3(0.15, 0.05, 0.25);
+    }
+    // Blend structure of world edges into fractal
+    return mix(worldColor, fcol, uWet);
+}
+
+vec3 juliaField(vec2 uv, vec3 worldColor) {
+    float y = luma(worldColor);
+    // Julia seed c from world + time (the room becomes the parameter)
+    vec2 jc = vec2(
+        -0.4 + (worldColor.r - worldColor.b) * 0.55,
+        0.6 + (worldColor.g - 0.5) * 0.7
+    );
+    jc += 0.12 * vec2(sin(uTime * 0.4), cos(uTime * 0.33));
+    float zoom = 1.0 + y * 1.5;
+    vec2 z = (uv - 0.5) * vec2(3.0, 2.2) / zoom;
+    float iter = 0.0;
+    const float MAX_I = 48.0;
+    for (float i = 0.0; i < MAX_I; i++) {
+        if (dot(z, z) > 4.0) break;
+        z = vec2(z.x * z.x - z.y * z.y, 2.0 * z.x * z.y) + jc;
+        iter = i;
+    }
+    float t = iter / MAX_I;
+    if (dot(z, z) > 4.0) {
+        t = (iter - log2(log2(max(dot(z, z), 1.0001))) + 1.0) / MAX_I;
+    }
+    vec3 fcol = fractalPalette(fract(t + y * 0.25));
+    if (iter >= MAX_I - 1.0) {
+        fcol = mix(worldColor, vec3(0.05, 0.0, 0.1), 0.7);
+    }
+    return mix(worldColor, fcol, uWet);
+}
+
 vec3 applyLsd(vec3 c, vec2 uv) {
     if (uLsd == 0) return c;
     float w = uWet;
@@ -412,6 +483,12 @@ vec3 applyLsd(vec3 c, vec2 uv) {
         vec2 d = uv - 0.5;
         float m = 0.03 * w * sin(10.0 * d.x + uTime) * cos(8.0 * d.y - uTime);
         return texture(uWorld, uv + d * m).rgb;
+    }
+    if (uLsd == 6) {
+        return mandelbrotField(uv, c);
+    }
+    if (uLsd == 7) {
+        return juliaField(uv, c);
     }
     return c;
 }

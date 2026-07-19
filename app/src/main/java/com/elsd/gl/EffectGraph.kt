@@ -130,6 +130,8 @@ class EffectGraph(private val context: Context) {
         "split" -> 3
         "kaleido" -> 4
         "melt" -> 5
+        "mandelbrot" -> 6
+        "julia" -> 7
         else -> 0
     }
 
