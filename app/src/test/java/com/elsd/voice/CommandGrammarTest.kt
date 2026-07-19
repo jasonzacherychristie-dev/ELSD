@@ -50,4 +50,14 @@ class CommandGrammarTest {
         assertEquals(Command.RandomMode, CommandGrammar.parse("shuffle"))
         assertEquals(Command.RandomMode, CommandGrammar.parse("chaos mode"))
     }
+
+    @Test
+    fun prefsVoice() {
+        assertEquals(Command.BoardSavePreset("user_save"), CommandGrammar.parse("save prefs"))
+        assertEquals(Command.BoardSavePreset("walk"), CommandGrammar.parse("save prefs walk"))
+        assertEquals(Command.BoardLoadPreset("user_save"), CommandGrammar.parse("load prefs"))
+        assertEquals(Command.BoardLoadPreset("noir_night"), CommandGrammar.parse("load preset noir_night"))
+        assertEquals(Command.BoardListPresets, CommandGrammar.parse("list presets"))
+        assertEquals(Command.BoardDeletePreset("walk"), CommandGrammar.parse("delete preset walk"))
+    }
 }

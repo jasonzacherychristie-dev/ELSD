@@ -34,7 +34,7 @@ class SwitchboardActivity : ComponentActivity() {
     private var drillId: EffectId? = null
     private var mode: Mode = Mode.BOARD
 
-    private enum class Mode { BOARD, ADD_PICK, DRILL, PRESET_SAVE, PRESET_LOAD }
+    private enum class Mode { BOARD, ADD_PICK, DRILL, PRESETS, PRESET_SAVE, PRESET_LOAD }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,6 +106,21 @@ class SwitchboardActivity : ComponentActivity() {
             setPadding(0, dp(4), 0, dp(10))
         })
 
+        // PRESETS / USER SAVES — first-class switchboard section
+        val userCount = BoardSession.presets.listUser().size
+        val factoryCount = BoardSession.presets.listFactory().size
+        listHost.addView(text("PRESETS / USER SAVES  ·  factory $factoryCount  ·  user $userCount").apply {
+            setTextColor(LIME)
+            setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
+            setPadding(0, dp(8), 0, dp(6))
+        })
+        listHost.addView(text("Active: ${board.presetName.uppercase()}").apply {
+            setTextColor(DIM)
+            setPadding(0, 0, 0, dp(8))
+        })
+
+        actionHost.addView(verbButton(BoardVerb.PRESETS) { showPresetsHub() })
+        actionHost.addView(verbButton(BoardVerb.SAVE_PREFS) { showPresetSave() })
         actionHost.addView(verbButton(BoardVerb.ADD_EFFECT) { showAddPick() })
         actionHost.addView(verbButton(BoardVerb.RANDOM) {
             val summary = com.elsd.board.RandomDesk.roll(BoardSession.board)
@@ -128,8 +143,6 @@ class SwitchboardActivity : ComponentActivity() {
                 showBoard()
             },
         )
-        actionHost.addView(verbButton(BoardVerb.SAVE_PRESET) { showPresetSave() })
-        actionHost.addView(verbButton(BoardVerb.LOAD_PRESET) { showPresetLoad() })
         actionHost.addView(verbButton(BoardVerb.CLEAR_BOARD) {
             board.clearBoard()
             Toast.makeText(this, BoardVerb.CLEAR_BOARD.label, Toast.LENGTH_SHORT).show()
@@ -138,6 +151,77 @@ class SwitchboardActivity : ComponentActivity() {
         actionHost.addView(verbButton(BoardVerb.GO_LIVE) {
             startActivity(Intent(this, MainActivity::class.java))
         })
+    }
+
+    private fun showPresetsHub() {
+        mode = Mode.PRESETS
+        title.text = "PRESETS / USER SAVES"
+        listHost.removeAllViews()
+        actionHost.removeAllViews()
+
+        listHost.addView(text("USER SAVES").apply {
+            setTextColor(LIME)
+            setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
+            setPadding(0, dp(4), 0, dp(6))
+        })
+        val user = BoardSession.presets.listUser()
+        if (user.isEmpty()) {
+            listHost.addView(text("NO USER SAVES — USE SAVE PREFS").apply {
+                setTextColor(DIM)
+                setPadding(0, 0, 0, dp(8))
+            })
+        } else {
+            user.forEach { name ->
+                listHost.addView(presetRow(name, userSave = true))
+            }
+        }
+
+        listHost.addView(text("FACTORY").apply {
+            setTextColor(AMBER)
+            setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
+            setPadding(0, dp(12), 0, dp(6))
+        })
+        BoardSession.presets.listFactory().forEach { name ->
+            listHost.addView(presetRow(name, userSave = false))
+        }
+
+        actionHost.addView(verbButton(BoardVerb.SAVE_PREFS) { showPresetSave() })
+        actionHost.addView(verbButton(BoardVerb.LIST_PRESETS) {
+            Toast.makeText(this, BoardSession.presets.listSummary(), Toast.LENGTH_LONG).show()
+        })
+        actionHost.addView(verbButton(BoardVerb.BACK) { showBoard() })
+    }
+
+    private fun presetRow(name: String, userSave: Boolean): View {
+        val col = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(0, 0, 0, dp(8))
+        }
+        col.addView(verbButton(if (userSave) "LOAD USER · ${name.uppercase()}" else "LOAD · ${name.uppercase()}") {
+            if (BoardSession.presets.load(name, BoardSession.board)) {
+                Toast.makeText(this, "LOADED $name", Toast.LENGTH_SHORT).show()
+                showBoard()
+            }
+        })
+        if (userSave) {
+            col.addView(Button(this).apply {
+                text = "DELETE · ${name.uppercase()}"
+                setTextColor(CREAM)
+                setBackgroundColor(Color.parseColor("#4A1518"))
+                setOnClickListener {
+                    BoardSession.presets.deleteUser(name)
+                    Toast.makeText(this@SwitchboardActivity, "DELETED $name", Toast.LENGTH_SHORT).show()
+                    showPresetsHub()
+                }
+                val lp = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                )
+                lp.topMargin = dp(4)
+                layoutParams = lp
+            })
+        }
+        return col
     }
 
     private fun frameRateRow(): View {
@@ -332,46 +416,32 @@ class SwitchboardActivity : ComponentActivity() {
 
     private fun showPresetSave() {
         mode = Mode.PRESET_SAVE
-        title.text = BoardVerb.SAVE_PRESET.label
+        title.text = "SAVE PREFS / USER SAVE"
         listHost.removeAllViews()
         actionHost.removeAllViews()
+        listHost.addView(text("Saves to USER (not factory). Voice: save prefs walk").apply {
+            setTextColor(DIM)
+            setPadding(0, 0, 0, dp(8))
+        })
         val input = EditText(this).apply {
-            hint = "PRESET NAME"
+            hint = "USER SAVE NAME"
             setTextColor(CREAM)
             setHintTextColor(DIM)
             setBackgroundColor(ROW_OFF)
             setPadding(dp(12))
-            setText(BoardSession.board.presetName)
+            val suggest = BoardSession.board.presetName.let {
+                if (it == "untitled" || it == "random" || it == "clear") "my_look" else it
+            }
+            setText(suggest)
         }
         listHost.addView(input)
-        actionHost.addView(verbButton(BoardVerb.SAVE_PRESET) {
+        actionHost.addView(verbButton(BoardVerb.SAVE_PREFS) {
             val name = input.text?.toString().orEmpty()
-            BoardSession.presets.save(name, BoardSession.board)
-            Toast.makeText(this, "${BoardVerb.SAVE_PRESET.label} $name", Toast.LENGTH_SHORT).show()
-            showBoard()
+            val saved = BoardSession.presets.saveUser(name, BoardSession.board)
+            Toast.makeText(this, "USER SAVE · $saved", Toast.LENGTH_SHORT).show()
+            showPresetsHub()
         })
-        actionHost.addView(verbButton(BoardVerb.BACK) { showBoard() })
-    }
-
-    private fun showPresetLoad() {
-        mode = Mode.PRESET_LOAD
-        title.text = BoardVerb.LOAD_PRESET.label
-        listHost.removeAllViews()
-        actionHost.removeAllViews()
-        val names = BoardSession.presets.listNames()
-        if (names.isEmpty()) {
-            listHost.addView(text("NO PRESETS").apply { setTextColor(DIM) })
-        } else {
-            names.forEach { name ->
-                listHost.addView(verbButton(name.uppercase()) {
-                    if (BoardSession.presets.load(name, BoardSession.board)) {
-                        Toast.makeText(this, "${BoardVerb.LOAD_PRESET.label} $name", Toast.LENGTH_SHORT).show()
-                        showBoard()
-                    }
-                })
-            }
-        }
-        actionHost.addView(verbButton(BoardVerb.BACK) { showBoard() })
+        actionHost.addView(verbButton(BoardVerb.BACK) { showPresetsHub() })
     }
 
     private fun timeRow(label: String, options: List<Float>, onPick: (Float) -> Unit): View {

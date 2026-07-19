@@ -31,6 +31,8 @@ sealed class Command {
     data class BoardPhase(val effectCatalog: String, val on: Boolean) : Command()
     data class BoardSavePreset(val name: String) : Command()
     data class BoardLoadPreset(val name: String) : Command()
+    data class BoardDeletePreset(val name: String) : Command()
+    data object BoardListPresets : Command()
     data object BoardClear : Command()
     /** Roll a random visual board. */
     data object RandomMode : Command()

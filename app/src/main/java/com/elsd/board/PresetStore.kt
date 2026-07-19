@@ -5,36 +5,99 @@ import org.json.JSONObject
 import java.io.File
 
 /**
- * SAVE PRESET / LOAD PRESET — visual boards only for 1.0 factory seeds.
+ * PRESETS / USER SAVES
+ * - factory/  shipped looks (re-seedable, not user-deletable from normal UI)
+ * - user/     user saves (SAVE PREFS / SAVE PRESET)
  */
 class PresetStore(context: Context) {
-    private val dir = File(context.filesDir, "presets").also { it.mkdirs() }
+    private val root = File(context.filesDir, "presets").also { it.mkdirs() }
+    private val factoryDir = File(root, "factory").also { it.mkdirs() }
+    private val userDir = File(root, "user").also { it.mkdirs() }
 
-    fun listNames(): List<String> =
-        dir.listFiles()?.mapNotNull { f ->
-            f.name.removeSuffix(".json").takeIf { f.extension == "json" }
-        }?.sorted().orEmpty()
-
-    fun save(name: String, board: Switchboard) {
-        val safe = sanitize(name)
-        board.presetName = safe
-        File(dir, "$safe.json").writeText(board.toJson().toString(2))
+    data class Entry(
+        val name: String,
+        val kind: Kind,
+    ) {
+        val label: String get() = when (kind) {
+            Kind.FACTORY -> "FACTORY · ${name.uppercase()}"
+            Kind.USER -> "USER · ${name.uppercase()}"
+        }
     }
 
+    enum class Kind { FACTORY, USER }
+
+    fun listFactory(): List<String> = namesIn(factoryDir)
+    fun listUser(): List<String> = namesIn(userDir)
+
+    fun listAll(): List<Entry> =
+        listFactory().map { Entry(it, Kind.FACTORY) } +
+            listUser().map { Entry(it, Kind.USER) }
+
+    fun saveUser(name: String, board: Switchboard): String {
+        val safe = sanitize(name)
+        board.presetName = safe
+        File(userDir, "$safe.json").writeText(board.toJson().toString(2))
+        return safe
+    }
+
+    /** Prefer user save over factory when names collide. */
     fun load(name: String, board: Switchboard): Boolean {
-        val f = File(dir, "${sanitize(name)}.json")
-        if (!f.exists()) return false
+        val safe = sanitize(name)
+        val user = File(userDir, "$safe.json")
+        val factory = File(factoryDir, "$safe.json")
+        val f = when {
+            user.exists() -> user
+            factory.exists() -> factory
+            else -> return false
+        }
         board.loadJson(JSONObject(f.readText()))
         return true
     }
 
-    fun seedFactoryIfEmpty() {
-        if (listNames().isNotEmpty()) return
+    fun deleteUser(name: String): Boolean {
+        val f = File(userDir, "${sanitize(name)}.json")
+        return f.exists() && f.delete()
+    }
+
+    fun exists(name: String): Boolean {
+        val safe = sanitize(name)
+        return File(userDir, "$safe.json").exists() || File(factoryDir, "$safe.json").exists()
+    }
+
+    fun listSummary(): String {
+        val f = listFactory()
+        val u = listUser()
+        return buildString {
+            append("FACTORY: ")
+            append(if (f.isEmpty()) "(none)" else f.joinToString())
+            append(" · USER: ")
+            append(if (u.isEmpty()) "(none)" else u.joinToString())
+        }
+    }
+
+    /** Always ensure factory seeds exist (does not wipe user/). Migrates legacy flat presets. */
+    fun ensureFactory() {
+        migrateLegacyFlatFiles()
+        if (listFactory().isNotEmpty()) return
+        seedAllFactory()
+    }
+
+    private fun migrateLegacyFlatFiles() {
+        root.listFiles()?.forEach { f ->
+            if (f.isFile && f.extension == "json") {
+                val dest = File(userDir, f.name)
+                if (!dest.exists()) f.copyTo(dest)
+                f.delete()
+            }
+        }
+    }
+
+    private fun seedAllFactory() {
         fun seed(name: String, build: Switchboard.() -> Unit) {
             val b = Switchboard()
             b.presetName = name
             b.build()
-            save(name, b)
+            File(factoryDir, "${sanitize(name)}.json").writeText(b.toJson().toString(2))
         }
         seed("gogh_walk") {
             globalWet = 0.55f
@@ -136,13 +199,12 @@ class PresetStore(context: Context) {
             addEffect(EffectId.MOOD_FEVER)
             addEffect(EffectId.NEON).fadeInSec = 1f
         }
-        // Adjustable-rate mandelbrot chromakeyed into FOV + trails — the etv special
         seed("mandel_key_trails") {
             globalWet = 0.85f
             targetFps = 24
             allowDroppedFrames = true
-            fractalKeyMode = 3 // chroma into FOV
-            fractalKeyHue = 0.33f // green-ish windows / plants / chroma cloth
+            fractalKeyMode = 3
+            fractalKeyHue = 0.33f
             addEffect(EffectId.MANDELBROT).apply {
                 rate = 1.25f
                 fadeInSec = 1.5f
@@ -157,12 +219,20 @@ class PresetStore(context: Context) {
             globalWet = 0.8f
             targetFps = 20
             allowDroppedFrames = true
-            fractalKeyMode = 1 // darks = infinity
+            fractalKeyMode = 1
             addEffect(EffectId.MANDELBROT).rate = 2.0f
             addEffect(EffectId.TRAIL)
             addEffect(EffectId.MOOD_NIGHT)
         }
     }
+
+    /** @deprecated use ensureFactory */
+    fun seedFactoryIfEmpty() = ensureFactory()
+
+    private fun namesIn(dir: File): List<String> =
+        dir.listFiles()?.mapNotNull { f ->
+            f.name.removeSuffix(".json").takeIf { f.isFile && f.extension == "json" }
+        }?.sorted().orEmpty()
 
     private fun sanitize(name: String): String =
         name.trim().lowercase().replace(Regex("[^a-z0-9_\\-]+"), "_").ifEmpty { "preset" }

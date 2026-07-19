@@ -114,7 +114,18 @@ class MainActivity : ComponentActivity() {
                     mix.applyCommand(cmd)
                     BoardSession.board.applyToMix(mix)
                     renderer.onMixChanged()
-                    status.text = mix.statusLine() + "\n" + ElsdApp.CREDIT_SHORT
+                    val extra = when (cmd) {
+                        is com.elsd.voice.Command.BoardListPresets ->
+                            "\n" + BoardSession.presets.listSummary()
+                        is com.elsd.voice.Command.BoardSavePreset ->
+                            "\nSAVED USER · ${cmd.name}"
+                        is com.elsd.voice.Command.BoardLoadPreset ->
+                            "\nLOADED · ${cmd.name}"
+                        is com.elsd.voice.Command.BoardDeletePreset ->
+                            "\nDELETED USER · ${cmd.name}"
+                        else -> ""
+                    }
+                    status.text = mix.statusLine() + extra + "\n" + ElsdApp.CREDIT_SHORT
                 }
             },
             onPartial = { partial ->

@@ -129,13 +129,32 @@ class MixState {
             }
             is Command.BoardSavePreset -> {
                 if (BoardSession::presets.isInitialized) {
-                    BoardSession.presets.save(cmd.name, BoardSession.board)
+                    val saved = BoardSession.presets.saveUser(cmd.name, BoardSession.board)
+                    presetName = saved
+                    lastBank = "PRESETS"
                 }
             }
             is Command.BoardLoadPreset -> {
                 if (BoardSession::presets.isInitialized) {
-                    BoardSession.presets.load(cmd.name, BoardSession.board)
-                    BoardSession.board.applyToMix(this)
+                    if (BoardSession.presets.load(cmd.name, BoardSession.board)) {
+                        BoardSession.board.applyToMix(this)
+                        lastBank = "PRESETS"
+                    }
+                }
+            }
+            is Command.BoardDeletePreset -> {
+                if (BoardSession::presets.isInitialized) {
+                    BoardSession.presets.deleteUser(cmd.name)
+                    lastBank = "PRESETS"
+                }
+            }
+            is Command.BoardListPresets -> {
+                // UI/status only — list is read at call site / status
+                lastBank = "PRESETS"
+                presetName = if (BoardSession::presets.isInitialized) {
+                    BoardSession.presets.listSummary().take(80)
+                } else {
+                    "presets"
                 }
             }
             is Command.BoardClear -> {

@@ -218,13 +218,35 @@ object CommandGrammar {
 
     private fun parseBoard(t: String): Command? {
         if (t.contains("clear board")) return Command.BoardClear
-        if (t.contains("save preset")) {
-            val name = t.substringAfter("save preset").trim().ifEmpty { "voice" }
+        // PRESETS / USER SAVES / prefs-style
+        if (
+            t.contains("list presets") || t.contains("list saves") ||
+            t.contains("my presets") || t.contains("show presets") ||
+            t.contains("what presets")
+        ) {
+            return Command.BoardListPresets
+        }
+        Regex("(?:delete preset|delete save|delete prefs)\\s+(.+)").find(t)?.let { m ->
+            return Command.BoardDeletePreset(m.groupValues[1].trim().replace(" ", "_"))
+        }
+        // save prefs / save preset / save my / save as
+        Regex(
+            "(?:save (?:prefs|preset|preferences)|save my (?:prefs|preset)|save as|save board)\\s*(.*)",
+        ).find(t)?.let { m ->
+            val name = m.groupValues[1].trim().ifEmpty { "user_save" }
             return Command.BoardSavePreset(name.replace(" ", "_"))
         }
-        if (t.contains("load preset")) {
-            val name = t.substringAfter("load preset").trim().ifEmpty { return null }
-            return Command.BoardLoadPreset(name.replace(" ", "_"))
+        if (t == "save prefs" || t == "save preset" || t == "save my prefs") {
+            return Command.BoardSavePreset("user_save")
+        }
+        // load prefs / load preset / load my / open preset
+        Regex(
+            "(?:load (?:prefs|preset|preferences)|load my (?:prefs|preset)|open preset|recall)\\s+(.+)",
+        ).find(t)?.let { m ->
+            return Command.BoardLoadPreset(m.groupValues[1].trim().replace(" ", "_"))
+        }
+        if (t == "load prefs" || t == "load last" || t == "load my prefs") {
+            return Command.BoardLoadPreset("user_save")
         }
         // add effect time trails 2
         Regex("(?:add effect time|fade in)\\s+(\\w+)\\s+(\\d+(?:\\.\\d+)?)").find(t)?.let { m ->

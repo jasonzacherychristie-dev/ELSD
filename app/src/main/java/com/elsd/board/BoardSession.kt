@@ -10,6 +10,6 @@ object BoardSession {
 
     fun init(store: PresetStore) {
         presets = store
-        store.seedFactoryIfEmpty()
+        store.ensureFactory()
     }
 }

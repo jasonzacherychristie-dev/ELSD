@@ -64,9 +64,11 @@ Full map: **[docs/design/ROADMAP.md](docs/design/ROADMAP.md)** · 1.0 execution:
 
 One page. Drill down. Same words as voice:
 
-**ADD EFFECT** · **REMOVE EFFECT** · **TOGGLE EFFECT** · **ADD EFFECT TIME** · **PHASE …** · **SET FRAMERATE** · **ENABLE DROPPED FRAMES** · **SAVE PRESET** · **LOAD PRESET** · **GO LIVE**
+**ADD EFFECT** · **PRESETS** · **SAVE PREFS** · **RANDOM** · **SET FRAMERATE** · **ENABLE DROPPED FRAMES** · **GO LIVE**
 
-Spec: [docs/design/SWITCHBOARD.md](docs/design/SWITCHBOARD.md) · [docs/design/FRAMERATE.md](docs/design/FRAMERATE.md)
+Voice prefs: `save prefs walk` · `load prefs noir_night` · `list presets` · `delete preset walk`
+
+Spec: [docs/design/SWITCHBOARD.md](docs/design/SWITCHBOARD.md) · [docs/design/PRESETS.md](docs/design/PRESETS.md) · [docs/design/FRAMERATE.md](docs/design/FRAMERATE.md)
 
 ## Target hardware
 

@@ -71,7 +71,7 @@ Four creative banks + two globals.
 | **PALETTE** (analog/digital medium) | ✅ film, vhs, digital clean/harsh, polaroid |
 | **MOOD** (one overall toggle) | ✅ neutral, calm, warm, cold, night, fever, toasted |
 | **Switchboard** | ✅ single page, drill-down, phase times |
-| **SAVE / LOAD PRESET** | ✅ JSON + factory seeds |
+| **PRESETS / USER SAVES** | ✅ factory + user dirs; switchboard hub; prefs voice — [`PRESETS.md`](PRESETS.md) |
 | **RANDOM** | ✅ roll board — voice: random / surprise me / shuffle / chaos… |
 | **SET FRAMERATE / DROPPED FRAMES** | ✅ film cadence + budget |
 | **Amy** lean-in | ✅ procedural quad (not live 3D mesh) — [`AMY_RENDER.md`](AMY_RENDER.md) |

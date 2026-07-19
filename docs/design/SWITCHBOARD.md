@@ -26,6 +26,11 @@ All user-facing actions use this lexicon (UI labels + voice):
 | **SAVE PRESET** | Write current board to a named preset |
 | **LOAD PRESET** | Replace board from a named preset |
 | **CLEAR BOARD** | Remove all effects (soft sober of layers; not full STOP) |
+| **PRESETS** | Hub: factory + **user saves**, load, delete user |
+| **SAVE PREFS** | Write current board to USER save |
+| **LOAD PREFS** / load row | Restore board (user preferred over factory) |
+| **LIST PRESETS** | Voice/status summary |
+| **DELETE PRESET** | User saves only |
 | **RANDOM** | Roll a coherent random board (mood + palette + looks) |
 | **SET FRAMERATE** | Cap cadence (12 / 16 / 24 / 30 / 60 / unlock) — **film language** |
 | **ENABLE DROPPED FRAMES** | Allow budget + aesthetic frame holds |
