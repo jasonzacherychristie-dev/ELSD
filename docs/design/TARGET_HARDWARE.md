@@ -1,11 +1,39 @@
 # Target hardware — ELSD 1.0
 
-ELSD is a **phone-in-viewer** perception mixer first.  
-We optimize FOV, thermal notes, and QA for **real phones we hold** — not boutique PC VR, not tiny 2015 Cardboard shells.
+ELSD is an **Android perception mixer** first — **app + Amy + switchboard** must deserve cool eyes before we chain the hardware.
 
-**Public pitch:** large-tray **Cardboard-compatible** headset · prove on **OnePlus 9** · ship feel on **OnePlus 12**.
+We optimize for **real phones we hold** — not boutique PC VR, not tiny 2015 cardboard shells.
+
+**Public pitch:** prove on **OnePlus 9** · ship feel on **OnePlus 12** · large-tray stereo when ready · USB-C glasses as personal dream display.
 
 **Sideload / adb process:** [`../DEV_DEPLOY.md`](../DEV_DEPLOY.md)
+
+---
+
+## Product approach (paths)
+
+**Order of development, not of ego:**
+
+| Order | Path | What it is | Role |
+|-------|------|------------|------|
+| **1** | **Desk / phone glass** | Flat landscape GO LIVE on OP9 / OP12 / Pixel | **Ship the app** — switchboard, Amy, banks, presets |
+| **2** | **Large plastic tray** | Phone-in-viewer, SBS + Cardboard-class distortion | **Stereo eyes** lab / optional 1.0 M5 |
+| **3** | **USB-C XR glasses** | XREAL / Viture-class; phone as DP Alt Mode source | **Personal high-end PGM** — cinematic, not required for open-source 1.0 |
+
+**Philosophy**
+
+- Putting **Amy on a big, legible desk UI** first means we build software that **deserves** dreamy glass later.  
+- Folding **Cardboard no longer fits** modern flagships — tray path must be **Ultra / 6.8–7.0"** plastic only.  
+- **High-end glasses** (120 Hz-class micro-OLED, electrochromic) are a **personal / ship-feel** treat on OP12 — not a gate for contributors.  
+- Glasses path ≠ tray path: glasses are usually a **huge virtual monitor** (dreamy cinema), not phone-screen passthrough through lenses.
+
+```
+ELSD core (Amy · switchboard · WORLD · banks)
+        │
+        ├─► A. Phone display (default QA)
+        ├─► B. Large tray stereo (Cardboard OSS when ready)
+        └─► C. USB-C glasses PGM (OP12 personal / cinema)
+```
 
 ---
 
@@ -13,9 +41,11 @@ We optimize FOV, thermal notes, and QA for **real phones we hold** — not bouti
 
 | Device | Role in lab |
 |--------|-------------|
-| **OnePlus 9** | Floor / thermal gate / daily headset torture |
-| **OnePlus 12** | Ship reference / “sizzle” |
-| **Pixel 7** | Clean Android reference, permissions & camera sanity (flat desk; ~6.3" tray fit varies) |
+| **OnePlus 9** | Floor / thermal gate / tray torture (lighter) |
+| **OnePlus 12** | Ship reference / “sizzle” / **glasses host** |
+| **Pixel 7** | Clean Android reference (flat desk; ~6.3" tray fit varies) |
+| **USB-C XR glasses** (e.g. XREAL One / One Pro / Air 2 Pro class) | Personal dream display on OP12 — optional |
+| **Large plastic tray** | Stereo / FOV experiments when Ultra-fit shell arrives |
 
 ---
 

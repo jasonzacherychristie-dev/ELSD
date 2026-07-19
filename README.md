@@ -78,13 +78,14 @@ Spec: [docs/design/SWITCHBOARD.md](docs/design/SWITCHBOARD.md) · [docs/design/P
 
 | | |
 |--|--|
-| **Headset** | **Large-tray Cardboard-compatible** phone VR viewer — fit **6.5–7.0"** (order for **OP12**; OP9 must fit) |
-| **Floor (prove it)** | **OnePlus 9** — Snapdragon 888, 6.55". If it runs here, everything above sizzles. |
+| **Develop first** | Phone glass + **Amy / switchboard** — the app has to deserve cool eyes |
+| **Floor (prove it)** | **OnePlus 9** — Snapdragon 888, 6.55" |
 | **Ship (sizzle)** | **OnePlus 12** (~6.8") |
-| **Desk / API check** | **Pixel 7** and peers — fine for flat testing |
-| **Not required for 1.0** | Quest / Pico / PCVR |
+| **Stereo (optional)** | **Large-tray** Cardboard-compatible shell — **6.5–7.0" / Ultra** (classic cardboard is too small) |
+| **Personal cinema** | USB-C XR glasses (XREAL / Viture-class, high-Hz micro-OLED) on OP12 — not required for contributors |
+| **Desk / API** | **Pixel 7** and peers |
 
-Shopping rules + OP9 QA gates: **[docs/design/TARGET_HARDWARE.md](docs/design/TARGET_HARDWARE.md)**
+Paths A/B/C + shopping rules: **[docs/design/TARGET_HARDWARE.md](docs/design/TARGET_HARDWARE.md)**
 
 ## Build & deploy to a phone
 
