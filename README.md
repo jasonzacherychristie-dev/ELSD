@@ -39,13 +39,14 @@ Third-party libraries (Cardboard SDK, CameraX, Media3, Vosk, AndroidX, …) rema
 ## Status
 
 **Active release: 1.0** — **visuals only** on live camera: ELSD · Art · Cinema · Palette · Mood.  
-**2.0:** live video in / stream out / key / ears. **3.0:** DeepDream.
+**2.0** media in/out · **3.0** DeepDream · **4.0** time travel (any era).
 
 | Release | Theme | Status |
 |---------|--------|--------|
 | **1.0** | Visual desk — camera + styles + mood + Amy + switchboard | **In progress** |
-| **2.0** | Media in/out + key + spatial ears + depth-pop | After 1.0 |
+| **2.0** | Media in/out + key + ears + strike morph | After 1.0 |
 | **3.0** | Dream machine — **DeepDream** | Wishlist |
+| **4.0** | **Time travel** — local world → any era past/future | Horizon |
 
 Full map: **[docs/design/ROADMAP.md](docs/design/ROADMAP.md)** · 1.0 execution: **[docs/design/PROJECT_PLAN.md](docs/design/PROJECT_PLAN.md)**
 
@@ -117,9 +118,10 @@ Install `app/build/outputs/apk/debug/app-debug.apk`, grant camera + mic, landsca
 | Doc | What |
 |-----|------|
 | [MISSION.md](MISSION.md) | Mission, vision, principles |
-| [docs/design/ROADMAP.md](docs/design/ROADMAP.md) | **1.0 / 2.0 / 3.0** |
+| [docs/design/ROADMAP.md](docs/design/ROADMAP.md) | **1.0 → 4.0** |
 | [docs/design/VISUAL_SYSTEM.md](docs/design/VISUAL_SYSTEM.md) | ELSD · Art · Cinema · Palette · Mood |
-| [docs/design/STILLNESS_MORPH.md](docs/design/STILLNESS_MORPH.md) | Stare longer → morph budget (DeepDream later) |
+| [docs/design/STILLNESS_MORPH.md](docs/design/STILLNESS_MORPH.md) | Stare longer → morph budget |
+| [docs/design/TIME_TRAVEL.md](docs/design/TIME_TRAVEL.md) | **4.0** — era transform of the local world |
 | [docs/design/SOUL.md](docs/design/SOUL.md) | Look, Amy, TOASTED |
 | [docs/design/VISION_1_0.md](docs/design/VISION_1_0.md) | Product vision |
 | [docs/design/VOICE_AND_CURSOR.md](docs/design/VOICE_AND_CURSOR.md) | Voice-only + cursor |

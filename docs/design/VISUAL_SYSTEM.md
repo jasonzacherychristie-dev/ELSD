@@ -8,6 +8,7 @@ No live plate ingest, no stream-out, no spatial-ear product path in the critical
 | **1.0** | ELSD · Art · Cinema · Palette · Mood | Camera only |
 | **2.0** | + richer FBO, depth-pop optional | **Live video in, stream out, keying** |
 | **3.0** | + DeepDream / neural | Dream machine |
+| **4.0** | + **Time travel** (era reskin of local world) | Any past/future — [`TIME_TRAVEL.md`](TIME_TRAVEL.md) |
 
 ---
 
@@ -156,4 +157,5 @@ Design: [`STILLNESS_MORPH.md`](STILLNESS_MORPH.md). Does not replace ART/CINEMA;
 
 **1.0:** Point the phone at the world. Paint it, grade it, trip it, set the mood.  
 **2.0:** Pipe other video in and out; stare longer for strike morphs.  
-**3.0:** Hold still — and dream.
+**3.0:** Hold still — and dream.  
+**4.0:** The room stays. The century changes.

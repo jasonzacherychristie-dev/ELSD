@@ -13,7 +13,7 @@ Sound can possess buildings. Paint can walk down the street. A keyed stream can 
 
 We build **TOASTED**: a live-desk spirit for perception — wet/dry, banks, program out — without locking the soul of the machine behind a brand name.
 
-Long horizon: richer stereo, safer trips, collaborative seeing. Near term: a **Cardboard-compatible Android** app on **large flagship + large-tray phone headset** (OnePlus 12 class) that a hobbyist can run, demo, and fork under **MIT**. See `docs/design/TARGET_HARDWARE.md`.
+Long horizon: dream layers, then **time travel** — the local world reskinned into any era (past or future). Near term: a **Cardboard-compatible Android** app on **large flagship + large-tray phone headset** (OnePlus 12 class) under **MIT**. See `docs/design/TARGET_HARDWARE.md` · `docs/design/TIME_TRAVEL.md`.
 
 ## What we ship for
 
@@ -43,7 +43,7 @@ Long horizon: richer stereo, safer trips, collaborative seeing. Near term: a **C
 - Building a social network or ad-surveillance platform  
 - Requiring proprietary engines for the core path  
 - iOS parity before Android 1.0 is real  
-- Shipping **DeepDream / heavy neural vision** before the 1.0 mixer works (tracked as **3.0** — see `docs/design/ROADMAP.md`)  
+- Shipping **DeepDream** before the 1.0 mixer works (**3.0**); **time travel / era rebuild** is **4.0** — see `docs/design/ROADMAP.md`  
 
 ## Success looks like
 

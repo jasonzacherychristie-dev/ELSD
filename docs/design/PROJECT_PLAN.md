@@ -10,7 +10,7 @@
 3. **TOASTED** desk: wet/dry, phase times, SAVE/LOAD PRESET.  
 4. **Amy** + voice vocabulary twin of switchboard — [`SOUL.md`](SOUL.md) · [`SWITCHBOARD.md`](SWITCHBOARD.md).  
 5. **No** live video in / stream out / key / ears in 1.0 — those are **2.0**.  
-6. **No** DeepDream in 1.0 — **3.0** ([`ROADMAP.md`](ROADMAP.md)).  
+6. **No** DeepDream in 1.0 — **3.0**; **no** time travel — **4.0** ([`ROADMAP.md`](ROADMAP.md)).  
 7. MIT + NOTICE; target hardware OP12 + large-tray viewer.
 
 ## Hardware baseline
@@ -122,7 +122,8 @@ Logical packages inside `app`: `bus`, `gl`, `fx-*`, `audio`, `bounce` (Amy), `vo
 | Release | See |
 |---------|-----|
 | **2.0** Deeper mixer | [`ROADMAP.md`](ROADMAP.md#20--deeper-mixer-after-10) |
-| **3.0** Dream machine + **DeepDream mode** | [`ROADMAP.md`](ROADMAP.md#30--dream-machine-wishlist) |
+| **3.0** Dream machine + **DeepDream** | [`ROADMAP.md`](ROADMAP.md) |
+| **4.0** **Time travel** (any era) | [`TIME_TRAVEL.md`](TIME_TRAVEL.md) |
 
 ## Open source process
 
