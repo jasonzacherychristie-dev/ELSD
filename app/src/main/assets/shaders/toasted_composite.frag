@@ -533,34 +533,63 @@ vec3 applyDesk(vec3 c, vec2 uv) {
         return floor(c * levels + 0.5) / levels;
     }
     if (uDesk == 5) {
-        // mirror H
-        vec2 muv = vec2(abs(uv.x - 0.5) + 0.5 * step(uv.x, 0.5) * 0.0 + (1.0 - uv.x) * step(0.5, uv.x) * 0.0, uv.y);
-        // clean horizontal mirror about center
-        muv = vec2(uv.x < 0.5 ? uv.x : 1.0 - uv.x, uv.y);
-        // show mirrored half blended
+        // mirror horizontal (left half reflected to right)
         vec3 mc = texture(uWorld, vec2(1.0 - uv.x, uv.y)).rgb;
         return mix(c, mc, w * step(0.5, uv.x));
+    }
+    if (uDesk == 6) {
+        // mirror vertical (top reflected to bottom)
+        vec3 mc = texture(uWorld, vec2(uv.x, 1.0 - uv.y)).rgb;
+        return mix(c, mc, w * step(0.5, uv.y));
+    }
+    if (uDesk == 7) {
+        // mirror quad — fold into upper-left quadrant, tile 4 ways
+        vec2 q = abs(uv - 0.5);
+        vec3 mc = texture(uWorld, 0.5 - q).rgb;
+        // also blend opposite corner sample for denser fold
+        vec3 mc2 = texture(uWorld, 0.5 + q * vec2(-1.0, 1.0)).rgb;
+        return mix(c, mix(mc, mc2, 0.5), w);
     }
     return c;
 }
 
+// Radial kaleidoscope: segments + optional spin
+vec3 kaleidoSample(vec2 uv, float segments, float spin) {
+    vec2 d = uv - 0.5;
+    float r = length(d);
+    float ang = atan(d.y, d.x) + spin;
+    float seg = max(segments, 2.0);
+    float twoPi = 6.2831853;
+    ang = mod(ang, twoPi / seg);
+    ang = abs(ang - 3.14159265 / seg);
+    vec2 kuv = vec2(cos(ang), sin(ang)) * r + 0.5;
+    kuv = clamp(kuv, 0.001, 0.999);
+    return texture(uWorld, kuv).rgb;
+}
+
 vec3 applyLsd(vec3 c, vec2 uv) {
-    // PSYCHEDELIC: kaleido / melt, then fractal key + trails
+    // PSYCHEDELIC: kaleido family / melt, then fractal key + trails
     float w = uWet;
     vec3 o = c;
     if (uLsd == 4) {
-        vec2 d = uv - 0.5;
-        float r = length(d);
-        float ang = atan(d.y, d.x);
-        float segments = 6.0;
-        ang = mod(ang, 6.28318 / segments);
-        ang = abs(ang - 3.14159 / segments);
-        vec2 kuv = vec2(cos(ang), sin(ang)) * r + 0.5;
-        o = mix(o, texture(uWorld, kuv).rgb, w);
+        o = mix(o, kaleidoSample(uv, 6.0, 0.0), w);
     } else if (uLsd == 5) {
         vec2 d = uv - 0.5;
         float m = 0.03 * w * sin(10.0 * d.x + uTime) * cos(8.0 * d.y - uTime);
         o = texture(uWorld, uv + d * m).rgb;
+    } else if (uLsd == 6) {
+        o = mix(o, kaleidoSample(uv, 4.0, 0.0), w);
+    } else if (uLsd == 7) {
+        o = mix(o, kaleidoSample(uv, 8.0, 0.0), w);
+    } else if (uLsd == 8) {
+        o = mix(o, kaleidoSample(uv, 12.0, 0.0), w);
+    } else if (uLsd == 9) {
+        // spinning kaleidoscope — rate via time
+        float spin = uTime * 0.55 * max(uFractalZoomRate, 0.5);
+        o = mix(o, kaleidoSample(uv, 6.0, spin), w);
+    } else if (uLsd == 10) {
+        // triangular 3-fold mirror (psychedelic crystal)
+        o = mix(o, kaleidoSample(uv, 3.0, 0.0), w);
     }
 
     if (uFractal == 1) {

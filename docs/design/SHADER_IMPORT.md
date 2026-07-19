@@ -114,11 +114,15 @@ docs/shaders/import/<effect_id>/
 
 See `docs/shaders/import/negative/SOURCE.md`.
 
-### Next candidates (after pilot)
+### After pilot (landed)
 
-1. **posterize** — still simple, very Toaster  
-2. **mirror** — UV only  
-3. External CC0 Shadertoy **only if** rewritten to contract  
+1. **posterize** — ✅ quantize  
+2. **mirror family** — ✅ H / V / quad (UV only) + kaleido 4/6/8/12/spin + tri_mirror  
+
+### Next candidates
+
+1. External CC0 Shadertoy **only if** rewritten to contract  
+2. Stillness morph L2+ ROI recursion
 
 ---
 

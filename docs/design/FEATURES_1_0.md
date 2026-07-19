@@ -126,4 +126,6 @@ Stranger &lt; 60s to a look they can name.
 
 ## Related
 
-- 
+- Shader intake: [`SHADER_IMPORT.md`](SHADER_IMPORT.md)  
+- Visual detail: [`VISUAL_SYSTEM.md`](VISUAL_SYSTEM.md)  
+- Roadmap: [`ROADMAP.md`](ROADMAP.md)  

@@ -55,8 +55,13 @@ enum class EffectId(
     GIALLO("giallo", EffectFamily.FILM, "GIALLO"),
     GOLDEN_AGE("golden_age", EffectFamily.FILM, "GOLDEN AGE"),
 
-    // —— PSYCHEDELIC ——
+    // —— PSYCHEDELIC (mirrors / kaleidoscope family + trip) ——
     KALEIDO("kaleido", EffectFamily.PSYCHEDELIC, "KALEIDO"),
+    KALEIDO_4("kaleido_4", EffectFamily.PSYCHEDELIC, "KALEIDO 4"),
+    KALEIDO_8("kaleido_8", EffectFamily.PSYCHEDELIC, "KALEIDO 8"),
+    KALEIDO_12("kaleido_12", EffectFamily.PSYCHEDELIC, "KALEIDO 12"),
+    KALEIDO_SPIN("kaleido_spin", EffectFamily.PSYCHEDELIC, "KALEIDO SPIN"),
+    TRI_MIRROR("tri_mirror", EffectFamily.PSYCHEDELIC, "TRI MIRROR"),
     MELT("melt", EffectFamily.PSYCHEDELIC, "MELT"),
     MANDELBROT("mandelbrot", EffectFamily.PSYCHEDELIC, "MANDELBROT"),
     JULIA("julia", EffectFamily.PSYCHEDELIC, "JULIA"),

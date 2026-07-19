@@ -19,10 +19,13 @@ object RandomDesk {
         EffectId.GIALLO, EffectId.GOLDEN_AGE,
     )
     private val psych = listOf(
-        EffectId.KALEIDO, EffectId.MELT, EffectId.MANDELBROT, EffectId.JULIA,
+        EffectId.KALEIDO, EffectId.KALEIDO_4, EffectId.KALEIDO_8, EffectId.KALEIDO_12,
+        EffectId.KALEIDO_SPIN, EffectId.TRI_MIRROR, EffectId.MELT,
+        EffectId.MANDELBROT, EffectId.JULIA,
     )
     private val deskToys = listOf(
-        EffectId.HUE, EffectId.SPLIT, EffectId.NEGATIVE, EffectId.POSTERIZE, EffectId.MIRROR,
+        EffectId.HUE, EffectId.SPLIT, EffectId.NEGATIVE, EffectId.POSTERIZE,
+        EffectId.MIRROR, EffectId.MIRROR_V, EffectId.MIRROR_QUAD,
     )
     private val palettes = listOf(
         EffectId.ANALOG_FILM, EffectId.ANALOG_VHS, EffectId.DIGITAL_CLEAN,

@@ -180,7 +180,7 @@ class Switchboard {
                                 last = "DESK"
                             }
                             else -> {
-                                // hue, split, negative, posterize, mirror
+                                // hue, split, negative, posterize, mirror / mirror_v / mirror_quad
                                 mix.deskId = layer.id.catalogName
                                 last = "DESK"
                             }
@@ -205,7 +205,7 @@ class Switchboard {
                                 last = "PSYCH"
                             }
                             else -> {
-                                // kaleido, melt
+                                // kaleido family, tri_mirror, melt
                                 mix.lsdId = layer.id.catalogName
                                 last = "PSYCH"
                             }
