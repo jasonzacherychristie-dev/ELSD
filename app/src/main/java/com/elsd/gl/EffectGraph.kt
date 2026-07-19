@@ -130,8 +130,13 @@ class EffectGraph(private val context: Context) {
     }
 
     private fun lsdIndex(id: String): Int = when (id) {
-        "kaleido" -> 4
+        "kaleido" -> 4      // 6 segments
         "melt" -> 5
+        "kaleido_4" -> 6
+        "kaleido_8" -> 7
+        "kaleido_12" -> 8
+        "kaleido_spin" -> 9
+        "tri_mirror" -> 10
         else -> 0
     }
 
@@ -141,6 +146,8 @@ class EffectGraph(private val context: Context) {
         "negative" -> 3
         "posterize" -> 4
         "mirror" -> 5
+        "mirror_v" -> 6
+        "mirror_quad" -> 7
         else -> 0
     }
 

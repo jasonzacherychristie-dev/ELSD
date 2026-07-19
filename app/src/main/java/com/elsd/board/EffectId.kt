@@ -29,6 +29,8 @@ enum class EffectId(
     NEGATIVE("negative", EffectFamily.DESK, "NEGATIVE"),
     POSTERIZE("posterize", EffectFamily.DESK, "POSTERIZE"),
     MIRROR("mirror", EffectFamily.DESK, "MIRROR"),
+    MIRROR_V("mirror_v", EffectFamily.DESK, "MIRROR V"),
+    MIRROR_QUAD("mirror_quad", EffectFamily.DESK, "MIRROR QUAD"),
 
     // —— ART ——
     GOGH("gogh", EffectFamily.ART, "GOGH"),

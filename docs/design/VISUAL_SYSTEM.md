@@ -26,7 +26,10 @@ Electronic LSD — trip geometry and time.
 | `trail` | Afterimage / feedback |
 | `hue` | Hue rotate |
 | `split` | RGB split |
-| `kaleido` | Kaleidoscope |
+| `kaleido` | 6-fold kaleidoscope |
+| `kaleido_4` / `kaleido_8` / `kaleido_12` | Segment density |
+| `kaleido_spin` | Rotating kaleidoscope |
+| `tri_mirror` | 3-fold triangular mirror |
 | `melt` | Domain warp melt |
 | `mandelbrot` | Escape-time set; **adjustable zoom rate**; chromakey into FOV |
 | `julia` | Julia set; room RGB = seed *c*; same key + rate stack |

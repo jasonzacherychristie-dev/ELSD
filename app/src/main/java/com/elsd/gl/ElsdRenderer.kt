@@ -155,4 +155,11 @@ class ElsdRenderer(
         bounce.mode = mix.bounceMode
         bounce.wet = mix.wet
         bounce.listening = listening
-       
+        bounce.actionsEnabled = mix.amyActionsEnabled
+        val aspect = width.toFloat() / height.toFloat()
+        bounce.draw(aspect, dt)
+
+        val costMs = (System.nanoTime() - t0) / 1_000_000f
+        lastFrameExpensive = costMs > 18f
+    }
+}

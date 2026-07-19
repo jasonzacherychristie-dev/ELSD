@@ -224,6 +224,30 @@ class PresetStore(context: Context) {
             addEffect(EffectId.TRAIL)
             addEffect(EffectId.MOOD_NIGHT)
         }
+        seed("looking_glass") {
+            globalWet = 0.85f
+            targetFps = 30
+            allowDroppedFrames = true
+            addEffect(EffectId.MIRROR_QUAD)
+            addEffect(EffectId.MOOD_COLD)
+            addEffect(EffectId.DIGITAL_CLEAN)
+        }
+        seed("crystal_spin") {
+            globalWet = 0.8f
+            targetFps = 24
+            allowDroppedFrames = true
+            addEffect(EffectId.KALEIDO_SPIN)
+            addEffect(EffectId.TRAIL).wet = 0.7f
+            addEffect(EffectId.MOOD_FEVER)
+        }
+        seed("diamond_room") {
+            globalWet = 0.75f
+            targetFps = 24
+            allowDroppedFrames = true
+            addEffect(EffectId.KALEIDO_8)
+            addEffect(EffectId.MIRROR_V)
+            addEffect(EffectId.MOOD_TOASTED)
+        }
     }
 
     /** @deprecated use ensureFactory */

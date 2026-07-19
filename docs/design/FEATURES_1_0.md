@@ -19,8 +19,10 @@ Four creative banks + two globals.
 | `hue` | ✅ | Hue rotate |
 | `split` | ✅ | RGB channel split |
 | `negative` | ✅ | **Shader import pilot** — invert |
-| `posterize` | ✅ | Quantize levels (simple follow-on) |
-| `mirror` | ✅ | Horizontal mirror blend |
+| `posterize` | ✅ | Quantize levels |
+| `mirror` | ✅ | Horizontal mirror (L→R) |
+| `mirror_v` | ✅ | Vertical mirror (T→B) |
+| `mirror_quad` | ✅ | Four-fold desk fold |
 
 ### 2. ART — art styles
 
@@ -56,7 +58,10 @@ Four creative banks + two globals.
 
 | ID | Status | Notes |
 |----|--------|--------|
-| `kaleido` | ✅ | |
+| `kaleido` | ✅ | 6-fold default |
+| `kaleido_4` / `_8` / `_12` | ✅ | Segment variants |
+| `kaleido_spin` | ✅ | Rotating 6-fold |
+| `tri_mirror` | ✅ | 3-fold crystal |
 | `melt` | ✅ | Domain warp |
 | `mandelbrot` | ✅ | Zoom rate + FOV key |
 | `julia` | ✅ | Room steers seed |
@@ -121,6 +126,4 @@ Stranger &lt; 60s to a look they can name.
 
 ## Related
 
-- Shader intake: [`SHADER_IMPORT.md`](SHADER_IMPORT.md)  
-- Visual detail: [`VISUAL_SYSTEM.md`](VISUAL_SYSTEM.md)  
-- Roadmap: [`ROADMAP.md`](ROADMAP.md)  
+- 

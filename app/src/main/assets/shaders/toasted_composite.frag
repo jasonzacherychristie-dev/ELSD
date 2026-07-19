@@ -14,9 +14,9 @@ uniform float uChromaHue;
 uniform int uPulse;
 // ART: 0 none, 1 gogh, 2 monet, 3 noir, 4 neon, 5 sketch, 6 melt, 7 comic, 8 cartoon, 9 hyperreal
 uniform int uPaint;
-// PSYCHEDELIC: 0 none, 4 kaleido, 5 melt
+// PSYCHEDELIC: 0 none, 4 kaleido6, 5 melt, 6 k4, 7 k8, 8 k12, 9 kspin, 10 tri_mirror
 uniform int uLsd;
-// DESK: 0 none, 1 hue, 2 split, 3 negative (import pilot), 4 posterize, 5 mirror
+// DESK: 0 none, 1 hue, 2 split, 3 negative, 4 posterize, 5 mirror H, 6 mirror V, 7 mirror quad
 uniform int uDesk;
 uniform int uTrail;           // 1 = trails on (stackable)
 uniform int uFractal;         // 0 off, 1 mandelbrot, 2 julia

@@ -193,6 +193,13 @@ class MixState {
                 fractalKeyMode = cmd.mode.coerceIn(0, 3)
                 BoardSession.board.fractalKeyMode = fractalKeyMode
             }
+            is Command.AmyActionsEnabled -> {
+                amyActionsEnabled = cmd.enabled
+                BoardSession.board.amyActionsEnabled = cmd.enabled
+            }
+            is Command.AmyPlay, is Command.AmyAntics -> {
+                // handled by renderer via pending action on MainActivity
+            }
             is Command.Unknown -> { /* ignore */ }
         }
     }

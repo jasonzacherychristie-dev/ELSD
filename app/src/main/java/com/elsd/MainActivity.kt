@@ -113,18 +113,36 @@ class MainActivity : ComponentActivity() {
             onCommand = { cmd ->
                 runOnUiThread {
                     renderer.setListening(false)
-                    mix.applyCommand(cmd)
-                    BoardSession.board.applyToMix(mix)
+                    when (cmd) {
+                        is Command.AmyPlay -> {
+                            AmyAction.fromId(cmd.actionId)?.let { renderer.playAmy(it) }
+                        }
+                        is Command.AmyAntics -> renderer.playAmyAntics()
+                        else -> {
+                            mix.applyCommand(cmd)
+                            BoardSession.board.applyToMix(mix)
+                            // cute ack after most commands
+                            if (mix.amyActionsEnabled) {
+                                renderer.playAmy(AmyAction.ACK)
+                            }
+                        }
+                    }
                     renderer.onMixChanged()
                     val extra = when (cmd) {
-                        is com.elsd.voice.Command.BoardListPresets ->
+                        is Command.BoardListPresets ->
                             "\n" + BoardSession.presets.listSummary()
-                        is com.elsd.voice.Command.BoardSavePreset ->
+                        is Command.BoardSavePreset ->
                             "\nSAVED USER · ${cmd.name}"
-                        is com.elsd.voice.Command.BoardLoadPreset ->
+                        is Command.BoardLoadPreset ->
                             "\nLOADED · ${cmd.name}"
-                        is com.elsd.voice.Command.BoardDeletePreset ->
+                        is Command.BoardDeletePreset ->
                             "\nDELETED USER · ${cmd.name}"
+                        is Command.AmyPlay ->
+                            "\nAMY · ${cmd.actionId.uppercase()}"
+                        is Command.AmyAntics ->
+                            "\nAMY · ANTICS"
+                        is Command.AmyActionsEnabled ->
+                            "\nAMY ACTIONS · ${if (cmd.enabled) "ON" else "OFF"}"
                         else -> ""
                     }
                     status.text = mix.statusLine() + extra + "\n" + ElsdApp.CREDIT_SHORT

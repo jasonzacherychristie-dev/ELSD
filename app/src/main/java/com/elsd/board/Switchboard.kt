@@ -148,6 +148,7 @@ class Switchboard {
         mix.targetFps = targetFps
         mix.allowDroppedFrames = allowDroppedFrames
         mix.bounceMode = if (amyMuted) BounceMode.MUTED else BounceMode.FLAT
+        mix.amyActionsEnabled = amyActionsEnabled
 
         mix.paintId = "none"
         mix.lsdId = "none"
@@ -235,4 +236,11 @@ class Switchboard {
                 EffectFamily.MOOD -> {
                     if (layer.enabled || layer.envelope() > 0.01f) {
                         mix.moodId = layer.id.catalogName
-                  
+                        last = "MOOD"
+                    }
+                }
+            }
+        }
+        mix.lastBank = last
+    }
+}

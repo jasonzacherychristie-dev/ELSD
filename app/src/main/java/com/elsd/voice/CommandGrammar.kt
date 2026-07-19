@@ -302,6 +302,27 @@ object CommandGrammar {
         Regex("phase off\\s+(\\w+)").find(t)?.let { m ->
             return Command.BoardPhase(m.groupValues[1], false)
         }
+        // Mirror / kaleido shorthand
+        when {
+            t.contains("mirror quad") || t.contains("quad mirror") ->
+                return Command.BoardAdd("mirror_quad")
+            t.contains("mirror vertical") || t.contains("mirror v") || t.contains("flip vertical") ->
+                return Command.BoardAdd("mirror_v")
+            t.contains("add mirror") || t == "mirror" ->
+                return Command.BoardAdd("mirror")
+            t.contains("kaleido spin") || t.contains("spinning kaleido") ->
+                return Command.BoardAdd("kaleido_spin")
+            t.contains("kaleido 12") || t.contains("kaleidoscope 12") ->
+                return Command.BoardAdd("kaleido_12")
+            t.contains("kaleido 8") || t.contains("kaleidoscope 8") ->
+                return Command.BoardAdd("kaleido_8")
+            t.contains("kaleido 4") || t.contains("kaleidoscope 4") ->
+                return Command.BoardAdd("kaleido_4")
+            t.contains("tri mirror") || t.contains("triangle mirror") ->
+                return Command.BoardAdd("tri_mirror")
+            t.contains("kaleido") || t.contains("kaleidoscope") ->
+                return Command.BoardAdd("kaleido")
+        }
         Regex("(?:add effect|add)\\s+(\\w+)").find(t)?.let { m ->
             val id = m.groupValues[1]
             if (id == "effect") return null
