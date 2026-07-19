@@ -14,6 +14,28 @@ object CommandGrammar {
             .trim()
         if (t.isEmpty()) return Command.Unknown(raw)
 
+        // RANDOM mode — whatever verbal trigger
+        if (
+            t == "random" ||
+            t.contains("random mode") ||
+            t.contains("surprise me") ||
+            t.contains("surprise") ||
+            t.contains("roll the dice") ||
+            t.contains("roll dice") ||
+            t.contains("shuffle") ||
+            t.contains("chaos mode") ||
+            t.contains("chaos") ||
+            t.contains("hit me") ||
+            t.contains("feel lucky") ||
+            t.contains("i'm feeling lucky") ||
+            t.contains("im feeling lucky") ||
+            t.contains("amy random") ||
+            t.contains("randomize") ||
+            t.contains("randomise")
+        ) {
+            return Command.RandomMode
+        }
+
         // Framerate / dropped frames
         if (t.contains("unlock framerate") || t.contains("framerate off") || t.contains("unlock frame")) {
             return Command.UnlockFramerate

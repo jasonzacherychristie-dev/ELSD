@@ -32,6 +32,8 @@ sealed class Command {
     data class BoardSavePreset(val name: String) : Command()
     data class BoardLoadPreset(val name: String) : Command()
     data object BoardClear : Command()
+    /** Roll a random visual board. */
+    data object RandomMode : Command()
     data class SetFramerate(val fps: Int) : Command()
     data class DroppedFrames(val enabled: Boolean) : Command()
     data object UnlockFramerate : Command()

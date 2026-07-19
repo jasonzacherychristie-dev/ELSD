@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ELSD</string>
-    <string name="boot_hint">Amy leans in when you talk · clear · toasted · gogh · trails · mute amy</string>
+    <string name="boot_hint">Amy leans in when you talk · random · clear · toasted · gogh · trails · mute amy</string>
     <string name="need_camera">Camera permission required for the WORLD bus.</string>
     <string name="about_credit">Built with Grok (xAI) — Jason Z. Christie</string>
     <string name="about_credit_long">ELSD is a Jason Z. Christie project, co-implemented with Grok by xAI. MIT License.</string>

@@ -142,6 +142,12 @@ class MixState {
                 BoardSession.board.clearBoard()
                 BoardSession.board.applyToMix(this)
             }
+            is Command.RandomMode -> {
+                com.elsd.board.RandomDesk.roll(BoardSession.board)
+                BoardSession.board.applyToMix(this)
+                lastBank = "RANDOM"
+                presetName = "random"
+            }
             is Command.SetFramerate -> {
                 targetFps = cmd.fps
                 BoardSession.board.targetFps = cmd.fps

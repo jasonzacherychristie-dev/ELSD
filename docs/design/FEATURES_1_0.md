@@ -72,6 +72,7 @@ Four creative banks + two globals.
 | **MOOD** (one overall toggle) | ✅ neutral, calm, warm, cold, night, fever, toasted |
 | **Switchboard** | ✅ single page, drill-down, phase times |
 | **SAVE / LOAD PRESET** | ✅ JSON + factory seeds |
+| **RANDOM** | ✅ roll board — voice: random / surprise me / shuffle / chaos… |
 | **SET FRAMERATE / DROPPED FRAMES** | ✅ film cadence + budget |
 | **Amy** lean-in | ✅ procedural quad (not live 3D mesh) — [`AMY_RENDER.md`](AMY_RENDER.md) |
 | **Voice** = switchboard verbs | ✅ |

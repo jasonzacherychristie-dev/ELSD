@@ -41,4 +41,13 @@ class CommandGrammarTest {
         assertEquals(Command.Spatial("orbit"), CommandGrammar.parse("orbit"))
         assertEquals(Command.Spatial("behind"), CommandGrammar.parse("something behind me"))
     }
+
+    @Test
+    fun randomTriggers() {
+        assertEquals(Command.RandomMode, CommandGrammar.parse("random"))
+        assertEquals(Command.RandomMode, CommandGrammar.parse("surprise me"))
+        assertEquals(Command.RandomMode, CommandGrammar.parse("roll the dice"))
+        assertEquals(Command.RandomMode, CommandGrammar.parse("shuffle"))
+        assertEquals(Command.RandomMode, CommandGrammar.parse("chaos mode"))
+    }
 }

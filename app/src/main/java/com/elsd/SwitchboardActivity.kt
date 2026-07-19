@@ -107,6 +107,11 @@ class SwitchboardActivity : ComponentActivity() {
         })
 
         actionHost.addView(verbButton(BoardVerb.ADD_EFFECT) { showAddPick() })
+        actionHost.addView(verbButton(BoardVerb.RANDOM) {
+            val summary = com.elsd.board.RandomDesk.roll(BoardSession.board)
+            Toast.makeText(this, summary, Toast.LENGTH_LONG).show()
+            showBoard()
+        })
         actionHost.addView(frameRateRow())
         actionHost.addView(
             verbButton(
