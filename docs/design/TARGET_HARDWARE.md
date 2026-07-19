@@ -121,37 +121,47 @@ When OP9 is green, OP12 should **sizzle**: higher unlocked fps, richer wet, fast
 
 ---
 
-## Reference viewer (primary) — order this class
+## Path B — large plastic tray (stereo eyes)
+
+Classic fold-up cardboard **does not fit** OP12-class phones. Only **hard plastic + strap + Ultra tray**.
 
 | Spec | Target |
 |------|--------|
 | **Class** | Plastic **Cardboard-compatible** phone VR headset (lenses + tray + strap) |
 | **Not required** | Meta Quest / Pico / PC PCVR for 1.0 |
-| **Phone fit** | **6.5–7.0"** — must fit **OP9 6.55"** and **OP12 ~6.82"** |
-| **Tray** | Prefer interior **≥ ~170 × 85 mm** (or listing that explicitly includes 6.7–7.0") |
-| **Reject** | Boxes that only list “up to 6.0–6.3 inch” (Pixel 7 may fit; OP12 will not) |
+| **Phone fit** | **6.5–7.0"** — OP9 guaranteed; OP12 if Ultra-fit verified |
+| **Tray** | Prefer interior **≥ ~170 × 85 mm** (or listing 6.7–7.0" / Ultra) |
+| **Reject** | Boxes that only list “up to 6.0–6.3 inch” |
 | **Optics** | Focus dial preferred; dual IPD nicer but optional |
-| **Mount** | Head **strap** (not nose-balance only) |
-| **Access** | **USB-C cutout** for charge during long dives |
-| **Comfort** | Foam + some venting for 20–30 min (SD888 throttles when sealed) |
+| **Mount** | Head **strap** |
+| **Access** | **USB-C cutout** preferred |
+| **Example class** | Homido PRIME-class (~to 6.8"); returnable “S24 Ultra VR” shells |
 
-### Shopping checklist (before you click buy)
+### Shopping checklist (tray)
 
-1. **Max phone size** includes **≥ 6.8"** or lists S23 Ultra / large flagship explicitly.  
-2. Photos show a **deep tray** and side walls that won’t crush a 75+ mm-wide body.  
-3. **Strap** included (or cheap to add).  
-4. **USB-C / cable notch** if you can get it.  
-5. Avoid “mini” / kids / 4.7–6.0-only shells.  
-6. Cardboard **QR / viewer profile** is optional for 1.0 (we can start flat or generic distortion later).
+1. Max phone size **≥ 6.8"** or Ultra photos.  
+2. Deep tray; strap; optional cable notch.  
+3. No mini / kids shells.  
 
-**One order covers the lab:** buy **large enough for OP12**; OP9 and most large phones will fit.  
-Pixel 7 (~6.3") is a **desk test** phone first — don’t size the headset around it.
+### Public wording
 
-### What we call it in public copy
+- “**Large-tray Cardboard-compatible phone headset**” / “**stereo eyes**”  
+- Not “official Google Cardboard” · not Quest  
 
-- “**Large-tray Cardboard-compatible phone headset**”  
-- “**Phone-in-viewer**” / “**stereo eyes**”  
-- Not “official Google Cardboard product” · not Quest
+---
+
+## Path C — USB-C XR glasses (personal dream display)
+
+| Spec | Target |
+|------|--------|
+| **Class** | Lightweight USB-C XR glasses (micro-OLED, often **90–120 Hz**, electrochromic) |
+| **Examples** | **XREAL One / One Pro** (current); **Air 2 Pro** if discounted; **Viture** peers |
+| **Phone host** | **OnePlus 12** (DP Alt Mode); re-check after OS updates |
+| **ELSD mode** | External **PGM / cinema** — huge virtual screen, dreamy grades |
+| **Not** | Drop-in for tray passthrough or Cardboard SBS |
+| **1.0 required?** | **No** — personal / polish; contributors stay on phone glass + OP9 |
+
+**Why it fits:** high-Hz OLED-on-face is where film banks and fractal dives feel liquid. Amy still earns that screen on the desk first. No glasses SDK required for 1.0 — external display / mirror is enough to *look*.
 
 ---
 
@@ -162,7 +172,9 @@ Pixel 7 (~6.3") is a **desk test** phone first — don’t size the headset arou
 | **minSdk** | **26** (Android 8) |
 | **Test OS** | OP9 on latest available; OP12 on 14/15 |
 | **GPU** | OpenGL ES **3.0+** (888 / Adreno 660 OK) |
-| **Stereo** | Cardboard NDK when ready; flat landscape for early QA |
+| **Default present** | Flat landscape phone glass |
+| **Stereo** | Cardboard NDK when tray ready (Path B) |
+| **Glasses** | External present / high refresh (Path C) |
 | **Permissions** | Camera, mic |
 
 ---
@@ -181,6 +193,7 @@ Pixel 7 (~6.3") is a **desk test** phone first — don’t size the headset arou
 - Voice + switchboard same vocabulary  
 - Lean-in on speech  
 - Status secondary  
+- **Desk first:** Amy and the board must feel cool on a phone before they need 120 Hz glass  
 
 ---
 
@@ -188,8 +201,10 @@ Pixel 7 (~6.3") is a **desk test** phone first — don’t size the headset arou
 
 | Hardware | Status |
 |----------|--------|
-| Quest / Pico / Vision Pro as required | Out of 1.0 |
+| Quest / Pico / Vision Pro as **required** | Out of 1.0 (optional curiosity only) |
 | Daydream controllers | Not required |
+| Folding cardboard / ≤6.3" shells | Obsolete for OP12 |
+| XR glasses as **contributor requirement** | Out of 1.0 |
 | iOS | Post–Android 1.0 |
 | Sub-6.0" phones as design center | Best-effort only |
 
@@ -210,4 +225,4 @@ Pixel 7 (~6.3") is a **desk test** phone first — don’t size the headset arou
 
 ## One-line pitch
 
-> **Prove it on the OnePlus 9. Ship it feeling great on the OnePlus 12. Pixel for clean API checks. Large-tray Cardboard-compatible headset. Voice + switchboard. World as canvas.**
+> **Build the desk Amy deserves. Prove it on the OnePlus 9. Sizzle on the OnePlus 12. Large tray for stereo when it fits. Personal 120 Hz glasses for dream cinema — not a gate. Voice + switchboard. World as canvas.**
