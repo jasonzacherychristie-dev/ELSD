@@ -51,21 +51,39 @@ Optional short voice aliases map into the same verbs (`add trails` → ADD EFFEC
 
 ## Information architecture
 
+**Root = 6 panels, no scroll** (screen real estate rule):
+
 ```
-SWITCHBOARD (root — only page)
-├── Board list: each EFFECT as a row [ON/OFF] [name] [times…]
-├── Actions: ADD EFFECT · SAVE PRESET · LOAD PRESET · CLEAR BOARD · GO LIVE
-└── Drill-down: EFFECT detail
-      ├── TOGGLE EFFECT
-      ├── REMOVE EFFECT
-      ├── ADD EFFECT TIME   (fade in)
-      ├── REMOVE EFFECT TIME (fade out)
-      ├── PHASE TIME
-      ├── PHASE ON / OFF
-      └── BACK
+┌─────────┬─────────┐
+│   ADD   │ LAYERS  │
+├─────────┼─────────┤
+│ PRESETS │ RANDOM  │
+├─────────┼─────────┤
+│  CLEAR  │  LIVE   │
+└─────────┴─────────┘
 ```
 
-One stack. One back. No tabs-of-tabs.
+| Panel | Short | Opens |
+|-------|-------|--------|
+| **ADD** | ADD | Catalog by bank → drill |
+| **LAYERS** | LAYERS | Active board rows → drill; **TOOLS** (fps, drops, amy, info) |
+| **PRESETS** | PRESETS | Factory + user; SAVE |
+| **RANDOM** | RANDOM | Roll board (stay on home) |
+| **CLEAR** | CLEAR | Clear board (stay on home) |
+| **LIVE** | LIVE | GO LIVE / PGM |
+
+Subpages may scroll. Status line on home: `PRESET · N FX · fps · DROP/HOLD`.
+
+```
+HOME (6 panels, no scroll)
+├── ADD → catalog → layer drill
+├── LAYERS → rows → drill | TOOLS (fps · drops · amy · info)
+├── PRESETS → load / save / delete user
+├── RANDOM / CLEAR (instant)
+└── LIVE → MainActivity
+```
+
+One stack. One BACK. No tabs-of-tabs.
 
 ---
 
